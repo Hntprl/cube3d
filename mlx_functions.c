@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/23 17:19:09 by amarouf          ###   ########.fr       */
+/*   Updated: 2024/12/25 17:06:14 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,33 +69,33 @@ int key_hook(int keycode,void *param)
 		destroy_win(param);
 	if (keycode == 119)
     {
-		if (mlx->map->map[mlx->addr->p->y / mlx->map->block_size][mlx->addr->p->x / mlx->map->block_size] != '1')
+		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
 		{
-			if (mlx->map->map[(mlx->addr->p->y - 10) / mlx->map->block_size][(mlx->addr->p->x) / mlx->map->block_size] != '1')
+			if (mlx->map->map[(int)(mlx->addr->p->y - 10) / mlx->map->block_size][(int)(mlx->addr->p->x) / mlx->map->block_size] != '1')
 				mlx->addr->p->y -= 10;
 		}
     }
 	else if (keycode == 115)
 	{
-		if (mlx->map->map[mlx->addr->p->y / mlx->map->block_size][mlx->addr->p->x / mlx->map->block_size] != '1')
+		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
 		{
-			if (mlx->map->map[(mlx->addr->p->y + 10) / mlx->map->block_size][(mlx->addr->p->x) / mlx->map->block_size] != '1')
+			if (mlx->map->map[(int)(mlx->addr->p->y + 10) / mlx->map->block_size][(int)(mlx->addr->p->x) / mlx->map->block_size] != '1')
 				mlx->addr->p->y += 10;
 		}
 	}
 	else if (keycode == 100)
 	{
-		if (mlx->map->map[mlx->addr->p->y / mlx->map->block_size][mlx->addr->p->x / mlx->map->block_size] != '1')
+		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
 		{
-			if (mlx->map->map[(mlx->addr->p->y) / mlx->map->block_size][(mlx->addr->p->x + 10) / mlx->map->block_size] != '1')
+			if (mlx->map->map[(int)(mlx->addr->p->y) / mlx->map->block_size][(int)(mlx->addr->p->x + 10) / mlx->map->block_size] != '1')
 				mlx->addr->p->x += 10;
 		}
 	}
 	else if (keycode == 97)
 	{
-		if (mlx->map->map[mlx->addr->p->y / mlx->map->block_size][mlx->addr->p->x / mlx->map->block_size] != '1')
+		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
 		{
-			if (mlx->map->map[(mlx->addr->p->y) / mlx->map->block_size][(mlx->addr->p->x - 10) / mlx->map->block_size] != '1')
+			if (mlx->map->map[(int)(mlx->addr->p->y) / mlx->map->block_size][(int)(mlx->addr->p->x - 10) / mlx->map->block_size] != '1')
 				mlx->addr->p->x -= 10;
 		}
 	}
