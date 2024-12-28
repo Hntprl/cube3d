@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/23 18:35:31 by amarouf          ###   ########.fr       */
+/*   Updated: 2024/12/27 16:59:15 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,27 @@
 
 typedef struct s_cube
 {
-    int height;
-    int width;
+    float height;
+    float width;
 }   t_cube;
+
+typedef struct s_ray
+{
+    float angle;
+    float distance;
+    float wall_hit_x;
+    float wall_hit_y;
+    char wall_hit_content;
+    int was_hit_vertical;
+}   t_ray;
+
+typedef struct s_player
+{
+    float x;
+    float y;
+    float rotation_angle;
+    float direction;
+}   t_player;
 
 typedef struct s_map
 {
@@ -39,14 +57,9 @@ typedef struct s_map
     int rows;
     int columns;
     int block_size;
+    // t_p *p;
 }   t_map;
 
-typedef struct s_p
-{
-    int x;
-    int y;
-    float rotation_angle;
-}   t_p;
 
 typedef struct s_addr
 {
@@ -54,7 +67,7 @@ typedef struct s_addr
     int bits_per_pixel;
     int size_line;
     int endian;
-    t_p *p;
+    // t_p *p;
 }   t_addr;
 
 typedef struct s_mlx
@@ -65,8 +78,10 @@ typedef struct s_mlx
     t_addr *addr;
     t_map *map;
     t_cube *cube;
+    t_player *p;
 }   t_mlx;
 
+float convert_to_degree(float radian);
 void rotate_player(t_mlx *mlx);
 float convert_to_radian(float angle);
 int ft_cube(void *param);
