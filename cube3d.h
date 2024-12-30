@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/27 16:59:15 by amarouf          ###   ########.fr       */
+/*   Updated: 2024/12/30 18:45:41 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@
 #  define BUFFER_SIZE  1
 # endif
 
+#define W   
 #define PI  3.14159265358979323846
 
 typedef struct s_cube
 {
     float height;
     float width;
+    float wall_line;
 }   t_cube;
 
 typedef struct s_ray
@@ -47,8 +49,12 @@ typedef struct s_player
 {
     float x;
     float y;
+    int turn_direction;
+    int walk_direction;
     float rotation_angle;
-    float direction;
+    float move_speed;
+    float rotation_speed;
+    int side_walk;
 }   t_player;
 
 typedef struct s_map
@@ -57,7 +63,6 @@ typedef struct s_map
     int rows;
     int columns;
     int block_size;
-    // t_p *p;
 }   t_map;
 
 
@@ -67,7 +72,6 @@ typedef struct s_addr
     int bits_per_pixel;
     int size_line;
     int endian;
-    // t_p *p;
 }   t_addr;
 
 typedef struct s_mlx
@@ -81,6 +85,15 @@ typedef struct s_mlx
     t_player *p;
 }   t_mlx;
 
+t_map *read_map(void);
+void move_player(t_mlx *mlx, int x, int y);
+void trurn_player(t_mlx *mlx);
+void bresenham(t_mlx *mlx, int x, int y, int x2, int y2);
+void draw_map(t_mlx *mlx);
+void ft_draw_block(t_mlx *mlx, int x, int y, int color);
+void set_player_direction(char c, t_mlx *mlx);
+void	draw_lines(t_mlx *mlx, int x, int y);
+void draw_grid(t_mlx *mlx);
 float convert_to_degree(float radian);
 void rotate_player(t_mlx *mlx);
 float convert_to_radian(float angle);

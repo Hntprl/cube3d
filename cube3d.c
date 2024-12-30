@@ -6,156 +6,44 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/28 14:13:26 by amarouf          ###   ########.fr       */
+/*   Updated: 2024/12/30 18:46:26 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void ft_draw_block(t_mlx *mlx, int x, int y, int color)
+void raycast_line(t_mlx *mlx, int x, int y, char flag, float pov)
 {
-	int i = 0;
-	int j = 0;
-	while (i < mlx->map->block_size)
-	{
-		j = 0;
-		while (j < mlx->map->block_size)
-		{
-			put_pixel(mlx->addr, x + i, y + j, color);
-			j ++;
-		}
-		i ++;
-	}
-}	
-
-void set_player_direction(char c, t_mlx *mlx)
-{
-	if (c == 'N')
-		mlx->p->direction = 0;
-	if (c == 'S')
-		mlx->p->direction = 180;
-	if (c == 'E')
-		mlx->p->direction = 90;
-	if (c == 'W')
-		mlx->p->direction = 270;
-}
-
-void draw_map(t_mlx *mlx)
-{
-	static int flag;
-	int i = 0;
-	int j = 0;
-	int x = 0;
-	int y = 0;
-	while (i < mlx->map->rows && mlx->map->map[i])
-	{
-		j = 0;
-		x = 0;
-		while (j < mlx->map->columns && mlx->map->map[i][j])
-		{
-			if (mlx->map->map[i][j] == '1')
-				ft_draw_block(mlx, x, y, 16777215);
-			if (mlx->map->map[i][j] == '0')
-				ft_draw_block(mlx, x, y, 0);
-			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S' || mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
-			{
-				if (flag == 0)
-				{
-					mlx->p->x = x;
-					mlx->p->y = y;
-					flag = 1;
-				}
-				// set_player_direction(mlx->map->map[i][j], mlx);c
-				ft_draw_block(mlx, mlx->p->x, mlx->p->y, 3093247);
-			}
-			x += mlx->map->block_size;
-			j ++;
-		}
-		y += mlx->map->block_size;
-		i ++;
-	}
-}
-// x20 y12
-void bresenham(t_mlx *mlx, int x, int y, int x2, int y2)
-{
-	int e2;
-	int dx = abs(x2 - mlx->p->x);
-	int dy = abs(y2 - mlx->p->y);
-	int error;
-	int sx;
-	int sy;
+	float adj;
+	float opp;
 	
-	if (mlx->p->x < x2)
-		sx = 1;
+	if (flag == '-')
+	{
+		adj	= 100 * cos(convert_to_radian(mlx->p->rotation_angle - pov));
+	 	opp	= 100 * sin(convert_to_radian(mlx->p->rotation_angle - pov));
+	}
 	else
-		sx = -1;
-
-	if (mlx->p->y < y2)
-		sy = 1;
-	else
-		sy = -1;
-	error = dx - dy;
-	while (x != x2 || y != y2)
 	{
-		put_pixel(mlx->addr, x, y, 16711680);
-		e2 = error * 2;
-		if (e2 > -dy)
-		{
-			error -= dy;
-			x += sx;
-		}
-		if (e2 < dx)
-		{
-			error += dx;
-			y += sy;
-		}
+		adj = 100 * cos(convert_to_radian(mlx->p->rotation_angle + pov));
+		opp = 100 * sin(convert_to_radian(mlx->p->rotation_angle + pov));
 	}
+	bresenham(mlx, x, y, x + adj, y + opp);
 }
 
-void draw_grid(t_mlx *mlx)
+void raycaster(t_mlx *mlx, int x, int y)
 {
-	int i = 0;
-	int x = 0;
-	int y = 0;
-	int x2 = mlx->cube->width;
-	int y2 = mlx->cube->height;
+	mlx->cube->wall_line = 3;
+	float pov = 90 / 2;
+	float gap;
 
-	while (i < mlx->map->rows)
+	gap = 0;
+	while (gap < pov)
 	{
-		x = 0;
-		y += mlx->map->block_size;
-		while (x < x2)
-		{
-			put_pixel(mlx->addr, x, y, 16711680);
-			x ++;
-		}
-		i ++;
-	}
-	i = 0;
-	while (i < mlx->map->columns)
-	{
-		y = 0;
-		x += mlx->map->block_size;
-		while (y < y2)
-		{
-			put_pixel(mlx->addr, x, y, 16711680);
-			y ++;
-		}
-		i ++;
-	}
+		raycast_line(mlx, x, y, '+', gap);
+		raycast_line(mlx, x, y, '-', gap);
+		gap += pov / (mlx->cube->width / mlx->cube->wall_line);
+	}	
 }
-
-void	draw_lines(t_mlx *mlx, int x, int y)
-{
-	int pov = 90 / 2;
-	float adj = 100;
-	float hyp = adj / sin(convert_to_radian(pov));
-	float opp = adj * tan(convert_to_radian(pov));
-	bresenham(mlx, x, y, x, y - adj);
-	bresenham(mlx, x, y, x - opp, y - hyp);
-	bresenham(mlx, x, y, x + opp, y - hyp);
-}
-
 
 int	ft_cube(void *param)
 {
@@ -165,11 +53,16 @@ int	ft_cube(void *param)
 	mlx->addr->pixels = mlx_get_data_addr(mlx->image, &mlx->addr->bits_per_pixel
 	, &mlx->addr->size_line, &mlx->addr->endian); 
 	draw_map(mlx);
-	// draw_grid(mlx);
+	draw_grid(mlx);
 	draw_lines(mlx, mlx->p->x, mlx->p->y);
 	ft_draw_block(mlx, mlx->p->x, mlx->p->y, 3093247);
+	move_player(mlx, mlx->p->x, mlx->p->y);
+	raycaster(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
 	mlx_destroy_image ( mlx->ptr, mlx->image );
+	mlx->p->walk_direction = 0;
+	mlx->p->side_walk = 0;
+	mlx->p->turn_direction = 0;
 	return (0);
 }
 
@@ -200,8 +93,9 @@ int main ()
 	
 	mlx.addr = &addr;
 	mlx.p = &p;
-	p.rotation_angle = 90;
-	// addr.p = &p;
+	p.walk_direction = 0;
+	p.turn_direction = 0;
+	p.side_walk = 0;
 	map = read_map();
 	cube.height = map->rows * map->block_size;
 	cube.width = map->columns * map->block_size;

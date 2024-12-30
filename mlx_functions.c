@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/27 21:11:23 by amarouf          ###   ########.fr       */
+/*   Updated: 2024/12/29 18:57:05 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,73 +34,60 @@ int destroy_win(void *param)
 	exit(0);
 }
 
-// void rotate_player(t_mlx *mlx)
-// {
-// 	float rotate = convert_to_radian(mlx->p->rotation_angle);
-	
-// }
-
 void handle_arrows(int keycode, t_mlx *mlx)
 {
-	float rotate = 90.0;
+	float rotate = 5.0;
 	
 	if (keycode == 65361)
 	{
-		mlx->p->rotation_angle -= 90;
+		mlx->p->turn_direction = -1;
 	}
 	else if (keycode == 65363)
 	{
-		mlx->p->rotation_angle += 90;
+		mlx->p->turn_direction = +1;
 	}
-	if (mlx->p->rotation_angle >= 360)
-		mlx->p->rotation_angle -= 360;
-	if (mlx->p->rotation_angle < 0)
-		mlx->p->rotation_angle += 360;
-	// rotate_player(mlx);
+	// printf("%f\n", mlx->p->rotation_angle);
 }
 
 int key_hook(int keycode,void *param)
 {
+	float new_x;
+	float new_y;
 	t_mlx *mlx = (t_mlx *)param;
 
 	if (keycode == 65307)
 		destroy_win(param);
-	if (keycode == 119)
+	if (keycode == 'w')
     {
-		if (mlx->map->map[(int)mlx->p->y / mlx->map->block_size][(int)mlx->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->p->y - 10) / mlx->map->block_size][(int)(mlx->p->x) / mlx->map->block_size] != '1')
-				mlx->p->y -= 10;
-		}
+		mlx->p->walk_direction = 1;
     }
-	else if (keycode == 115)
+	else if (keycode == 's')
 	{
-		if (mlx->map->map[(int)mlx->p->y / mlx->map->block_size][(int)mlx->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->p->y + 10) / mlx->map->block_size][(int)(mlx->p->x) / mlx->map->block_size] != '1')
-				mlx->p->y += 10;
-		}
+		mlx->p->walk_direction = -1;
 	}
-	else if (keycode == 100)
+	else if (keycode == 'a')
 	{
-		if (mlx->map->map[(int)mlx->p->y / mlx->map->block_size][(int)mlx->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->p->y) / mlx->map->block_size][(int)(mlx->p->x + 10) / mlx->map->block_size] != '1')
-				mlx->p->x += 10;
-		}
+		mlx->p->side_walk = 1;
+		mlx->p->walk_direction = -1;
 	}
-	else if (keycode == 97)
+	else if (keycode == 'd')
 	{
-		if (mlx->map->map[(int)mlx->p->y / mlx->map->block_size][(int)mlx->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->p->y) / mlx->map->block_size][(int)(mlx->p->x - 10) / mlx->map->block_size] != '1')
-				mlx->p->x -= 10;
-		}
+		mlx->p->side_walk = 1;
+		mlx->p->walk_direction = 1;
 	}
 	else
 		handle_arrows(keycode, mlx);
 	return (0);
 }
+
+// int key_release(int keycode, t_mlx *mlx)
+// {
+// 	if (keycode == 'w' || keycode == 's')
+// 		mlx->p->walk_direction = 0;
+// 	if (keycode == 'a' || keycode == 'd')
+// 		mlx->p->turn_direction = 0;
+// 	return (0);
+// }
 
 void event_handling(t_mlx *mlx)
 {
