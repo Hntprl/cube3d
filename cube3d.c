@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/30 18:46:26 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/01 21:29:07 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,43 +66,62 @@ int	ft_cube(void *param)
 	return (0);
 }
 
-t_map *read_map(void)
+
+t_map *read_map(char *av)
 {
-	int fd = open("maps/mapp.cub", O_RDONLY, 0777);
-	int i = 0;
-	t_map *map = malloc(sizeof(t_map));
-	map->rows = 12;
+	int i;
+	int fd;
+	char *line;
+	t_map *map;
+	
+	i = 0;
+	map= malloc(sizeof(t_map));
 	map->block_size = 40;
-	map->columns = 58;
-	map->map = malloc(sizeof(char *) * map->rows);
-	while (i < map->rows)
+	map->rows=nbrs_lines(av);
+	map->map =calloc(map->rows, sizeof(char *)); 
+	fd= open(av, O_RDONLY, 0777);
+	checkpath(fd,av);
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		map->map[i] = get_next_line(fd);
-		i ++;
+		if(line[0]=='N' || line[0]=='S'  || line[0]=='W' || line[0]=='E')
+			fill_textures(map,line);
+		else if(line[0]=='F' || line[0]=='C')
+			fill_colors(map,line);
+		else if(is_maplast(map))
+			fill_map(map,line,i);
+		i++;
+		map->columns =ft_strlen(line);
+		// free(line);
 	}
+	// printf("line *%s*",map->map[2]);
+
 	return (map);
 }
 
-int main ()
+int main (int ac,char **av)
 {
 	t_cube cube;
 	t_player p;
 	t_mlx mlx;
 	t_addr addr;
 	t_map *map;
-	
+	if (ac != 2)
+		printerr(1,"Error: u should enter just two arguments");
+	init_t_map(map);
 	mlx.addr = &addr;
 	mlx.p = &p;
 	p.walk_direction = 0;
 	p.turn_direction = 0;
 	p.side_walk = 0;
-	map = read_map();
+	map = read_map(av[1]);
+	printf("line *%s*",map->map[2]);
+
 	cube.height = map->rows * map->block_size;
 	cube.width = map->columns * map->block_size;
 	mlx.map = map;
 	mlx.cube = &cube;
 	mlx.ptr = mlx_init();
 	mlx.window =  mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");
-	ft_cube(&mlx);
-	event_handling(&mlx);
+	// ft_cube(&mlx);
+	// event_handling(&mlx);
 }

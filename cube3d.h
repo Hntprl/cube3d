@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/30 18:45:41 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/01 20:53:44 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef struct s_player
 typedef struct s_map
 {
     char **map;
+    char *es_img;
+    char *we_img;
+    char *no_img;
+    char *su_img;
+    int *fl_color;
+    int *ce_color;
     int rows;
     int columns;
     int block_size;
@@ -85,7 +91,7 @@ typedef struct s_mlx
     t_player *p;
 }   t_mlx;
 
-t_map *read_map(void);
+t_map *read_map(char *av);
 void move_player(t_mlx *mlx, int x, int y);
 void trurn_player(t_mlx *mlx);
 void bresenham(t_mlx *mlx, int x, int y, int x2, int y2);
@@ -111,4 +117,24 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int get_color(int r, int g, int b);
 int put_pixel(t_addr *addr, int x, int y, int color);
 int destroy_win(void *param);
+
+
+//parsing 
+int	ft_strcmp(const char *s1, const char *s2);
+char	**ft_split(char const *s, char c);
+int	countword(char *str, char sep);
+void printerr(int status,char *str);
+void checkpath(int fd,char *av);
+int compare(char *str,char *ext);
+int is_validtexture(char **str);
+void fill_textures(t_map *map,char *str);
+void	spliit(char *str,t_map *map);
+void fill_colors(t_map *map,char *str);
+int	ft_isdigit(int c);
+char	*ft_strtrim(char const *s1, char const *set);
+int	ft_isalpha(int c);
+int nbrs_lines(char *av);
+void fill_map(t_map *map,char *line,int i);
+int is_maplast(t_map *map);
+void init_t_map(t_map *map);
 #endif
