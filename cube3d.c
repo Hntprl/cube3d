@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/01 21:29:07 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/01 21:37:46 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ int main (int ac,char **av)
 	mlx.cube = &cube;
 	mlx.ptr = mlx_init();
 	mlx.window =  mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");
-	// ft_cube(&mlx);
-	// event_handling(&mlx);
+	ft_cube(&mlx);
+	event_handling(&mlx);
 }
