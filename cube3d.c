@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/01 21:37:46 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/02 10:09:34 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,62 +66,91 @@ int	ft_cube(void *param)
 	return (0);
 }
 
-
-t_map *read_map(char *av)
-{
-	int i;
-	int fd;
-	char *line;
-	t_map *map;
-	
-	i = 0;
-	map= malloc(sizeof(t_map));
-	map->block_size = 40;
-	map->rows=nbrs_lines(av);
-	map->map =calloc(map->rows, sizeof(char *)); 
-	fd= open(av, O_RDONLY, 0777);
-	checkpath(fd,av);
-	while ((line = get_next_line(fd)) != NULL)
+t_map *read_map(char *av) {
+    int i = 0;
+    int fd;
+    char *line;
+    t_map *map;
+    
+    if (!av)
+        return NULL;        
+    map = malloc(sizeof(t_map));
+    if (!map)
+        return NULL;
+        
+    init_t_map(&map);
+    if (!map)
+        return NULL;
+    map->block_size = 40;
+    map->rows = nbrs_lines(av);
+    map->map = calloc(map->rows, sizeof(char *));
+    if (!map->map) {
+        // free_map(map);
+        return NULL;
+    }
+    
+    fd = open(av, O_RDONLY);
+    if (fd == -1) {
+        // free_map(map);
+        return NULL;
+    }
+    while ((line = get_next_line(fd)) != NULL)
 	{
-		if(line[0]=='N' || line[0]=='S'  || line[0]=='W' || line[0]=='E')
-			fill_textures(map,line);
-		else if(line[0]=='F' || line[0]=='C')
-			fill_colors(map,line);
-		else if(is_maplast(map))
-			fill_map(map,line,i);
-		i++;
-		map->columns =ft_strlen(line);
-		// free(line);
-	}
-	// printf("line *%s*",map->map[2]);
-
-	return (map);
+        if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
+            fill_textures(map, line);
+        else if (line[0] == 'F' || line[0] == 'C')
+            fill_colors(map, line);
+        else if (is_maplast(map))
+            fill_map(map, line, &i);
+            
+        map->columns = ft_strlen(line);
+        free(line); 
+    }
+    close(fd);
+    return map;
 }
 
-int main (int ac,char **av)
-{
-	t_cube cube;
-	t_player p;
-	t_mlx mlx;
-	t_addr addr;
-	t_map *map;
-	if (ac != 2)
-		printerr(1,"Error: u should enter just two arguments");
-	init_t_map(map);
-	mlx.addr = &addr;
-	mlx.p = &p;
-	p.walk_direction = 0;
-	p.turn_direction = 0;
-	p.side_walk = 0;
-	map = read_map(av[1]);
-	printf("line *%s*",map->map[2]);
 
-	cube.height = map->rows * map->block_size;
-	cube.width = map->columns * map->block_size;
-	mlx.map = map;
-	mlx.cube = &cube;
-	mlx.ptr = mlx_init();
-	mlx.window =  mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");
-	ft_cube(&mlx);
-	event_handling(&mlx);
+int main(int ac, char **av) {
+    t_cube cube;
+    t_player p = {0}; 
+    t_mlx mlx = {0};  
+    t_addr addr = {0};
+    t_map *map;
+    
+    if (ac != 2) {
+        printerr(1, "Error: u should enter just two arguments");
+        return 1;
+    }
+    
+    map = read_map(av[1]);
+	// printf("line *%s*",map->map[0]);
+    if (!map) {
+        printerr(1, "Error: Failed to read map");
+        return 1;
+    }
+    
+    mlx.addr = &addr;
+    mlx.p = &p;
+    mlx.map = map;
+    mlx.cube = &cube;
+    
+    cube.height = map->rows * map->block_size;
+    cube.width = map->columns * map->block_size;
+    
+    if (!(mlx.ptr = mlx_init())) 
+	{
+        // free_map(map);
+        return 1;
+    }
+    
+    if (!(mlx.window = mlx_new_window(mlx.ptr, cube.width, cube.height, "Map"))) {
+        // free_map(map);
+        // Free MLX resources
+        return 1;
+    }  
+    ft_cube(&mlx);
+    event_handling(&mlx);
+    
+    return 0;
 }
