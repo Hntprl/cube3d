@@ -11,24 +11,24 @@ void checkpath(char *av)
 	if(ft_strcmp(av+ft_strlen(av)-4,".cub"))
 		printerr(1,"Error: The file must end with .cub");
 }
-int compare(char *str,char *ext)
-{
-	int i;
-	int j;
+// int compare(char *str,char *ext)
+// {
+// 	int i;
+// 	int j;
 	
-	i=ft_strlen(str)-1;
-	j=ft_strlen(ext)-1;
-	// printf("STR %c ext%C\n",str[i],ext[j]);
-	while (i!=0 && str[i]!='.')
-	{
-		if(ext[j]!=str[i])
-			return 1;
-		i--;
-		j--;
-	}
-	return 0;
+// 	i=ft_strlen(str)-1;
+// 	j=ft_strlen(ext)-1;
+// 	// printf("STR %c ext%C\n",str[i],ext[j]);
+// 	while (i!=0 && str[i]!='.')
+// 	{
+// 		if(ext[j]!=str[i])
+// 			return 1;
+// 		i--;
+// 		j--;
+// 	}
+// 	return 0;
 	
-}
+// }
 int is_validtexture(char **str)
 {
 	if((!ft_strcmp(str[0],"NO") || !ft_strcmp(str[0],"SO") || !ft_strcmp(str[0],"WE") || !ft_strcmp(str[0],"EA")) && (ft_strlen(str[1]) > 4))
@@ -85,7 +85,7 @@ void fill_textures(t_map *map,char *str)
 		string[j]=ft_strtrim(string[j]," \t\n");
 		j++;
 	}
-	if ((compare(string[1],".xpm")))//maybe work with strcmp
+	if ((ft_strcmp(string[1]+ft_strlen(string[1])-4,".xpm")))//maybe work with strcmp
 				printerr(1,"the texture should end with .xpm");
 	if(!(is_validtexture(string)))
 	{
