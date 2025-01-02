@@ -11,24 +11,7 @@ void checkpath(char *av)
 	if(ft_strcmp(av+ft_strlen(av)-4,".cub"))
 		printerr(1,"Error: The file must end with .cub");
 }
-// int compare(char *str,char *ext)
-// {
-// 	int i;
-// 	int j;
-	
-// 	i=ft_strlen(str)-1;
-// 	j=ft_strlen(ext)-1;
-// 	// printf("STR %c ext%C\n",str[i],ext[j]);
-// 	while (i!=0 && str[i]!='.')
-// 	{
-// 		if(ext[j]!=str[i])
-// 			return 1;
-// 		i--;
-// 		j--;
-// 	}
-// 	return 0;
-	
-// }
+
 int is_validtexture(char **str)
 {
 	if((!ft_strcmp(str[0],"NO") || !ft_strcmp(str[0],"SO") || !ft_strcmp(str[0],"WE") || !ft_strcmp(str[0],"EA")) && (ft_strlen(str[1]) > 4))
@@ -190,6 +173,7 @@ void	spliit(char *str,t_map *map)
 {
 	int i=1;
 	int start=0;
+
 	is_validcolor(str+1);
 	while(str[i])
 	{

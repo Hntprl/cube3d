@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/02 10:21:42 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/02 14:39:04 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	ft_isdigit(int c);
 char	*ft_strtrim(char const *s1, char const *set);
 int	ft_isalpha(int c);
 int nbrs_lines(char *av);
-void fill_map(t_map *map,char *line,int *i);
+void fill_map(t_map *map,char *line,int *i,int *inside_map);
 int is_maplast(t_map *map);
 void init_t_map(t_map **map);
 #endif

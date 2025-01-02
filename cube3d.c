@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/02 10:34:49 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/02 14:36:18 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_map *read_map(char *av) {
     int fd;
     char *line;
     t_map *map;
+	int inside_map=0;
     
     if (!av)
         return NULL;        
@@ -105,7 +106,7 @@ t_map *read_map(char *av) {
         else if (line[0] == 'F' || line[0] == 'C')
             fill_colors(map, line);
         else if (is_maplast(map))
-            fill_map(map, line, &i);
+            fill_map(map, line, &i,&inside_map);
             
         map->columns = ft_strlen(line);
         free(line); 

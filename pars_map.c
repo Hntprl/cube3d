@@ -1,67 +1,53 @@
 #include "cube3d.h"
 
-// int nbrs_lines(char *av)
-// {
-// 	int fd;
-// 	char *line;
-// 	int nbr_line;
-// 	nbr_line=0;
-// 	fd= open(av, O_RDONLY, 0777);
-// 	if (fd == -1 || !av)
-//         return -1;
-// 	checkpath(fd,av);
-// 	while((line = get_next_line(fd)) != NULL)
-// 	{
-// 		if(line[0]=='1' || line[0]=='0')
-// 				nbr_line++;
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return nbr_line;
-	
-// }
-int count_map_lines(char *line)
+int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
-    while (line[i]) 
+	if(*inside_map)
+	{//here i can check others rules applied to a valid map
+		if (ft_strcmp(line, "\n") == 0) 
+            printerr(1,"Error: The map contains a newline ");
+		if()
+	}
+    	
+	while (line[i]) 
 	{
-        if (line[i] != '1' && line[i] != '0' && 
+        if ((line[i] != '1' && line[i] != '0' && 
             line[i] != 'N' && line[i] != 'S' && 
             line[i] != 'E' && line[i] != 'W' && 
-            line[i] != ' ' && line[i] != '\n')
-            return 0;
+            line[i] != ' ' && line[i] != '\n'))
+		{
+			if(*inside_map)
+            printerr(1,"Error: found a different symbol inside map ");
+		}
         i++;
     }
+	if(line[0] == '1' || line[0] == '0')
+		*inside_map=1;
     return (line[0] == '1' || line[0] == '0');
 }
+
 int nbrs_lines(char *av) 
 {
     int fd;
     char *line;
     int nbr_line = 0;
+	int inside=0;
     
     if (!av)
         return -1;
-    
     fd = open(av, O_RDONLY,0777);
     if (fd == -1) 
-	{
         printerr(1, "Error: Cannot open file");
-        return -1;
-    }
     while ((line = get_next_line(fd)) != NULL) 
 	{
-        if (count_map_lines(line))
+        if (count_map_lines(line,&inside))
             nbr_line++;
         free(line);
     }
-    close(fd);
-    
+    close(fd); 
     if (nbr_line == 0)
-	 {
         printerr(1, "Error: No valid map lines found");
-        return -1;
-    }
     return nbr_line;
 }
 
@@ -99,16 +85,20 @@ int valid_caracter(char *line, char *caracter)
     return 1;
 }
 
-void fill_map(t_map *map, char *line, int *i)
+void fill_map(t_map *map, char *line, int *i,int *inside_map)
 {
-    if (!map || !line || !i)
+    if (!map || !line || !i || !inside_map)
         return;
-    if (count_map_lines(line)) 
+    if (count_map_lines(line,inside_map)) 
 	{
         map->map[*i] = ft_strdup(line);
-        // printf("Filling map row %d with line: [%s]\n", *i, map->map[*i]);
+        printf("Filling map row %d with line: [%s]\n",count_map_lines(line,inside_map) , line);
         (*i)++;
     }
+	// else if(!(count_map_lines(line,inside_map)))
+	// {
+	// 	printerr(1,"Error: found a different symbol inside map");
+	// }
 }
 
 // void pars_map(t_map *map)
@@ -120,3 +110,23 @@ void fill_map(t_map *map, char *line, int *i)
 // 	// if(closed_walls())
 // 	// 	printerr(1,"Error: The map must be closed by walls");
 // }
+
+
+// Parse and Identify Sections:
+
+// Locate the map as the last section of the file.
+// Handle and ignore empty lines where applicable.
+// Verify Map Characters:
+
+// Check that the map contains only the valid characters (0, 1, N, S, E, W).
+// Validate Surrounding Walls:
+
+// Ensure all rows at the edges (top and bottom) are filled with 1.
+// Ensure all columns at the edges (leftmost and rightmost) are filled with 1.
+// Check Player Start Position:
+
+// Confirm there is exactly one player start position (N, S, E, W).
+// More or fewer starting positions would make the map invalid.
+// Handle Empty Spaces:
+
+// Ensure no 0 appears outside of the map bounds or leads to an unclosed area.
