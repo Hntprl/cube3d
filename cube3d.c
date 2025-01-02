@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/02 10:09:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/02 10:34:49 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,19 @@ t_map *read_map(char *av) {
     if (!map)
         return NULL;
     map->block_size = 40;
+	checkpath(av);
     map->rows = nbrs_lines(av);
     map->map = calloc(map->rows, sizeof(char *));
-    if (!map->map) {
+    if (!map->map) 
+	{
         // free_map(map);
         return NULL;
     }
     
-    fd = open(av, O_RDONLY);
-    if (fd == -1) {
+    fd = open(av, O_RDONLY,0777);
+	// checkpath(fd,av);
+    if (fd == -1) 
+	{
         // free_map(map);
         return NULL;
     }
@@ -118,39 +122,24 @@ int main(int ac, char **av) {
     t_addr addr = {0};
     t_map *map;
     
-    if (ac != 2) {
+    if (ac != 2) 
+	{
         printerr(1, "Error: u should enter just two arguments");
         return 1;
     }
     
     map = read_map(av[1]);
 	// printf("line *%s*",map->map[0]);
-    if (!map) {
-        printerr(1, "Error: Failed to read map");
-        return 1;
-    }
-    
+
     mlx.addr = &addr;
     mlx.p = &p;
+	p.rotation_angle = 0;
     mlx.map = map;
-    mlx.cube = &cube;
-    
+    mlx.cube = &cube;  
     cube.height = map->rows * map->block_size;
     cube.width = map->columns * map->block_size;
-    
-    if (!(mlx.ptr = mlx_init())) 
-	{
-        // free_map(map);
-        return 1;
-    }
-    
-    if (!(mlx.window = mlx_new_window(mlx.ptr, cube.width, cube.height, "Map"))) {
-        // free_map(map);
-        // Free MLX resources
-        return 1;
-    }  
+    mlx.ptr = mlx_init();
+    mlx.window = mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");
     ft_cube(&mlx);
-    event_handling(&mlx);
-    
-    return 0;
+    event_handling(&mlx);  
 }

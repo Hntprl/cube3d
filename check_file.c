@@ -6,10 +6,10 @@ void printerr(int status,char *str)
 	exit(status);
 }
 
-void checkpath(int fd,char *av)
+void checkpath(char *av)
 {
-	if(fd==-1 || ft_strcmp(av+ft_strlen(av)-4,".cub"))
-		printerr(1,"invalid path");
+	if(ft_strcmp(av+ft_strlen(av)-4,".cub"))
+		printerr(1,"Error: The file must end with .cub");
 }
 int compare(char *str,char *ext)
 {
@@ -44,18 +44,22 @@ int	is_space(char str)
 		return (1);
 	return (0);
 }
-int count_words(const char *str) {
+int count_words(const char *str) 
+{
     int count = 0;
     int in_word = 0;
 
-    while (*str) {
-        if (!is_space(*str)) {
-            if (!in_word) {
-                in_word = 1; // Starting a new word
+    while (*str) 
+	{
+        if (!is_space(*str)) 
+		{
+            if (!in_word) 
+			{
+                in_word = 1; 
                 count++;
             }
         } else {
-            in_word = 0; // Outside a word
+            in_word = 0;
         }
         str++;
     }
@@ -101,7 +105,8 @@ void fill_textures(t_map *map,char *str)
         // 	str++;
 	// printf("valid format *%s*",str);
 
-int is_valid_format(char *str) {
+int is_valid_format(char *str) 
+{
     while (is_space(*str))
         str++;
     if (!str || *str == '\0')
@@ -114,7 +119,8 @@ int is_valid_format(char *str) {
 	{
         if (!is_space(*str))
             last_non_space = str;
-        if (*str == ',') {
+        if (*str == ',') 
+		{
             if (last_was_comma)
                 return 0; 
             last_was_comma = 1;
@@ -126,7 +132,7 @@ int is_valid_format(char *str) {
 
     if (last_non_space && *last_non_space == ',')
         return 0;
-    return 1; // Valid format
+    return 1; 
 }
 int isnot_alpha(char *str)
 {
@@ -154,14 +160,16 @@ int *min_fill(t_map *map, char *str, int i, int start)
     static int ce_index = 0; 
     static int fl_index = 0; 
 
-    if (ce_index == 0 && fl_index == 0) {
+    if (ce_index == 0 && fl_index == 0) 
+	{
         map->ce_color = calloc(3, sizeof(int));
         map->fl_color = calloc(3, sizeof(int));
     }
     substr = ft_substr(str, start, i);
     valid_range = atoi(substr);
     free(substr);
-    if (valid_range < 0 || valid_range > 255) {
+    if (valid_range < 0 || valid_range > 255) 
+	{
         printerr(1, "Error: The color range should be between 0 & 255");
         return NULL;
     }
@@ -189,13 +197,9 @@ void	spliit(char *str,t_map *map)
     		i++;
 		start=i;
 		while(str[i] && ft_isdigit(str[i]))
-		{
 			i++;
-		}
 		if( start<i )
-		{
 			min_fill(map,str,i,start);
-		}
 		else if(str[i] == ',')
 			i++;
 		i++;

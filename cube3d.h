@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/02 10:02:51 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/02 10:21:42 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 int	countword(char *str, char sep);
 void printerr(int status,char *str);
-void checkpath(int fd,char *av);
+void checkpath(char *av);
 int compare(char *str,char *ext);
 int is_validtexture(char **str);
 void fill_textures(t_map *map,char *str);

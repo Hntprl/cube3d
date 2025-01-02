@@ -1,6 +1,7 @@
 #include "cube3d.h"
 
-void init_t_map(t_map **map) {
+void init_t_map(t_map **map) 
+{
     if (!map || !*map)
         return;
     
@@ -31,7 +32,8 @@ void free_map(t_map *map)
     if (!map)
         return;
     int i = 0;
-    if (map->map) {
+    if (map->map) 
+    {
         while ( map->map[i])
         {
             free(map->map[i]);
