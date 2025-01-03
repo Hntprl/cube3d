@@ -1,13 +1,74 @@
 #include "cube3d.h"
 
-int count_map_lines(char *line,int *inside_map)
+int check_walls(char **map,int rows)
+{
+    int i=0;
+    int j;
+    while(map[i])
+        {
+            j=0;
+            while (map[i][j])
+            {
+                if(map[0][j]!=1)
+                    printerr(1,"Error : Top row not surrounded by walls");
+                if(map[rows][j]!=1)
+                    printerr(1,"Error : Bottom row not surrounded by walls");
+                j++;        
+            }
+            i++;
+            
+        }
+}
+// int check_walls(char **map, int rows, int columns)
+// {
+//     int i;
+//     // Check top row
+//     i = 0;
+//     while( i < columns )
+//     {
+//         if (map[0][i] != '1') {
+//             fprintf(stderr, "Error: Top row is not surrounded by '1'.\n");
+//             return 0;
+//         }
+//         i++;
+//     }
+//     i = 0;
+//     // Check bottom row
+//     while(i < columns) 
+//     {
+//         if (map[rows - 1][i] != '1') {
+//             fprintf(stderr, "Error: Bottom row is not surrounded by '1'.\n");
+//             return 0;
+//         }
+//         i++;
+//     }
+//     i = 1;
+//     // Check left and right borders for middle rows
+//     while( i < rows - 1)
+//     {
+//         if (map[i][0] != '1' || map[i][columns - 1] != '1') {
+//             fprintf(stderr, "Error: Row %d is not surrounded by '1'.\n", i);
+//             return 0;
+//         }
+//         i++;
+//     }
+//     // If all checks pass, the map is surrounded by '1'
+//     return 1;
+// }
+int count_map_lines(char *line,int *inside_map,t_map map)
 {
     int i = 0;
+    // t_map *map;
+    // printf("cloumns = %d\n",map.columns);
 	if(*inside_map)
 	{//here i can check others rules applied to a valid map
-		if (ft_strcmp(line, "\n") == 0) 
+		
+        if(map.rows==1 && map.columns==1)
+            printf("line : %s- len : %d",line,map.columns);
+        if (ft_strcmp(line, "\n") == 0) 
             printerr(1,"Error: The map contains a newline ");
-		if()
+		// if(check_walls(line))
+
 	}
     	
 	while (line[i]) 
@@ -27,7 +88,7 @@ int count_map_lines(char *line,int *inside_map)
     return (line[0] == '1' || line[0] == '0');
 }
 
-int nbrs_lines(char *av) 
+int nbrs_lines(char *av,t_map *map) 
 {
     int fd;
     char *line;
@@ -41,7 +102,7 @@ int nbrs_lines(char *av)
         printerr(1, "Error: Cannot open file");
     while ((line = get_next_line(fd)) != NULL) 
 	{
-        if (count_map_lines(line,&inside))
+        if (count_map_lines(line,&inside,*map))
             nbr_line++;
         free(line);
     }
@@ -89,10 +150,10 @@ void fill_map(t_map *map, char *line, int *i,int *inside_map)
 {
     if (!map || !line || !i || !inside_map)
         return;
-    if (count_map_lines(line,inside_map)) 
+    if (count_map_lines(line,inside_map,*map)) 
 	{
         map->map[*i] = ft_strdup(line);
-        printf("Filling map row %d with line: [%s]\n",count_map_lines(line,inside_map) , line);
+        // printf("Filling map row %d with line: [%s]\n",count_map_lines(line,inside_map,*map) , line);
         (*i)++;
     }
 	// else if(!(count_map_lines(line,inside_map)))

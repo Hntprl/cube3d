@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/02 14:36:18 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:54:13 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_map *read_map(char *av) {
         return NULL;
     map->block_size = 40;
 	checkpath(av);
-    map->rows = nbrs_lines(av);
+    map->rows = nbrs_lines(av,map);
     map->map = calloc(map->rows, sizeof(char *));
     if (!map->map) 
 	{
@@ -110,6 +110,11 @@ t_map *read_map(char *av) {
             
         map->columns = ft_strlen(line);
         free(line); 
+    }
+    if(map)
+    {
+        // check_walls(map->map,map->rows,map->columns);
+        check_walls(map->map,map->rows);
     }
     close(fd);
     return map;
