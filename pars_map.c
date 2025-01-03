@@ -10,9 +10,11 @@ int check_walls(char **map,int rows)
             while (map[i][j])
             {
                 if(map[0][j]!=1)
-                    printerr(1,"Error : Top row not surrounded by walls");
-                if(map[rows][j]!=1)
-                    printerr(1,"Error : Bottom row not surrounded by walls");
+                    printf("char = *%c*\n",map[0][j]);
+                    // printerr(1,"Error : Top row not surrounded by walls");
+                if(map[rows-1][j]!=1)
+                    // printerr(1,"Error : Bottom row not surrounded by walls");
+                    // printf("last = *%c*\n",map[rows-1][j]);
                 j++;        
             }
             i++;
@@ -55,32 +57,33 @@ int check_walls(char **map,int rows)
 //     // If all checks pass, the map is surrounded by '1'
 //     return 1;
 // }
-int count_map_lines(char *line,int *inside_map,t_map map)
+// void check_line(t_map *map)
+// {
+//     printf("map ===== %s\n",map->map[0]);
+// }
+int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
-    // t_map *map;
-    // printf("cloumns = %d\n",map.columns);
+    // printf("map ===== %s\n",(*map)->map[0]);
 	if(*inside_map)
-	{//here i can check others rules applied to a valid map
-		
-        if(map.rows==1 && map.columns==1)
-            printf("line : %s- len : %d",line,map.columns);
+	{	
+        // check_line(map);
         if (ft_strcmp(line, "\n") == 0) 
             printerr(1,"Error: The map contains a newline ");
-		// if(check_walls(line))
 
-	}
-    	
+	}	
 	while (line[i]) 
 	{
         if ((line[i] != '1' && line[i] != '0' && 
             line[i] != 'N' && line[i] != 'S' && 
             line[i] != 'E' && line[i] != 'W' && 
-            line[i] != ' ' && line[i] != '\n'))
+            line[i] != '\n' && line[i] != ' '))
 		{
 			if(*inside_map)
             printerr(1,"Error: found a different symbol inside map ");
 		}
+        if(line[i]=='\n' || line[i]==' ')
+            line[i]='\0';
         i++;
     }
 	if(line[0] == '1' || line[0] == '0')
@@ -88,7 +91,7 @@ int count_map_lines(char *line,int *inside_map,t_map map)
     return (line[0] == '1' || line[0] == '0');
 }
 
-int nbrs_lines(char *av,t_map *map) 
+int nbrs_lines(char *av) 
 {
     int fd;
     char *line;
@@ -102,7 +105,7 @@ int nbrs_lines(char *av,t_map *map)
         printerr(1, "Error: Cannot open file");
     while ((line = get_next_line(fd)) != NULL) 
 	{
-        if (count_map_lines(line,&inside,*map))
+        if (count_map_lines(line,&inside))
             nbr_line++;
         free(line);
     }
@@ -150,7 +153,7 @@ void fill_map(t_map *map, char *line, int *i,int *inside_map)
 {
     if (!map || !line || !i || !inside_map)
         return;
-    if (count_map_lines(line,inside_map,*map)) 
+    if (count_map_lines(line,inside_map)) 
 	{
         map->map[*i] = ft_strdup(line);
         // printf("Filling map row %d with line: [%s]\n",count_map_lines(line,inside_map,*map) , line);
@@ -161,17 +164,6 @@ void fill_map(t_map *map, char *line, int *i,int *inside_map)
 	// 	printerr(1,"Error: found a different symbol inside map");
 	// }
 }
-
-// void pars_map(t_map *map)
-// {
-// 	// if(found_space() || is_empty())
-// 	// 	printerr(1,"Error: The map can not separated by  space or empty line");
-//     // if((valid_caracter(map," 01NESW")))
-// 	// 	printerr(1,"Error: The map must be composed of only 6 <1,0,N,W,E,S>");
-// 	// if(closed_walls())
-// 	// 	printerr(1,"Error: The map must be closed by walls");
-// }
-
 
 // Parse and Identify Sections:
 
