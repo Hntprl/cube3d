@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/03 23:19:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:10:43 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,45 +65,46 @@ int	ft_cube(void *param)
 	mlx->p->turn_direction = 0;
 	return (0);
 }
-void check_map(t_map *map)
+int check_map(t_map **map)
 {
     int i=0;
     int j=0;
-    char *mymap=map->map
+    char **mymap=(*map)->map;
+        printf("line = *%s*","hi");
     while(mymap[i])
     {
         j=0;
+        
         while (mymap[i][j])
         {
             if(mymap[i][0]==0 || !(ft_strcmp(mymap[i]," NEWS")))
             {
                 if(mymap[i][j]==0 && (i=0 || j==0 || mymap[i][j+1]==0 ||  mymap[i][j+1]=='\0' ||  mymap[i][j+1]==' '))
-                    
+                    printf("hi");
             }
             j++;
         }
         i++;
     }
 }
+
 t_map *read_map(char *av) {
     int i = 0;
     int fd;
     char *line;
     t_map *map;
 	int inside_map=0;
+    int pl=0;
     
     if (!av)
         return NULL;        
     map = calloc(1,sizeof(t_map));
-    if (!map)
-        return NULL;
-        
     init_t_map(&map);
     if (!map)
         return NULL;
     map->block_size = 40;
 	checkpath(av);
-    map->rows = nbrs_lines(av);
+    map->rows = nbrs_lines(av,&map->columns);
     map->map = calloc(map->rows, sizeof(char *));
     if (!map->map) 
 	{
@@ -112,7 +113,6 @@ t_map *read_map(char *av) {
     }
     
     fd = open(av, O_RDONLY,0777);
-	// checkpath(fd,av);
     if (fd == -1) 
 	{
         // free_map(map);
@@ -125,17 +125,18 @@ t_map *read_map(char *av) {
         else if (line[0] == 'F' || line[0] == 'C')
             fill_colors(map, line);
         else if (is_maplast(map))
-            fill_map(map, line, &i,&inside_map);
-            
-        map->columns = ft_strlen(line);
+            pl= fill_map(map, line, &i,&inside_map);            
         free(line); 
     }
-    if(map)
-    {
-        // check_walls(map->map,map->rows,map->columns);
-        check_walls(map->map,map->rows);
-        check_map(map);
-    }
+    
+    // if(map)
+    // {
+    //     // check_walls(map->map,map->rows,map->columns);
+    //     // check_walls(map->map,map->rows);
+    //     check_map(&map);
+    // }
+    if(pl!=1)
+        printerr(1,"Error: the game musthave one player ");
     close(fd);
     return map;
 }
@@ -155,7 +156,6 @@ int main(int ac, char **av) {
     }
     
     map = read_map(av[1]);
-	// printf("line *%s*",map->map{0]);
 
     mlx.addr = &addr;
     mlx.p = &p;

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/03 22:57:00 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:06:09 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ void fill_colors(t_map *map,char *str);
 int	ft_isdigit(int c);
 char	*ft_strtrim(char const *s1, char const *set);
 int	ft_isalpha(int c);
-int nbrs_lines(char *av);
-void fill_map(t_map *map,char *line,int *i,int *inside_map);
+int nbrs_lines(char *av,int *columns);
+int fill_map(t_map *map,char *line,int *i,int *inside_map);
 int is_maplast(t_map *map);
 void init_t_map(t_map **map);
 // int check_walls(char **map, int rows, int columns);

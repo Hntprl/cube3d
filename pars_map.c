@@ -9,10 +9,10 @@ int check_walls(char **map,int rows)
             j=0;
             while (map[i][j])
             {
-                if(map[0][j]!=1)
-                    printf("char = *%c*\n",map[0][j]);
-                    // printerr(1,"Error : Top row not surrounded by walls");
-                if(map[rows-1][j]!=1)
+                // if(map[0][j]!=1)
+                //     // printf("char = *%c*\n",map[0][j]);
+                //     // printerr(1,"Error : Top row not surrounded by walls");
+                // if(map[rows-1][j]!=1)
                     // printerr(1,"Error : Bottom row not surrounded by walls");
                     // printf("last = *%c*\n",map[rows-1][j]);
                 j++;        
@@ -61,16 +61,14 @@ int check_walls(char **map,int rows)
 // {
 //     printf("map ===== %s\n",map->map[0]);
 // }
+
 int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
-    // printf("map ===== %s\n",(*map)->map[0]);
 	if(*inside_map)
 	{	
-        // check_line(map);
         if (ft_strcmp(line, "\n") == 0) 
             printerr(1,"Error: The map contains a newline ");
-
 	}	
 	while (line[i]) 
 	{
@@ -91,7 +89,7 @@ int count_map_lines(char *line,int *inside_map)
     return (line[0] == '1' || line[0] == '0');
 }
 
-int nbrs_lines(char *av) 
+int nbrs_lines(char *av,int *columns) 
 {
     int fd;
     char *line;
@@ -106,7 +104,11 @@ int nbrs_lines(char *av)
     while ((line = get_next_line(fd)) != NULL) 
 	{
         if (count_map_lines(line,&inside))
+        {
+            if(ft_strlen(line)>*columns)
+                *columns=ft_strlen(line);
             nbr_line++;
+        }
         free(line);
     }
     close(fd); 
@@ -122,47 +124,52 @@ int is_maplast(t_map *map)
 	return 0;
 }
 
-int valid_caracter(char *line, char *caracter) 
+// int valid_caracter(char *line, char *caracter) 
+// {
+//     int i = 0;
+//     int j;
+//     int flag;
+//     while (line[i]) 
+// 	{        
+//         j = 0;
+//         flag = 0;
+
+//         while (caracter[j])
+// 		 {
+//             if (line[i] == caracter[j]) 
+// 			{
+//                 flag = 1; 
+//                 break;
+//             }
+//             j++;
+//         }
+//         if (flag == 0)
+//             return 0;
+//         i++;
+//     }
+
+//     return 1;
+// }
+
+int fill_map(t_map *map, char *line, int *i,int *inside_map)
 {
-    int i = 0;
-    int j;
-    int flag;
-    while (line[i]) 
-	{        
-        j = 0;
-        flag = 0;
-
-        while (caracter[j])
-		 {
-            if (line[i] == caracter[j]) 
-			{
-                flag = 1; 
-                break;
-            }
-            j++;
-        }
-        if (flag == 0)
-            return 0;
-        i++;
-    }
-
-    return 1;
-}
-
-void fill_map(t_map *map, char *line, int *i,int *inside_map)
-{
+   static int number_p=0;
     if (!map || !line || !i || !inside_map)
-        return;
+        return -1;
     if (count_map_lines(line,inside_map)) 
 	{
         map->map[*i] = ft_strdup(line);
-        // printf("Filling map row %d with line: [%s]\n",count_map_lines(line,inside_map,*map) , line);
+        int j=0;
+        while(map->map[*i][j])
+        {
+
+            if(map->map[*i][j]== 'N' || map->map[*i][j]== 'E' || map->map[*i][j]== 'W' || map->map[*i][j]== 'S')
+                number_p++;
+            j++;
+        }
         (*i)++;
     }
-	// else if(!(count_map_lines(line,inside_map)))
-	// {
-	// 	printerr(1,"Error: found a different symbol inside map");
-	// }
+    return (number_p);
 }
 
 // Parse and Identify Sections:
