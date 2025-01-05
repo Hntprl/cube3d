@@ -14,7 +14,6 @@ void checkpath(char *av)
 
 int is_validtexture(char **str)
 {
-	//  if (ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "NO", 2) == 0)
 	if((!ft_strcmp(str[0],"NO") || !ft_strcmp(str[0],"SO") || !ft_strcmp(str[0],"WE") || !ft_strcmp(str[0],"EA")) && (ft_strlen(str[1]) > 4))
 			return 0;
 	else 

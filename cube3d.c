@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/05 23:57:02 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/06 00:01:19 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,40 +87,7 @@ int check_map(t_map **map)
         i++;
     }
 }
-// int isvalid_map(t_map *map, char **myarr)
-// {
-//     int i = 0;
-//     int j = 0;
-//     while (myarr[i])
-//     {
-//         j = 0;
-//         while (myarr[i][j])
-//         {
-//             if (myarr[i][j]=='0' )
-//             {
-//                 if(i != 0 && j!=0 && i!=map->rows-1 && j!=ft_strlen(myarr[i])-1)
-//                 {
-//                 if(myarr[i-1][j]=='0' || myarr[i-1][j]=='1' || ft_strchr("NEWS", myarr[i-1][j]))
-//                     printf("right side is good\n");
-//                 if(myarr[i+1][j]=='0' ||  myarr[i+1][j]=='1' || ft_strchr("NEWS", myarr[i+1][j]))
-//                     printf("left side is good\n");
-//                 if (myarr[i][j-1]=='0' ||  myarr[i][j-1]=='1' || ft_strchr("NEWS", myarr[i][j-1]))
-//                     printf("top side is good\n");
-//                 if (myarr[i][j+1]=='0' ||  myarr[i][j+1]=='1' || ft_strchr("NEWS", myarr[i][j+1]))
-//                     printf("bottom side is good\n");
-//                 }
-//                 else
-//                 {
-//                     printf("invalid  map\n");
-//                     exit(1);
-//                 }
-//             } 
-//             j++;
-//         }
-//         i++;
-//     }
-//     return 1;
-// }
+
 int isvalid_map(t_map *map, char **myarr)
 {
     int i = 0;
@@ -195,7 +162,8 @@ t_map *read_map(char *av) {
     }
     while ((line = get_next_line(fd)) != NULL)
 	{
-       if (ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "NO", 2) == 0)
+    //    if (ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "NO", 2) == 0)
+        if(line[0]=='N' || line[0]=='S'  || line[0]=='W' || line[0]=='E')
             fill_textures(map, line);
         else if (line[0] == 'F' || line[0] == 'C')
             fill_colors(map, line);
@@ -240,8 +208,8 @@ int main(int ac, char **av) {
     mlx.cube = &cube;  
     cube.height = map->rows * map->block_size;
     cube.width = map->columns * map->block_size;
-    // mlx.ptr = mlx_init();
-    // mlx.window = mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");
-    // ft_cube(&mlx);
-    // event_handling(&mlx);  
+    mlx.ptr = mlx_init();
+    mlx.window = mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");
+    ft_cube(&mlx);
+    event_handling(&mlx);  
 }
