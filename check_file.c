@@ -14,6 +14,7 @@ void checkpath(char *av)
 
 int is_validtexture(char **str)
 {
+	//  if (ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "NO", 2) == 0)
 	if((!ft_strcmp(str[0],"NO") || !ft_strcmp(str[0],"SO") || !ft_strcmp(str[0],"WE") || !ft_strcmp(str[0],"EA")) && (ft_strlen(str[1]) > 4))
 			return 0;
 	else 
@@ -68,6 +69,7 @@ void fill_textures(t_map *map,char *str)
 		string[j]=ft_strtrim(string[j]," \t\n");
 		j++;
 	}
+	// printf("line %s\n",string[1]+ft_strlen(string[1])-4);
 	if ((ft_strcmp(string[1]+ft_strlen(string[1])-4,".xpm")))//maybe work with strcmp
 				printerr(1,"the texture should end with .xpm");
 	if(!(is_validtexture(string)))

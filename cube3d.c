@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/05 17:40:35 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:57:02 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,37 +87,79 @@ int check_map(t_map **map)
         i++;
     }
 }
+// int isvalid_map(t_map *map, char **myarr)
+// {
+//     int i = 0;
+//     int j = 0;
+//     while (myarr[i])
+//     {
+//         j = 0;
+//         while (myarr[i][j])
+//         {
+//             if (myarr[i][j]=='0' )
+//             {
+//                 if(i != 0 && j!=0 && i!=map->rows-1 && j!=ft_strlen(myarr[i])-1)
+//                 {
+//                 if(myarr[i-1][j]=='0' || myarr[i-1][j]=='1' || ft_strchr("NEWS", myarr[i-1][j]))
+//                     printf("right side is good\n");
+//                 if(myarr[i+1][j]=='0' ||  myarr[i+1][j]=='1' || ft_strchr("NEWS", myarr[i+1][j]))
+//                     printf("left side is good\n");
+//                 if (myarr[i][j-1]=='0' ||  myarr[i][j-1]=='1' || ft_strchr("NEWS", myarr[i][j-1]))
+//                     printf("top side is good\n");
+//                 if (myarr[i][j+1]=='0' ||  myarr[i][j+1]=='1' || ft_strchr("NEWS", myarr[i][j+1]))
+//                     printf("bottom side is good\n");
+//                 }
+//                 else
+//                 {
+//                     printf("invalid  map\n");
+//                     exit(1);
+//                 }
+//             } 
+//             j++;
+//         }
+//         i++;
+//     }
+//     return 1;
+// }
 int isvalid_map(t_map *map, char **myarr)
 {
     int i = 0;
     int j = 0;
+
     while (myarr[i])
     {
         j = 0;
+            if(myarr[0][0]=='0' || myarr[0][0]=='1')
+            {
         while (myarr[i][j])
         {
-            if (myarr[i][j]=='0' )
+                
+            if (myarr[i][j] == '0' || ft_strchr("NEWS", myarr[i][j]))
             {
-                if(i != 0 && j!=0 )
-                {
-                    
-                //&& i!=map->rows && j!=map->columns)
-                if(myarr[i-1][j]==0 || myarr[i-1][j]==1 || ft_strchr("NEWS", myarr[i-1][j]))
-                    printf("right side is good");
-                else if(myarr[i+1][j]==0 ||  myarr[i+1][j]==1 || ft_strchr("NEWS", myarr[i+1][j]))
-                    printf("left side is good");
-                else if (myarr[i][j-1]==0 ||  myarr[i][j-1]==1 || ft_strchr("NEWS", myarr[i][j-1]))
-                    printf("top side is good");
-                else if (myarr[i][j+1]==0 ||  myarr[i][j+1]==1 || ft_strchr("NEWS", myarr[i][j+1]))
-                    printf("bottom side is good");
+                // check the '0'|| j == ft_strlen(myarr[i]) - 1
+                    if (i == 0 || j == 0 || i == map->rows - 1 )
+                    {
+                        printf("Invalid map: '0' at the edge at (%d, %d)\n", i, j);
+                        exit(1);
+                    }
+
+                    if (!( (myarr[i-1][j] == '0' || myarr[i-1][j] == '1' || ft_strchr("NEWS", myarr[i-1][j])) &&
+                        (myarr[i+1][j] == '0' || myarr[i+1][j] == '1' || ft_strchr("NEWS", myarr[i+1][j])) &&
+                        (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' || ft_strchr("NEWS", myarr[i][j-1])) &&
+                        (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' || ft_strchr("NEWS", myarr[i][j+1])) ))
+                    {
+                        printf("Invalid map: '0' at (%d, %d) is not surrounded by valid characters\n", i, j);
+                        exit(1);
+                    }
                 }
-            } 
             j++;
+            }
         }
         i++;
     }
     return 1;
 }
+
 
 t_map *read_map(char *av) {
     int i = 0;
@@ -153,7 +195,7 @@ t_map *read_map(char *av) {
     }
     while ((line = get_next_line(fd)) != NULL)
 	{
-        if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
+       if (ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "NO", 2) == 0)
             fill_textures(map, line);
         else if (line[0] == 'F' || line[0] == 'C')
             fill_colors(map, line);
@@ -171,8 +213,8 @@ t_map *read_map(char *av) {
     // printf("%s\n",myarr[0]);
     
     
-    if(pl!=1)
-        printerr(1,"Error: the game must have one player ");
+    // if(pl!=1)
+    //     printerr(1,"Error: the game must have one player ");
     close(fd);
     return map;
 }
