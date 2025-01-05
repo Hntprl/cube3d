@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:45:39 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/22 15:49:58 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/05 13:33:41 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	p = (char *) malloc(sizeof(char) * ft_strlen(s1) + 1);
+	// p=calloc((ft_strlen(s1)+1),sizeof(char *));
 	if (p == NULL)
 	{
 		return (NULL);

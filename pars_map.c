@@ -65,19 +65,15 @@ int check_walls(char **map,int rows)
 int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
-	if(*inside_map)
-	{	
-        if (ft_strcmp(line, "\n") == 0) 
-            printerr(1,"Error: The map contains a newline ");
-	}	
+	if(*inside_map && (ft_strcmp(line, "\n") == 0))
+        printerr(1,"Error: The map contains a newline ");
 	while (line[i]) 
 	{
-        if ((line[i] != '1' && line[i] != '0' && 
+        if ((*inside_map) && (line[i] != '1' && line[i] != '0' && 
             line[i] != 'N' && line[i] != 'S' && 
             line[i] != 'E' && line[i] != 'W' && 
             line[i] != '\n' && line[i] != ' '))
 		{
-			if(*inside_map)
             printerr(1,"Error: found a different symbol inside map ");
 		}
         if(line[i]=='\n' || line[i]==' ')
@@ -124,34 +120,7 @@ int is_maplast(t_map *map)
 	return 0;
 }
 
-// int valid_caracter(char *line, char *caracter) 
-// {
-//     int i = 0;
-//     int j;
-//     int flag;
-//     while (line[i]) 
-// 	{        
-//         j = 0;
-//         flag = 0;
-
-//         while (caracter[j])
-// 		 {
-//             if (line[i] == caracter[j]) 
-// 			{
-//                 flag = 1; 
-//                 break;
-//             }
-//             j++;
-//         }
-//         if (flag == 0)
-//             return 0;
-//         i++;
-//     }
-
-//     return 1;
-// }
-
-int fill_map(t_map *map, char *line, int *i,int *inside_map)
+int fill_map(t_map *map,char ***myarr, char *line, int *i,int *inside_map)
 {
    static int number_p=0;
     if (!map || !line || !i || !inside_map)
@@ -159,12 +128,13 @@ int fill_map(t_map *map, char *line, int *i,int *inside_map)
     if (count_map_lines(line,inside_map)) 
 	{
         map->map[*i] = ft_strdup(line);
+        (*myarr)[*i]=ft_strdup(line);
         int j=0;
         while(map->map[*i][j])
         {
-
+        // printf("%c",myarr[*i][j]);
             if(map->map[*i][j]== 'N' || map->map[*i][j]== 'E' || map->map[*i][j]== 'W' || map->map[*i][j]== 'S')
-                number_p++;
+                number_p++;           
             j++;
         }
         (*i)++;
