@@ -62,11 +62,12 @@ int check_walls(char **map,int rows)
 //     printf("map ===== %s\n",map->map[0]);
 // }
 
-int count_map_lines(char *line,int *inside_map,int *number_p)
+int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
 	if(*inside_map && (ft_strcmp(line, "\n") == 0))
         printerr(1,"Error: The map contains a newline ");
+        printf("line = %s\n",line);
 	while (line[i]) 
 	{
         if ((*inside_map) && (line[i] != '1' && line[i] != '0' && 
@@ -75,14 +76,10 @@ int count_map_lines(char *line,int *inside_map,int *number_p)
             line[i] != '\n' && line[i] != ' '))
 		{
             printerr(1,"Error: found a different symbol inside map ");
-		}
-        if((*inside_map) && (line[i]== 'N' || line[i]== 'E' || line[i]== 'W' || line[i]== 'S'))
-                number_p++;   
-        // if(line[i]=='\n' || line[i]==' ')
-        //     line[i]='\0';
+		}  
         i++;
     }
-	if(line[0] == '1' || line[0] == '0')
+	if((line[0] == '1' || line[0] == '0') )
 		*inside_map=1;
     return (line[0] == '1' || line[0] == '0');
 }
@@ -93,7 +90,6 @@ int nbrs_lines(char *av,int *columns)
     char *line;
     int nbr_line = 0;
 	int inside=0;
-    int number_players=0;
     
     if (!av)
         return -1;
@@ -102,7 +98,7 @@ int nbrs_lines(char *av,int *columns)
         printerr(1, "Error: Cannot open file");
     while ((line = get_next_line(fd)) != NULL) 
 	{
-        if (count_map_lines(line,&inside,&number_players))
+        if (count_map_lines(line,&inside))
         {
             if(ft_strlen(line)>*columns)
                 *columns=ft_strlen(line);
@@ -128,16 +124,17 @@ int fill_map(t_map *map,char ***myarr, char *line, int *i,int *inside_map)
    static int number_p=0;
     if (!map || !line || !i || !inside_map)
         return -1;
-    if (count_map_lines(line,inside_map,&number_p)) 
+    if (count_map_lines(line,inside_map)) 
 	{
+        printf("my array = %s",line);
         map->map[*i] = ft_strdup(line);
         (*myarr)[*i]=ft_strdup(line);
         int j=0;
+        // // printf("%s")
         while(map->map[*i][j])
         {
-        // printf("%c",myarr[*i][j]);
-            // if(map->map[*i][j]== 'N' || map->map[*i][j]== 'E' || map->map[*i][j]== 'W' || map->map[*i][j]== 'S')
-            //     number_p++;           
+            if(map->map[*i][j]== 'N' || map->map[*i][j]== 'E' || map->map[*i][j]== 'W' || map->map[*i][j]== 'S')
+                number_p++;           
             j++;
         }
         (*i)++;

@@ -55,6 +55,8 @@ void fill_textures(t_map *map,char *str)
 {
 	char **string;
 	int i=0;
+	// if(map->map)
+	// 	printerr(1,"Error: the textures must filled before the map");
 	map->no_img=calloc(1,sizeof(char *));
 	map->su_img=calloc(1,sizeof(char *));
 	map->es_img=calloc(1,sizeof(char *));
