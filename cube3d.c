@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/06 17:49:01 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:29:25 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,16 @@ int isvalid_map(t_map *map, char **myarr)
                         (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' ) ))
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
                 }
+                if(myarr[i][j]==' ')
+                {
+                     if (i == 0 || j == 0 || i == map->rows - 1 || j==ft_strlen(myarr[i])-1)
+                        printerr(1,"Error : Invalid map not surrounded by valid characters");
+                    if (!( (myarr[i-1][j] == ' ' || myarr[i-1][j] == '1' ) &&
+                        (myarr[i+1][j] == ' ' || myarr[i+1][j] == '1' ) &&
+                        (myarr[i][j-1] == ' ' || myarr[i][j-1] == '1' ) &&
+                        (myarr[i][j+1] == ' ' || myarr[i][j+1] == '1' ) ))
+                        printerr(1,"Error : Invalid map not surrounded by valid characters");
+                }
             j++;
             }
         }
@@ -170,7 +180,7 @@ t_map *read_map(char *av) {
             fill_colors(map, line);
         else if (is_maplast(map))
              pl=fill_map(map,&myarr, line,&i,&inside_map);            
-        free(line); 
+        free(line);
     }
     isvalid_map(map,myarr);
     if(pl!=1)

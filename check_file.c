@@ -55,8 +55,9 @@ void fill_textures(t_map *map,char *str)
 {
 	char **string;
 	int i=0;
-	// if(map->map)
-	// 	printerr(1,"Error: the textures must filled before the map");
+	// if(map->map==NULL)
+	// {
+
 	map->no_img=calloc(1,sizeof(char *));
 	map->su_img=calloc(1,sizeof(char *));
 	map->es_img=calloc(1,sizeof(char *));
@@ -86,6 +87,11 @@ void fill_textures(t_map *map,char *str)
 	}
 	else
 		printerr(1,"the textures should have one of the directions < NO, SO, WE, EA > ");
+	// }
+	// else
+	// 	printerr(1,"the textures must be filled before map");
+
+	// 
 }
 		// while (last_non_space==str && is_space(*str))//when the format like that <F 220,200, ,4 >
         // 	str++;

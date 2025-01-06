@@ -65,8 +65,8 @@ int check_walls(char **map,int rows)
 int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
-	if(*inside_map && (ft_strcmp(line, "\n") == 0))
-        printerr(1,"Error: The map contains a newline ");
+	// if(*inside_map && (ft_strcmp(line, "\n") == 0))
+    //     printerr(1,"Error: The map contains a newline ");
         printf("line = %s\n",line);
 	while (line[i]) 
 	{
@@ -114,9 +114,9 @@ int nbrs_lines(char *av,int *columns)
 
 int is_maplast(t_map *map)
 {
-	if(map && map->ce_color && map->fl_color && map->no_img && map->es_img && map->we_img && map->su_img)
-		return 1;
-	return 0;
+	if(map && map->ce_color==NULL && map->fl_color==NULL && map->no_img==NULL && map->es_img==NULL && map->we_img==0 && map->su_img==0)
+		return 0;
+	return 1;
 }
 
 int fill_map(t_map *map,char ***myarr, char *line, int *i,int *inside_map)
