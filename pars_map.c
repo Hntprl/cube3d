@@ -67,7 +67,7 @@ int count_map_lines(char *line,int *inside_map)
     int i = 0;
 	// if(*inside_map && (ft_strcmp(line, "\n") == 0))
     //     printerr(1,"Error: The map contains a newline ");
-        printf("line = %s\n",line);
+        printf("line = %s len = %ld \n",line,ft_strlen(line));
 	while (line[i]) 
 	{
         if ((*inside_map) && (line[i] != '1' && line[i] != '0' && 
@@ -126,7 +126,7 @@ int fill_map(t_map *map,char ***myarr, char *line, int *i,int *inside_map)
         return -1;
     if (count_map_lines(line,inside_map)) 
 	{
-        printf("my array = %s",line);
+        // printf("my array = %s",line);
         map->map[*i] = ft_strdup(line);
         (*myarr)[*i]=ft_strdup(line);
         int j=0;

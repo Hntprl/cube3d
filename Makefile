@@ -1,6 +1,6 @@
 NAME = cube3d
-CC = gcc
-Cflags = -Wall -Wextra -Werror
+CC = cc
+Cflags = -Wall -Wextra -Werror #-g3 -fsanitize=address
 MLX = -lmlx -lXext -lX11 -lm -lpng -lz -O3
 
 
@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 all:$(NAME)
 
 $(NAME) : $(OBJ)
-		$(CC) $(Cflags) $(OBJ) $(MLX) -o $(NAME) -fsanitize=address	
+		$(CC) $(Cflags) $(OBJ) $(MLX) -o $(NAME) 	
 
 clean:
 	rm -rf $(OBJ)

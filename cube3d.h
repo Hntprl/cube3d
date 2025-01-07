@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/06 17:40:38 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:08:04 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ int nbrs_lines(char *av,int *columns);
 int fill_map(t_map *map,char ***myarr,char *line,int *i,int *inside_map);
 int is_maplast(t_map *map);
 void init_t_map(t_map **map);
-// int check_walls(char **map, int rows, int columns);
 int check_walls(char **map,int rows);
-// int count_map_lines(char *line,int *inside_map);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void free_map(t_map *map);
+void	free_arg(char **str);
 #endif

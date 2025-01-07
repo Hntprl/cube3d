@@ -27,21 +27,24 @@ void init_t_map(t_map **map)
     (*map)->block_size = 0;
 }
 
+void	free_arg(char **str)
+{
+	int		i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i++]);
+	}
+	free(str);
+}
 void free_map(t_map *map)
 {
     if (!map)
         return;
-    int i = 0;
-    if (map->map) 
-    {
-        while ( map->map[i])
-        {
-            free(map->map[i]);
-            i++;
-        }
-        free(map->map);
-    }
-
+    free_arg(map->map);
     free(map->es_img);
     free(map->we_img);
     free(map->no_img);

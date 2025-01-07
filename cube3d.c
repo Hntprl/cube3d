@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/06 18:29:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/07 22:35:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,72 +65,77 @@ int	ft_cube(void *param)
 	mlx->p->turn_direction = 0;
 	return (0);
 }
-int check_map(t_map **map)
-{
-    int i=0;
-    int j=0;
-    char **mymap=(*map)->map;
-        printf("line = *%s*","hi");
-    while(mymap[i])
-    {
-        j=0;
+// int check_map(t_map **map)
+// {
+//     int i=0;
+//     int j=0;
+//     char **mymap=(*map)->map;
+//         printf("line = *%s*","hi");
+//     while(mymap[i])
+//     {
+//         j=0;
         
-        while (mymap[i][j])
-        {
-            if(mymap[i][0]==0 || !(ft_strcmp(mymap[i]," NEWS")))
-            {
-                if(mymap[i][j]==0 && (i=0 || j==0 || mymap[i][j+1]==0 ||  mymap[i][j+1]=='\0' ||  mymap[i][j+1]==' '))
-                    printf("hi");
-            }
-            j++;
-        }
-        i++;
-    }
-}
+//         while (mymap[i][j])
+//         {
+//             if(mymap[i][0]==0 || !(ft_strcmp(mymap[i]," NEWS")))
+//             {
+//                 if(mymap[i][j]==0 && (i=0 || j==0 || mymap[i][j+1]==0 ||  mymap[i][j+1]=='\0' ||  mymap[i][j+1]==' '))
+//                     printf("hi");
+//             }
+//             j++;
+//         }
+//         i++;
+//     }
+// }
 
 int isvalid_map(t_map *map, char **myarr)
 {
     int i = 0;
     int j = 0;
 
-    while (myarr[i])
+    while (i< map->rows && myarr[i])
     {
         j = 0;
             if(myarr[0][0]=='0' || myarr[0][0]=='1')
             {
-        while (myarr[i][j])
+        while (j < ft_strlen(myarr[i]))
         {   
             if (myarr[i][j] == '0' )
             {
                     if (i == 0 || j == 0 || i == map->rows - 1  || j==ft_strlen(myarr[i])-1)
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
-                    if (!( (myarr[i-1][j] == '0' || myarr[i-1][j] == '1' || ft_strchr("NEWS", myarr[i-1][j])) &&
-                        (myarr[i+1][j] == '0' || myarr[i+1][j] == '1' || ft_strchr("NEWS", myarr[i+1][j])) &&
-                        (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' || ft_strchr("NEWS", myarr[i][j-1])) &&
-                        (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' || ft_strchr("NEWS", myarr[i][j+1])) ))
+                    if (!( (i > 0 && (myarr[i-1][j] == '0' || myarr[i-1][j] == '1' || ft_strchr("NEWS", myarr[i-1][j])) )&&
+                        (i < map->rows-1 && (myarr[i+1][j] == '0' || myarr[i+1][j] == '1' || ft_strchr("NEWS", myarr[i+1][j]))) &&
+                         (j > 0 && (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' || ft_strchr("NEWS", myarr[i][j-1]))) &&
+                       ( j < ft_strlen(myarr[i]) - 1 &&  (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' || ft_strchr("NEWS", myarr[i][j+1])) )))
                     {
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
                     }
                 }
                 if(ft_strchr("NEWS", myarr[i][j]))
                 {
+                    // (i > 0 && j > 0 && i < map->rows - 1 && j < ft_strlen(myarr[i]) - 1)
                     if (i == 0 || j == 0 || i == map->rows - 1 || j==ft_strlen(myarr[i])-1)
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
-                    if (!( (myarr[i-1][j] == '0' || myarr[i-1][j] == '1' ) &&
-                        (myarr[i+1][j] == '0' || myarr[i+1][j] == '1' ) &&
-                        (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' ) &&
-                        (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' ) ))
+                    if (!(( i>0 && (myarr[i-1][j] == '0' || myarr[i-1][j] == '1' ) )&&
+                        (i < map->rows-1 && (myarr[i+1][j] == '0' || myarr[i+1][j] == '1' )) &&
+                        (j > 0 && (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' )) &&
+                        ( j < ft_strlen(myarr[i]) - 1 && (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' ) )))
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
                 }
                 if(myarr[i][j]==' ')
                 {
-                     if (i == 0 || j == 0 || i == map->rows - 1 || j==ft_strlen(myarr[i])-1)
-                        printerr(1,"Error : Invalid map not surrounded by valid characters");
-                    if (!( (myarr[i-1][j] == ' ' || myarr[i-1][j] == '1' ) &&
-                        (myarr[i+1][j] == ' ' || myarr[i+1][j] == '1' ) &&
-                        (myarr[i][j-1] == ' ' || myarr[i][j-1] == '1' ) &&
-                        (myarr[i][j+1] == ' ' || myarr[i][j+1] == '1' ) ))
-                        printerr(1,"Error : Invalid map not surrounded by valid characters");
+                    //  if (i == 0 || j == 0 || i == map->rows - 1 || j==ft_strlen(myarr[i])-1)
+                    //     printerr(1,"Error : Invalid map not surrounded by valid characters");
+                     if (i > 0 && j > 0 && i < map->rows - 1 && j < ft_strlen(myarr[i]) - 1) {
+                    // Only check spaces inside the playable area
+                    if (!( (myarr[i-1][j] == ' ' || myarr[i-1][j] == '1') &&
+                           (myarr[i+1][j] == ' ' || myarr[i+1][j] == '1') &&
+                           (myarr[i][j-1] == ' ' || myarr[i][j-1] == '1') &&
+                           (myarr[i][j+1] == ' ' || myarr[i][j+1] == '1'))) {
+                        printerr(1, "Error: Invalid map not surrounded by valid characters");
+                    }
+                     }
                 }
             j++;
             }
@@ -140,6 +145,16 @@ int isvalid_map(t_map *map, char **myarr)
     return 1;
 }
 
+    // if (!myarr) 
+	// {
+    //     // free_map(map);
+    //     free_arg(myarr);
+    //     return NULL;
+    // }
+    // map ;
+    // if (!map)
+    //     return NULL;
+
 t_map *read_map(char *av) {
     int i = 0;
     int fd;
@@ -147,32 +162,32 @@ t_map *read_map(char *av) {
     t_map *map;
 	int inside_map=0;
     int pl=0;
-   char **myarr=calloc(map->columns,sizeof(char *));
-
-    
+   char **myarr;
     if (!av)
         return NULL;        
     map = calloc(1,sizeof(t_map));
     init_t_map(&map);
-    if (!map)
-        return NULL;
     map->block_size = 40;
 	checkpath(av);
     map->rows = nbrs_lines(av,&map->columns);
+    myarr=calloc(map->columns,sizeof(char *));
     map->map = calloc(map->rows, sizeof(char *));
     if (!map->map) 
 	{
-        // free_map(map);
+        free_map(map);
+        free_arg(myarr);
         return NULL;
     }
     
     fd = open(av, O_RDONLY,0777);
     if (fd == -1) 
 	{
-        // free_map(map);
+        free_map(map);
+        free_arg(myarr);
         return NULL;
     }
-    while ((line = get_next_line(fd)) != NULL)
+    //checking the order of map && check that just 4 textures not more and 2 colors 
+    while ((line = get_next_line(fd)) != NULL)//need to make this inside a function and made it because of need of a flag
 	{
         if((line[0]=='N' && line[1]=='O') || (line[0]=='S' && line[1]=='O')  || (line[0]=='W' && line[1]=='E')|| (line[0]=='E' && line[1]=='A'))
             fill_textures(map, line);
@@ -183,6 +198,7 @@ t_map *read_map(char *av) {
         free(line);
     }
     isvalid_map(map,myarr);
+    free_arg(myarr);
     if(pl!=1)
         printerr(1,"Error: the game must have one player ");
     close(fd);
