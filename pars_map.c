@@ -1,73 +1,12 @@
 #include "cube3d.h"
 
-int check_walls(char **map,int rows)
-{
-    int i=0;
-    int j;
-    while(map[i])
-        {
-            j=0;
-            while (map[i][j])
-            {
-                // if(map[0][j]!=1)
-                //     // printf("char = *%c*\n",map[0][j]);
-                //     // printerr(1,"Error : Top row not surrounded by walls");
-                // if(map[rows-1][j]!=1)
-                    // printerr(1,"Error : Bottom row not surrounded by walls");
-                    // printf("last = *%c*\n",map[rows-1][j]);
-                j++;        
-            }
-            i++;
-            
-        }
-}
-// int check_walls(char **map, int rows, int columns)
-// {
-//     int i;
-//     // Check top row
-//     i = 0;
-//     while( i < columns )
-//     {
-//         if (map[0][i] != '1') {
-//             fprintf(stderr, "Error: Top row is not surrounded by '1'.\n");
-//             return 0;
-//         }
-//         i++;
-//     }
-//     i = 0;
-//     // Check bottom row
-//     while(i < columns) 
-//     {
-//         if (map[rows - 1][i] != '1') {
-//             fprintf(stderr, "Error: Bottom row is not surrounded by '1'.\n");
-//             return 0;
-//         }
-//         i++;
-//     }
-//     i = 1;
-//     // Check left and right borders for middle rows
-//     while( i < rows - 1)
-//     {
-//         if (map[i][0] != '1' || map[i][columns - 1] != '1') {
-//             fprintf(stderr, "Error: Row %d is not surrounded by '1'.\n", i);
-//             return 0;
-//         }
-//         i++;
-//     }
-//     // If all checks pass, the map is surrounded by '1'
-//     return 1;
-// }
-// void check_line(t_map *map)
-// {
-//     printf("map ===== %s\n",map->map[0]);
-// }
-
 int count_map_lines(char *line,int *inside_map)
 {
     int i = 0;
-	// if(*inside_map && (ft_strcmp(line, "\n") == 0))
-    //     printerr(1,"Error: The map contains a newline ");
-        printf("line = %s len = %ld \n",line,ft_strlen(line));
+    t_map *mp;
+    
+	if(*inside_map && (ft_strcmp(line, "\n") == 0))//mp->rows!=12
+        printerr(1,"Error: The map contains a newline ");
 	while (line[i]) 
 	{
         if ((*inside_map) && (line[i] != '1' && line[i] != '0' && 
@@ -126,11 +65,9 @@ int fill_map(t_map *map,char ***myarr, char *line, int *i,int *inside_map)
         return -1;
     if (count_map_lines(line,inside_map)) 
 	{
-        // printf("my array = %s",line);
         map->map[*i] = ft_strdup(line);
         (*myarr)[*i]=ft_strdup(line);
         int j=0;
-        // // printf("%s")
         while(map->map[*i][j])
         {
             if(map->map[*i][j]== 'N' || map->map[*i][j]== 'E' || map->map[*i][j]== 'W' || map->map[*i][j]== 'S')

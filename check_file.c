@@ -48,16 +48,10 @@ int count_words(const char *str)
     }
     return count;
 }
-	// if(map->map)
-	// 	printerr(1,"the map shouldn't be initialized before textures");
-	//should firslty have just 2 strings
-	// if(map->map==NULL)
-	// {
+
 void fill_textures(t_map *map,char *str)
 {
 	char **string;
-	static int i=0;
-	// int direction[4]={0,0,0,0};
 	map->no_img=calloc(1,sizeof(char *));
 	map->su_img=calloc(1,sizeof(char *));
 	map->es_img=calloc(1,sizeof(char *));
@@ -73,7 +67,7 @@ void fill_textures(t_map *map,char *str)
 	}
 	if ((ft_strcmp(string[1]+ft_strlen(string[1])-4,".xpm")))
 				printerr(1,"the texture should end with .xpm");
-	if(!(is_validtexture(string)) && i<4)
+	if(!(is_validtexture(string)))
 	{
 			if(str[0]=='N' && map->text[0]==0)
 			{
@@ -97,21 +91,11 @@ void fill_textures(t_map *map,char *str)
 			}
 			else
                 printerr(1, "Error: duplicate or invalid texture already set");
-			i++;
 		}
 	else
 		printerr(1,"the textures should have one of the directions < NO, SO, WE, EA > ");
 	}
-	// }
-	// else
-	// 	printerr(1,"the textures must be filled before map");
-
-	// 
-// }
-		// while (last_non_space==str && is_space(*str))//when the format like that <F 220,200, ,4 >
-        // 	str++;
-	// printf("valid format *%s*",str);
-
+	
 int is_valid_format(char *str) 
 {
     while (is_space(*str))
@@ -180,7 +164,6 @@ int *min_fill(t_map *map, char *str, int i, int start)
         printerr(1, "Error: The color range should be between 0 & 255");
         return NULL;
     }
-		printf("-------color = %d\n", map->colors[1]);//need to make th same with textures 
     if (str[0] == 'C' && map->colors[0]==0) 
 	{
         if (ce_index < 3)

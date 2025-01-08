@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/08 13:24:01 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/08 21:38:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,6 @@ int	ft_cube(void *param)
 	mlx->p->turn_direction = 0;
 	return (0);
 }
-// int check_map(t_map **map)
-// {
-//     int i=0;
-//     int j=0;
-//     char **mymap=(*map)->map;
-//         printf("line = *%s*","hi");
-//     while(mymap[i])
-//     {
-//         j=0;
-        
-//         while (mymap[i][j])
-//         {
-//             if(mymap[i][0]==0 || !(ft_strcmp(mymap[i]," NEWS")))
-//             {
-//                 if(mymap[i][j]==0 && (i=0 || j==0 || mymap[i][j+1]==0 ||  mymap[i][j+1]=='\0' ||  mymap[i][j+1]==' '))
-//                     printf("hi");
-//             }
-//             j++;
-//         }
-//         i++;
-//     }
-// }
 
 int isvalid_map(t_map *map, char **myarr)
 {
@@ -114,7 +92,6 @@ int isvalid_map(t_map *map, char **myarr)
                 }
                 if(ft_strchr("NEWS", myarr[i][j]))
                 {
-                    // (i > 0 && j > 0 && i < map->rows - 1 && j < ft_strlen(myarr[i]) - 1)
                     if (i == 0 || j == 0 || i == map->rows - 1 || j==ft_strlen(myarr[i])-1)
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
                     if (!(( i>0 && (myarr[i-1][j] == '0' || myarr[i-1][j] == '1' ) )&&
@@ -125,10 +102,7 @@ int isvalid_map(t_map *map, char **myarr)
                 }
                 if(myarr[i][j]==' ')
                 {
-                    //  if (i == 0 || j == 0 || i == map->rows - 1 || j==ft_strlen(myarr[i])-1)
-                    //     printerr(1,"Error : Invalid map not surrounded by valid characters");
                      if (i > 0 && j > 0 && i < map->rows - 1 && j < ft_strlen(myarr[i]) - 1) {
-                    // Only check spaces inside the playable area
                     if (!( (myarr[i-1][j] == ' ' || myarr[i-1][j] == '1') &&
                            (myarr[i+1][j] == ' ' || myarr[i+1][j] == '1') &&
                            (myarr[i][j-1] == ' ' || myarr[i][j-1] == '1') &&
@@ -157,24 +131,32 @@ int isvalid_map(t_map *map, char **myarr)
 
 int to_map(int fd,char **myarr,t_map *map)
 {
+    int  elmant = 0;
     int i=0;
     int pl=0;
     int inside_map=0;
     char *line;
-    while ((line = get_next_line(fd)) != NULL)//need to make this inside a function and made it because of need of a flag
+    while ((line = get_next_line(fd)) != NULL)
 	{
         if(((line[0]=='N' && line[1]=='O') || (line[0]=='S' && line[1]=='O')  || (line[0]=='W' && line[1]=='E')|| (line[0]=='E' && line[1]=='A')))
+        {
             fill_textures(map, line);
+            elmant++;   
+        }
         else if (line[0] == 'F' || line[0] == 'C')
+        {
             fill_colors(map, line);
-        else if (is_maplast(map))
-             pl=fill_map(map,&myarr, line,&i,&inside_map); 
-        else if (line[0]=='\n')
-            printerr(1,"Error: empty map");        
+            elmant++;   
+        }
+        else if(is_maplast(map))
+            pl=fill_map(map,&myarr, line,&i,&inside_map);
         free(line);
     }
+    if (elmant != 6)
+        printerr(1,"Error: The textures and Colors must be in the first"); 
     return pl;
 }
+
 t_map *read_map(char *av) {
     int i = 0;
     int fd;
@@ -206,18 +188,6 @@ t_map *read_map(char *av) {
         free_arg(myarr);
         return NULL;
     }
-    //check an empty file
-    //checking the order of map && check that just 4 textures not more and 2 colors 
-    // while ((line = get_next_line(fd)) != NULL)//need to make this inside a function and made it because of need of a flag
-	// {
-    //     if((line[0]=='N' && line[1]=='O') || (line[0]=='S' && line[1]=='O')  || (line[0]=='W' && line[1]=='E')|| (line[0]=='E' && line[1]=='A'))
-    //         fill_textures(map, line);
-    //     else if (line[0] == 'F' || line[0] == 'C')
-    //         fill_colors(map, line);
-    //     else if (is_maplast(map))
-    //          pl=fill_map(map,&myarr, line,&i,&inside_map);            
-    //     free(line);
-    // }
     pl=to_map(fd,myarr,map);
     isvalid_map(map,myarr);
     free_arg(myarr);
@@ -233,7 +203,7 @@ int main(int ac, char **av) {
     t_player p = {0}; 
     t_mlx mlx = {0};  
     t_addr addr = {0};
-    t_map *map;
+    t_map *map ;
     
     if (ac != 2) 
 	{
