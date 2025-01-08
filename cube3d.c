@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/07 22:35:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:24:01 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,26 @@ int isvalid_map(t_map *map, char **myarr)
     // if (!map)
     //     return NULL;
 
+int to_map(int fd,char **myarr,t_map *map)
+{
+    int i=0;
+    int pl=0;
+    int inside_map=0;
+    char *line;
+    while ((line = get_next_line(fd)) != NULL)//need to make this inside a function and made it because of need of a flag
+	{
+        if(((line[0]=='N' && line[1]=='O') || (line[0]=='S' && line[1]=='O')  || (line[0]=='W' && line[1]=='E')|| (line[0]=='E' && line[1]=='A')))
+            fill_textures(map, line);
+        else if (line[0] == 'F' || line[0] == 'C')
+            fill_colors(map, line);
+        else if (is_maplast(map))
+             pl=fill_map(map,&myarr, line,&i,&inside_map); 
+        else if (line[0]=='\n')
+            printerr(1,"Error: empty map");        
+        free(line);
+    }
+    return pl;
+}
 t_map *read_map(char *av) {
     int i = 0;
     int fd;
@@ -186,17 +206,19 @@ t_map *read_map(char *av) {
         free_arg(myarr);
         return NULL;
     }
+    //check an empty file
     //checking the order of map && check that just 4 textures not more and 2 colors 
-    while ((line = get_next_line(fd)) != NULL)//need to make this inside a function and made it because of need of a flag
-	{
-        if((line[0]=='N' && line[1]=='O') || (line[0]=='S' && line[1]=='O')  || (line[0]=='W' && line[1]=='E')|| (line[0]=='E' && line[1]=='A'))
-            fill_textures(map, line);
-        else if (line[0] == 'F' || line[0] == 'C')
-            fill_colors(map, line);
-        else if (is_maplast(map))
-             pl=fill_map(map,&myarr, line,&i,&inside_map);            
-        free(line);
-    }
+    // while ((line = get_next_line(fd)) != NULL)//need to make this inside a function and made it because of need of a flag
+	// {
+    //     if((line[0]=='N' && line[1]=='O') || (line[0]=='S' && line[1]=='O')  || (line[0]=='W' && line[1]=='E')|| (line[0]=='E' && line[1]=='A'))
+    //         fill_textures(map, line);
+    //     else if (line[0] == 'F' || line[0] == 'C')
+    //         fill_colors(map, line);
+    //     else if (is_maplast(map))
+    //          pl=fill_map(map,&myarr, line,&i,&inside_map);            
+    //     free(line);
+    // }
+    pl=to_map(fd,myarr,map);
     isvalid_map(map,myarr);
     free_arg(myarr);
     if(pl!=1)

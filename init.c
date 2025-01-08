@@ -2,6 +2,7 @@
 
 void init_t_map(t_map **map) 
 {
+    // int i=0;
     if (!map || !*map)
         return;
     
@@ -13,6 +14,7 @@ void init_t_map(t_map **map)
     
     (*map)->fl_color = calloc(3, sizeof(int));
     (*map)->ce_color = calloc(3, sizeof(int));
+    
     if (!(*map)->fl_color || !(*map)->ce_color) 
     {
         free((*map)->fl_color);
@@ -25,6 +27,13 @@ void init_t_map(t_map **map)
     (*map)->rows = 0;
     (*map)->columns = 0;
     (*map)->block_size = 0;
+    (*map)->colors[1] = 0;
+    (*map)->colors[0] = 0;
+    (*map)->text[0] = 0;
+    (*map)->text[1] = 0;
+    (*map)->text[2] = 0;
+    (*map)->text[3] = 0;
+
 }
 
 void	free_arg(char **str)

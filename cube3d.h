@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/07 11:08:04 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:22:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_map
     char *su_img;
     int *fl_color;
     int *ce_color;
+    int colors[2];
+    int text[4];
     int rows;
     int columns;
     int block_size;

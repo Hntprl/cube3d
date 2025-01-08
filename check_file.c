@@ -51,13 +51,13 @@ int count_words(const char *str)
 	// if(map->map)
 	// 	printerr(1,"the map shouldn't be initialized before textures");
 	//should firslty have just 2 strings
+	// if(map->map==NULL)
+	// {
 void fill_textures(t_map *map,char *str)
 {
 	char **string;
-	int i=0;
-	// if(map->map==NULL)
-	// {
-
+	static int i=0;
+	// int direction[4]={0,0,0,0};
 	map->no_img=calloc(1,sizeof(char *));
 	map->su_img=calloc(1,sizeof(char *));
 	map->es_img=calloc(1,sizeof(char *));
@@ -71,28 +71,43 @@ void fill_textures(t_map *map,char *str)
 		string[j]=ft_strtrim(string[j]," \t\n");
 		j++;
 	}
-	// printf("line %s\n",string[1]+ft_strlen(string[1])-4);
-	if ((ft_strcmp(string[1]+ft_strlen(string[1])-4,".xpm")))//maybe work with strcmp
+	if ((ft_strcmp(string[1]+ft_strlen(string[1])-4,".xpm")))
 				printerr(1,"the texture should end with .xpm");
-	if(!(is_validtexture(string)))
+	if(!(is_validtexture(string)) && i<4)
 	{
-			if(str[0]=='N')
+			if(str[0]=='N' && map->text[0]==0)
+			{
 				map->no_img=string[1];
-			else if(str[0]=='S')
+				map->text[0]=1;
+			}
+			else if(str[0]=='S' && map->text[1]==0)
+			{
 				map->su_img=string[1];
-			else if(str[0]=='W')
+				map->text[1]=1;
+			}
+			else if(str[0]=='W' && map->text[2]==0)
+			{
 				map->we_img=string[1];
-			else if(str[0]=='E')
+				map->text[2]=1;
+			}
+			else if(str[0]=='E' && map->text[3]==0)
+			{
 				map->es_img=string[1];
-	}
+				map->text[3]=1;
+			}
+			else
+                printerr(1, "Error: duplicate or invalid texture already set");
+			i++;
+		}
 	else
 		printerr(1,"the textures should have one of the directions < NO, SO, WE, EA > ");
+	}
 	// }
 	// else
 	// 	printerr(1,"the textures must be filled before map");
 
 	// 
-}
+// }
 		// while (last_non_space==str && is_space(*str))//when the format like that <F 220,200, ,4 >
         // 	str++;
 	// printf("valid format *%s*",str);
@@ -165,16 +180,28 @@ int *min_fill(t_map *map, char *str, int i, int start)
         printerr(1, "Error: The color range should be between 0 & 255");
         return NULL;
     }
-    if (str[0] == 'C') 
+		printf("-------color = %d\n", map->colors[1]);//need to make th same with textures 
+    if (str[0] == 'C' && map->colors[0]==0) 
 	{
         if (ce_index < 3)
+		{
             map->ce_color[ce_index++] = valid_range;
+		if(ce_index==3)
+			map->colors[0]=1;
+		}
     }
-	 else if (str[0] == 'F') 
+	 else if (str[0] == 'F' && map->colors[1]==0) 
 	{
         if (fl_index < 3)
+		{
             map->fl_color[fl_index++] = valid_range;
+		if(fl_index==3)
+			map->colors[1]=1;
+		}
     }
+	else
+		printerr(1,"Error :  color already set");
+
     return NULL;
 }
 
