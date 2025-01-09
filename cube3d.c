@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/08 21:38:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:39:40 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int isvalid_map(t_map *map, char **myarr)
     while (i< map->rows && myarr[i])
     {
         j = 0;
+        // printf("line *%s*\n",myarr[i]);
             if(myarr[0][0]=='0' || myarr[0][0]=='1')
             {
         while (j < ft_strlen(myarr[i]))
@@ -87,6 +88,7 @@ int isvalid_map(t_map *map, char **myarr)
                          (j > 0 && (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' || ft_strchr("NEWS", myarr[i][j-1]))) &&
                        ( j < ft_strlen(myarr[i]) - 1 &&  (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' || ft_strchr("NEWS", myarr[i][j+1])) )))
                     {
+                        // printf("line ==== %c,i=%d,j=%d",myarr[i+1][j],i,j);
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
                     }
                 }
@@ -207,7 +209,7 @@ int main(int ac, char **av) {
     
     if (ac != 2) 
 	{
-        printerr(1, "Error: u should enter just two arguments");
+        printerr(1, "Error: u must enter the map file");
         return 1;
     }
     map = read_map(av[1]);
