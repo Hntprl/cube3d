@@ -6,20 +6,25 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:35:31 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/30 18:41:19 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/05 12:06:34 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void draw_grid(t_mlx *mlx)
+void	draw_grid(t_mlx *mlx)
 {
-	int i = 0;
-	int x = 0;
-	int y = 0;
-	int x2 = mlx->cube->width;
-	int y2 = mlx->cube->height;
+	int	i;
+	int	x;
+	int	y;
+	int	x2;
+	int	y2;
 
+	i = 0;
+	x = 0;
+	y = 0;
+	x2 = mlx->cube->width;
+	y2 = mlx->cube->height;
 	while (i < mlx->map->rows)
 	{
 		x = 0;
@@ -27,9 +32,9 @@ void draw_grid(t_mlx *mlx)
 		while (x < x2)
 		{
 			put_pixel(mlx->addr, x, y, 16777215);
-			x ++;
+			x++;
 		}
-		i ++;
+		i++;
 	}
 	i = 0;
 	while (i < mlx->map->columns)
@@ -39,16 +44,19 @@ void draw_grid(t_mlx *mlx)
 		while (y < y2)
 		{
 			put_pixel(mlx->addr, x, y, 16777215);
-			y ++;
+			y++;
 		}
-		i ++;
+		i++;
 	}
 }
 
 void	draw_lines(t_mlx *mlx, int x, int y)
 {
-	float adj = 100 * cos(convert_to_radian(mlx->p->rotation_angle));
-	float opp = 100 * sin(convert_to_radian(mlx->p->rotation_angle));
-	
-	bresenham(mlx, x, y, x + adj, y + opp);
+	float	adj;
+	float	opp;
+
+	adj = 100 * cos(convert_to_radian(mlx->p->rotation_angle));
+	opp = 100 * sin(convert_to_radian(mlx->p->rotation_angle));
+	if (x + adj < mlx->cube->width && y + opp < mlx->cube->height && x + adj > 0 && y + opp > 0)
+		bresenham(mlx, x, y, x + adj, y + opp);
 }

@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:45:39 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/22 15:49:58 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/04 18:47:32 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlen(const char *s)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		i ++;
+		i++;
 	}
 	return (i);
 }
@@ -40,12 +40,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s1[i] != '\0')
 	{
 		p[i] = s1[i];
-		i ++;
+		i++;
 	}
 	while (s2[j] != '\0')
 	{
 		p[i + j] = s2[j];
-		j ++;
+		j++;
 	}
 	p[i + j] = '\0';
 	return (p);
@@ -77,7 +77,7 @@ char	*ft_strdup(const char *s1)
 	char	*p;
 
 	i = 0;
-	p = (char *) malloc(sizeof(char) * ft_strlen(s1) + 1);
+	p = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
 	if (p == NULL)
 	{
 		return (NULL);
@@ -85,7 +85,7 @@ char	*ft_strdup(const char *s1)
 	while (s1[i] != '\0')
 	{
 		p[i] = s1[i];
-		i ++;
+		i++;
 	}
 	p[i] = '\0';
 	return (p);
