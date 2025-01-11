@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/11 14:52:55 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/11 16:57:50 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast)
 	long xstep;
 	long ystep;
 
-	xstep = v_cast->firstx;
-	ystep = v_cast->firsty;
+	xstep = v_cast->xstep;
+	ystep = v_cast->ystep;
 	bresenham(mlx, mlx->p->x, mlx->p->y, xstep, ystep);
 	if (check_walls(mlx, xstep, ystep))
 	{
@@ -105,7 +105,7 @@ void build_rays(t_mlx *mlx, int rays_count)
     t_cast v_cast;
 	int index = 0;
 	float pov = mlx->p->pov / 2;
-	float gap_angle = pov * -1;
+	float gap_angle = -pov;
 	float gap = mlx->p->pov / (rays_count);
 
 	while (index < rays_count)
@@ -113,16 +113,16 @@ void build_rays(t_mlx *mlx, int rays_count)
 		mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle + gap_angle);
 		find_ray_direction(mlx->ray[index].ray_angle, &mlx->ray[index]);
         h_cast.firsty = floor(mlx->p->y / mlx->map->block_size) * mlx->map->block_size;
-		if (mlx->ray->is_ray_facing_down)
+		if (mlx->ray[index].is_ray_facing_down)
 			h_cast.firsty += mlx->map->block_size;
 		h_cast.firstx = mlx->p->x + (h_cast.firsty - mlx->p->y) / tan(convert_to_radian(mlx->ray[index].ray_angle));
         h_cast.ystep = h_cast.firsty;
         h_cast.xstep = h_cast.firstx;
 
 		v_cast.firstx = floor(mlx->p->x / mlx->map->block_size) * mlx->map->block_size;
-		if (mlx->ray->is_ray_facing_right)
+		if (mlx->ray[index].is_ray_facing_left)
 			v_cast.firstx += mlx->map->block_size;
-		v_cast.firsty = mlx->p->y + tan(mlx->ray[index].ray_angle) * (v_cast.firstx - mlx->p->x);
+		v_cast.firsty = mlx->p->y + tan(convert_to_radian(mlx->ray[index].ray_angle)) * (v_cast.firstx - mlx->p->x);
 		v_cast.xstep = v_cast.firstx;
 		v_cast.ystep = v_cast.firsty;
 		while ( h_cast.ystep > 0 && h_cast.ystep < mlx->cube->height && h_cast.xstep > 0 && h_cast.xstep < mlx->cube->width
