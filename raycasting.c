@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/10 16:25:40 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/11 14:52:55 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast)
 
 	xstep = v_cast->firstx;
 	ystep = v_cast->firsty;
-	if (mlx->ray[index].is_ray_facing_left)
-		xstep --;
 	bresenham(mlx, mlx->p->x, mlx->p->y, xstep, ystep);
 	if (check_walls(mlx, xstep, ystep))
 	{
@@ -30,7 +28,11 @@ int vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast)
 		return  (1);
 	}
 	xstep = mlx->map->block_size;
-	ystep = mlx->map->block_size * tan(convert_to_radian(gap));
+	if (mlx->ray[index].is_ray_facing_left)
+		xstep *= -1;
+	ystep = xstep * tan(convert_to_radian(gap));
+	if (mlx->ray[index].is_ray_facing_up && xstep > 0 || mlx->ray[index].is_ray_facing_down && xstep < 0)
+		xstep *= -1;
 	v_cast->ystep += ystep;
 	v_cast->xstep += xstep;
 	return (0);
@@ -54,10 +56,10 @@ int	horizontal_raycast(t_mlx *mlx, float rayangle, int index, t_cast *h_cast)
 		return  (1);
 	}
 	ystep = mlx->map->block_size;
-	if (mlx->ray->is_ray_facing_up)
+	if (mlx->ray[index].is_ray_facing_up)
 		ystep *= -1;
 	xstep = mlx->map->block_size / tan(convert_to_radian(rayangle));
-	if (mlx->ray->is_ray_facing_left && xstep > 0 || mlx->ray->is_ray_facing_right && xstep < 0)
+	if (mlx->ray[index].is_ray_facing_left && xstep > 0 || mlx->ray[index].is_ray_facing_right && xstep < 0)
 		xstep *= -1;
     h_cast->ystep += ystep;
     h_cast->xstep += xstep;
@@ -113,16 +115,23 @@ void build_rays(t_mlx *mlx, int rays_count)
         h_cast.firsty = floor(mlx->p->y / mlx->map->block_size) * mlx->map->block_size;
 		if (mlx->ray->is_ray_facing_down)
 			h_cast.firsty += mlx->map->block_size;
-        h_cast.firstx = mlx->p->x + ( h_cast.firsty - mlx->p->y) / tan(convert_to_radian(mlx->ray[index].ray_angle));
+		h_cast.firstx = mlx->p->x + (h_cast.firsty - mlx->p->y) / tan(convert_to_radian(mlx->ray[index].ray_angle));
         h_cast.ystep = h_cast.firsty;
         h_cast.xstep = h_cast.firstx;
-		while ( h_cast.ystep > 0 && h_cast.ystep < mlx->cube->height && h_cast.xstep > 0 && h_cast.xstep < mlx->cube->width)
+
+		v_cast.firstx = floor(mlx->p->x / mlx->map->block_size) * mlx->map->block_size;
+		if (mlx->ray->is_ray_facing_right)
+			v_cast.firstx += mlx->map->block_size;
+		v_cast.firsty = mlx->p->y + tan(mlx->ray[index].ray_angle) * (v_cast.firstx - mlx->p->x);
+		v_cast.xstep = v_cast.firstx;
+		v_cast.ystep = v_cast.firsty;
+		while ( h_cast.ystep > 0 && h_cast.ystep < mlx->cube->height && h_cast.xstep > 0 && h_cast.xstep < mlx->cube->width
+		&& v_cast.ystep > 0 && v_cast.ystep < mlx->cube->height && v_cast.xstep > 0 && v_cast.xstep < mlx->cube->width)
         {
 			if (horizontal_raycast(mlx, mlx->ray[index].ray_angle, index, &h_cast))
 				break ;
-			// if (vertical_raycast(mlx,  mlx->ray[index].ray_angle, index, &v_cast))
-			// 	break ;
-			
+			if (vertical_raycast(mlx,  mlx->ray[index].ray_angle, index, &v_cast))
+				break ;
 		}
 		gap_angle += gap;
 		index++;
