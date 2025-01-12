@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/12 20:17:32 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/12 22:32:08 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	to_map(int fd, char **myarr, t_map *map)
 	int		pl;
 	int		inside_map;
 	char	*line;
+	char *nwline;
 
 	elmant = 0;
 	i = 0;
@@ -94,20 +95,23 @@ int	to_map(int fd, char **myarr, t_map *map)
 	inside_map = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		if (((line[0] == 'N' && line[1] == 'O') || (line[0] == 'S'
-					&& line[1] == 'O') || (line[0] == 'W' && line[1] == 'E')
-				|| (line[0] == 'E' && line[1] == 'A')))
+		nwline=ft_strtrim(line," \t\n");
+		if (((nwline[0] == 'N' && nwline[1] == 'O') || (nwline[0] == 'S'
+					&& nwline[1] == 'O') || (nwline[0] == 'W' && nwline[1] == 'E')
+				|| (nwline[0] == 'E' && nwline[1] == 'A')))
 		{
-			fill_textures(map, line);
+			fill_textures(map, nwline);
 			elmant++;
 		}
-		else if (line[0] == 'F' || line[0] == 'C')
+		else if (nwline[0] == 'F' || nwline[0] == 'C')
 		{
-			fill_colors(map, line);
+			fill_colors(map, nwline);
 			elmant++;
 		}
 		else if (is_maplast(map))
+		{
 			pl = fill_map(map, &myarr, line, &i, &inside_map);
+		}
 		free(line);
 	}
 	if (elmant != 6)
@@ -149,7 +153,7 @@ t_map	*read_map(char *av)
 	// to_map(fd, myarr, map);
 	if (to_map(fd, myarr, map) != 1)
 		printerr(1, "Error: the game must have one player ");
-	// isvalid_map(map, myarr);
+	isvalid_map(map, myarr);
 	free_arg(myarr);
 	close(fd);
 	return (map);
@@ -174,7 +178,7 @@ int	main(int ac, char **av)
 	p.rotation_angle = 0;
 	mlx.map = map;
 	mlx.cube = &cube;
-	cube.height = map->rows * map->block_size;
+	cube.height = map->rows * map->block_size ;
 	cube.width = map->columns * map->block_size;
 	mlx.ptr = mlx_init();
 	mlx.window = mlx_new_window(mlx.ptr, cube.width, cube.height, "Map");

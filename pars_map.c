@@ -13,24 +13,31 @@ int	count_map_lines(char *line, int *inside_map)
 {
 	int		i;
 	t_map	*mp;
+	char *trimedline;
+	trimedline=ft_strtrim(line," \t\n");
 
 	i = 0;
 	if (*inside_map)
 	{
-		while (line[i])
+		while (trimedline[i])
 		{
-			diff_symbol(line[i], inside_map);
+			diff_symbol(trimedline[i], inside_map);
 			i++;
 		}
-		if ((ft_strcmp(line, "\n") == 0))
-			printerr(1, "Error: The map contains a newline ");
+		if (trimedline[0] == '\0')
+        {
+            free(trimedline);
+            printerr(1, "Error: The map contains a newline");
+        }
+		// if ((ft_strcmp(trimedline, "\n") == 0))
+		// 	printerr(1, "Error: The map contains a newline ");
 	}
-	if (line[0] == '1' || line[0] == '0')
+	if (trimedline[0] == '1' || trimedline[0] == '0')
 	{
 		*inside_map = 1;
 		return (1);
 	}
-	if (*inside_map && ft_strcmp(line, "\n") == 0)
+	if (*inside_map && trimedline[0] == '\0')
 	{
 		return (0);
 	}

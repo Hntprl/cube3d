@@ -93,20 +93,20 @@ int isvalid_map(t_map *map, char **myarr)
 {
     int i = 0;
     int j = 0;
-
-	j = 0;
-	// while (myarr[j])
+	// while (mapi[j])
 	// {
-    //     printf("line nbr= %d *%s*\n",j,myarr[j]);
-	// 	myarr[j] = ft_strtrim(myarr[j], " \t\n");
+	// 	myarr[j]=ft_strtrim(mapi[j]," \t\n");
+	// 	        // printf("myarr[%d] *%s*\n",(j),myarr[j]);
 	// 	j++;
 	// }
+	
+	j = 0;
     while (i< map->rows && myarr[i])
     {
         j = 0;
 		
-            if(myarr[0][0]=='0' || myarr[0][0]=='1')
-            {
+            // if(myarr[0][0]=='0' || myarr[0][0]=='1')
+            // {
         while (j < ft_strlen(myarr[i]))
         {   
             if (myarr[i][j] == '0' )
@@ -118,7 +118,6 @@ int isvalid_map(t_map *map, char **myarr)
                          (j > 0 && (myarr[i][j-1] == '0' || myarr[i][j-1] == '1' || ft_strchr("NEWS", myarr[i][j-1]))) &&
                        ( j < ft_strlen(myarr[i]) - 1 &&  (myarr[i][j+1] == '0' || myarr[i][j+1] == '1' || ft_strchr("NEWS", myarr[i][j+1])) )))
                     {
-                        // printf("line ==== %c,i=%d,j=%d",myarr[i+1][j],i,j);
                         printerr(1,"Error : Invalid map not surrounded by valid characters");
                     }
                 }
@@ -145,7 +144,7 @@ int isvalid_map(t_map *map, char **myarr)
                 }
             j++;
             }
-        }
+        // }
         i++;
     }
     return 1;
