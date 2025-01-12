@@ -72,21 +72,52 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_strlcpy(str, (char *)&s1[i], len - i + 2);
 	return (str);
 }
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	i;
+	char	*str;
+	char	*pt;
+	int		i;
+	int		n;
+
+	if (size != 0 && count >= SIZE_MAX / size)
+	{
+		return (NULL);
+	}
+	str = malloc(size * count);
+	if (str == 0)
+	{
+		return (0);
+	}
+	i = 0;
+	pt = (char *)str;
+	n = count * size;
+	while (n-- > 0)
+	{
+		pt[i] = '\0';
+		i++;
+	}
+	return (str);
+}
+int	ft_atoi(const char *str)
+{
+	int i;
+	int sign;
+	int res;
 
 	i = 0;
-	if (n != 0)
+	sign = 1;
+	res = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+')
+		i++;
+	else if (str[i] == '-')
 	{
-		while ((s2[i] || s1[i]) && i < n)
-		{
-			if (s1[i] != s2[i])
-			{
-				return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-			}
-			i++;
-		}
+		i++;
+		sign = -sign;
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	while (str[i] <= '9' && str[i] >= '0')
+		res = res * 10 + str[i++] - '0';
+	return (sign * res);
 }

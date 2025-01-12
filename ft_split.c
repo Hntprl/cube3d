@@ -1,4 +1,5 @@
 #include "cube3d.h"
+
 int	countword(char *str, char sep)
 {
 	int	i;
@@ -66,8 +67,8 @@ static char	**free_split(char **str, int i)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**string;
-	int		index_string;
+	char **string;
+	int index_string;
 
 	index_string = 0;
 	if (!s)

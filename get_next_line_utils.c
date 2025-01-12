@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:45:39 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/05 22:46:48 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:14:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if(!s)
-		return 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 	{
-		i ++;
+		i++;
 	}
 	return (i);
 }
@@ -42,12 +42,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s1[i] != '\0')
 	{
 		p[i] = s1[i];
-		i ++;
+		i++;
 	}
 	while (s2[j] != '\0')
 	{
 		p[i + j] = s2[j];
-		j ++;
+		j++;
 	}
 	p[i + j] = '\0';
 	return (p);
@@ -79,8 +79,7 @@ char	*ft_strdup(const char *s1)
 	char	*p;
 
 	i = 0;
-	p = (char *) malloc(sizeof(char) * ft_strlen(s1) + 1);
-	// p=calloc((ft_strlen(s1)+1),sizeof(char *));
+	p = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
 	if (p == NULL)
 	{
 		return (NULL);
@@ -88,7 +87,7 @@ char	*ft_strdup(const char *s1)
 	while (s1[i] != '\0')
 	{
 		p[i] = s1[i];
-		i ++;
+		i++;
 	}
 	p[i] = '\0';
 	return (p);

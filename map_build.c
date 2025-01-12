@@ -12,29 +12,37 @@
 
 #include "cube3d.h"
 
-void ft_draw_block(t_mlx *mlx, int x, int y, int color)
+void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	while (i < mlx->map->block_size)
 	{
 		j = 0;
 		while (j < mlx->map->block_size)
 		{
 			put_pixel(mlx->addr, x + i, y + j, color);
-			j ++;
+			j++;
 		}
-		i ++;
+		i++;
 	}
-}	
+}
 
-void draw_map(t_mlx *mlx)
+void	draw_map(t_mlx *mlx)
 {
-	static int flag;
-	int i = 0;
-	int j = 0;
-	int x = 0;
-	int y = 0;
+	static int	flag;
+	int			i;
+	int			j;
+	int			x;
+	int			y;
+
+	i = 0;
+	j = 0;
+	x = 0;
+	y = 0;
 	while (i < mlx->map->rows && mlx->map->map[i])
 	{
 		j = 0;
@@ -45,7 +53,8 @@ void draw_map(t_mlx *mlx)
 				ft_draw_block(mlx, x, y, 16777215);
 			if (mlx->map->map[i][j] == '0')
 				ft_draw_block(mlx, x, y, 0);
-			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S' || mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
+			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S'
+				|| mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
 			{
 				if (flag == 0)
 				{
@@ -57,27 +66,28 @@ void draw_map(t_mlx *mlx)
 				ft_draw_block(mlx, mlx->p->x, mlx->p->y, 3093247);
 			}
 			x += mlx->map->block_size;
-			j ++;
+			j++;
 		}
 		y += mlx->map->block_size;
-		i ++;
+		i++;
 	}
 }
 
-void bresenham(t_mlx *mlx, int x, int y, int x2, int y2)
+void	bresenham(t_mlx *mlx, int x, int y, int x2, int y2)
 {
-	int e2;
-	int dx = abs(x2 - mlx->p->x);
-	int dy = abs(y2 - mlx->p->y);
-	int error;
-	int sx;
-	int sy;
-	
+	int	e2;
+	int	dx;
+	int	dy;
+	int	error;
+	int	sx;
+	int	sy;
+
+	dx = abs(x2 - mlx->p->x);
+	dy = abs(y2 - mlx->p->y);
 	if (mlx->p->x < x2)
 		sx = 1;
 	else
 		sx = -1;
-
 	if (mlx->p->y < y2)
 		sy = 1;
 	else

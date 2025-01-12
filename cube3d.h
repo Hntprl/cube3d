@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/08 13:22:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:14:57 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 # include <limits.h>
+#include <stdint.h>
 #include <math.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE  1
@@ -27,6 +28,12 @@
 
 #define W   
 #define PI  3.14159265358979323846
+
+
+typedef struct {
+    void *allocations[100];
+    int count;
+} MemoryManager;
 
 typedef struct s_cube
 {
@@ -139,8 +146,12 @@ int nbrs_lines(char *av,int *columns);
 int fill_map(t_map *map,char ***myarr,char *line,int *i,int *inside_map);
 int is_maplast(t_map *map);
 void init_t_map(t_map **map);
-int check_walls(char **map,int rows);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void free_map(t_map *map);
 void	free_arg(char **str);
+void	*ft_calloc(size_t count, size_t size);
+int	ft_atoi(const char *str);
+int	isvalid_map(t_map *map, char **myarr);
+void	is_validcolor(char *str);
+int	is_space(char str);
+int	*min_fill(t_map *map, char *str, int i, int start);
 #endif

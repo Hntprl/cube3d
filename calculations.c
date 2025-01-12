@@ -12,12 +12,12 @@
 
 #include "cube3d.h"
 
-float convert_to_radian(float angle)
+float	convert_to_radian(float angle)
 {
-    return (angle * (PI / 180));
+	return (angle * (PI / 180));
 }
 
-float convert_to_degree(float radian)
+float	convert_to_degree(float radian)
 {
-    return (radian * (180 / PI));
+	return (radian * (180 / PI));
 }

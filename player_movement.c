@@ -12,7 +12,7 @@
 
 #include "cube3d.h"
 
-void set_player_direction(char c, t_mlx *mlx)
+void	set_player_direction(char c, t_mlx *mlx)
 {
 	if (c == 'N')
 		mlx->p->rotation_angle = 0;
@@ -24,28 +24,33 @@ void set_player_direction(char c, t_mlx *mlx)
 		mlx->p->rotation_angle = 270;
 }
 
-void trurn_player(t_mlx *mlx)
+void	trurn_player(t_mlx *mlx)
 {
 	mlx->p->rotation_speed = 5;
 	mlx->p->rotation_angle += mlx->p->turn_direction * mlx->p->rotation_speed;
 }
 
-void move_player(t_mlx *mlx, int x, int y)
+void	move_player(t_mlx *mlx, int x, int y)
 {
+	float	pov;
+	float	adj;
+	float	opp;
+
 	if (!mlx || !mlx->p || !mlx->map || !mlx->map->map)
-        return ;
+		return ;
 	trurn_player(mlx);
-	float pov = mlx->p->rotation_angle;
+	pov = mlx->p->rotation_angle;
 	if (mlx->p->side_walk == 1)
-		pov-= 90;
-	float adj = 10 * cos(convert_to_radian(pov));
-	float opp = 10 * sin(convert_to_radian(pov));
-	
-    if (mlx->map->map[(int)(y + opp * mlx->p->walk_direction) / mlx->map->block_size][(int)(x + adj * mlx->p->walk_direction) / mlx->map->block_size] != '1')
-    {
-        x += adj * mlx->p->walk_direction;
-        y += opp * mlx->p->walk_direction;
-    }
+		pov -= 90;
+	adj = 10 * cos(convert_to_radian(pov));
+	opp = 10 * sin(convert_to_radian(pov));
+	if (mlx->map->map[(int)(y + opp * mlx->p->walk_direction)
+		/ mlx->map->block_size][(int)(x + adj * mlx->p->walk_direction)
+		/ mlx->map->block_size] != '1')
+	{
+		x += adj * mlx->p->walk_direction;
+		y += opp * mlx->p->walk_direction;
+	}
 	mlx->p->x = x;
 	mlx->p->y = y;
 }
