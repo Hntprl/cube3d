@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/08 19:17:48 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:07:06 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@
 
 typedef struct s_cast
 {
-	long 	firstx;
-	long 	firsty;
+	long 	distance;
 	long	xstep;
 	long	ystep;
 }				t_cast;
@@ -46,9 +45,6 @@ typedef struct s_cube
 typedef struct s_ray
 {
 	float 		ray_angle;
-	float		distance;
-	float		wall_hit_x;
-	float		wall_hit_y;
 	int			was_hit_vertical;
 	int			was_hit_horizontal;
 	int			is_ray_facing_down;
@@ -98,6 +94,7 @@ typedef struct s_mlx
 	t_ray 		*ray;
 }				t_mlx;
 
+long			calculate_distance(float x1, float y1, float x2, float y2);
 int				vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int				horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void			build_rays(t_mlx *mlx, int rays_count);
