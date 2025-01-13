@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/12 22:32:08 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:43:44 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,11 @@ int	to_map(int fd, char **myarr, t_map *map)
 			fill_colors(map, nwline);
 			elmant++;
 		}
-		else if (is_maplast(map))
-		{
+		else if (nwline[0]=='0' || nwline[0]=='1')
 			pl = fill_map(map, &myarr, line, &i, &inside_map);
-		}
+		else if(nwline[0]!='\0')
+			printerr(1,"Error! : invalid content in the file");
+		free(nwline);
 		free(line);
 	}
 	if (elmant != 6)
@@ -150,7 +151,6 @@ t_map	*read_map(char *av)
 		free_arg(myarr);
 		return (NULL);
 	}
-	// to_map(fd, myarr, map);
 	if (to_map(fd, myarr, map) != 1)
 		printerr(1, "Error: the game must have one player ");
 	isvalid_map(map, myarr);
