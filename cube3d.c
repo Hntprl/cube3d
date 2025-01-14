@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/13 21:43:44 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:24:27 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ int	ft_cube(void *param)
 // map ;
 // if (!map)
 //     return (NULL);
-
+// int is_map(char *line)
+// {
+// 	char *trimed;
+// 	trimed=line
+// }
 int	to_map(int fd, char **myarr, t_map *map)
 {
 	int		elmant;
@@ -88,6 +92,7 @@ int	to_map(int fd, char **myarr, t_map *map)
 	int		inside_map;
 	char	*line;
 	char *nwline;
+	int map_lines_read=0;
 
 	elmant = 0;
 	i = 0;
@@ -108,8 +113,18 @@ int	to_map(int fd, char **myarr, t_map *map)
 			fill_colors(map, nwline);
 			elmant++;
 		}
-		else if (nwline[0]=='0' || nwline[0]=='1')
-			pl = fill_map(map, &myarr, line, &i, &inside_map);
+		else if ((map_lines_read != map->rows && inside_map) || (nwline[0]=='0' || nwline[0]=='1'))
+		{
+			if (nwline[0] == '\0')
+            {
+                free(nwline);
+                free(line);
+                printerr(1, "Error: Empty line inside map");
+            }
+             inside_map = 1;
+            pl = fill_map(map, &myarr, line, &i, &inside_map);
+            map_lines_read++;
+		}
 		else if(nwline[0]!='\0')
 			printerr(1,"Error! : invalid content in the file");
 		free(nwline);

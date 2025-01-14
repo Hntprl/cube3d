@@ -84,7 +84,6 @@ int	fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
 {
 	static int	number_p = 0;
 	int			j;
-	static int increment;
 
 	if (!map || !line || !i || !inside_map)
 		return (-1);

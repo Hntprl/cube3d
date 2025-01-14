@@ -68,6 +68,7 @@ int	*min_fill(t_map *map, char *str, int i, int start)
 	substr = ft_substr(str, start, i);
 	valid_range = ft_atoi(substr);
 	free(substr);
+	// printf("color = %d\n",valid_range);
 	if (valid_range < 0 || valid_range > 255)
 	{
 		printerr(1, "Error: The color range should be between 0 & 255");
