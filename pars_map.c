@@ -18,11 +18,6 @@ int	count_map_lines(char *line, int *inside_map)
 	i = 0;
 	if (*inside_map)
 	{
-		if(trimedline[0]=='\0')
-		{
-			free(trimedline);
-			printerr(1,"Error: Empty line inside map");
-		}
 		while (trimedline[i])
 		{
 			diff_symbol(trimedline[i], inside_map);
@@ -35,11 +30,6 @@ int	count_map_lines(char *line, int *inside_map)
 		free(trimedline);
 		return (1);
 	}
-	if (*inside_map && trimedline[0] == '\0')
-    {
-        free(trimedline);
-        return (0);
-    }
 	 if (*inside_map)
         *inside_map = 0;
 	free(trimedline);
@@ -103,22 +93,3 @@ int	fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
 	}
 	return (number_p);
 }
-
-// Parse and Identify Sections:
-
-// Locate the map as the last section of the file.
-// Handle and ignore empty lines where applicable.
-// Verify Map Characters:
-
-// Check that the map contains only the valid characters (0, 1, N, S, E, W).
-// Validate Surrounding Walls:
-
-// Ensure all rows at the edges (top and bottom) are filled with 1.
-// Ensure all columns at the edges (leftmost and rightmost) are filled with 1.
-// Check Player Start Position:
-
-// Confirm there is exactly one player start position (N, S, E, W).
-// More or fewer starting positions would make the map invalid.
-// Handle Empty Spaces:
-
-// Ensure no 0 appears outside of the map bounds or leads to an unclosed area.

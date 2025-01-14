@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/12 15:14:57 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:39:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ char	**ft_split(char const *s, char c);
 int	countword(char *str, char sep);
 void printerr(int status,char *str);
 void checkpath(char *av);
-// int compare(char *str,char *ext);
 int is_validtexture(char **str);
 void fill_textures(t_map *map,char *str);
 void	spliit(char *str,t_map *map);
@@ -144,7 +143,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 int	ft_isalpha(int c);
 int nbrs_lines(char *av,int *columns);
 int fill_map(t_map *map,char ***myarr,char *line,int *i,int *inside_map);
-int is_maplast(t_map *map);
 void init_t_map(t_map **map);
 void free_map(t_map *map);
 void	free_arg(char **str);
@@ -154,4 +152,5 @@ int	isvalid_map(t_map *map, char **myarr);
 void	is_validcolor(char *str);
 int	is_space(char str);
 int	*min_fill(t_map *map, char *str, int i, int start);
+int	to_map(int fd, char **myarr, t_map *map);
 #endif

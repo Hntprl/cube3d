@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/14 17:24:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:37:08 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,72 +67,6 @@ int	ft_cube(void *param)
 	mlx->p->side_walk = 0;
 	mlx->p->turn_direction = 0;
 	return (0);
-}
-
-
-// if (!myarr)
-// {
-//     // free_map(map);
-//     free_arg(myarr);
-//     return (NULL);
-// }
-// map ;
-// if (!map)
-//     return (NULL);
-// int is_map(char *line)
-// {
-// 	char *trimed;
-// 	trimed=line
-// }
-int	to_map(int fd, char **myarr, t_map *map)
-{
-	int		elmant;
-	int		i;
-	int		pl;
-	int		inside_map;
-	char	*line;
-	char *nwline;
-	int map_lines_read=0;
-
-	elmant = 0;
-	i = 0;
-	pl = 0;
-	inside_map = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		nwline=ft_strtrim(line," \t\n");
-		if (((nwline[0] == 'N' && nwline[1] == 'O') || (nwline[0] == 'S'
-					&& nwline[1] == 'O') || (nwline[0] == 'W' && nwline[1] == 'E')
-				|| (nwline[0] == 'E' && nwline[1] == 'A')))
-		{
-			fill_textures(map, nwline);
-			elmant++;
-		}
-		else if (nwline[0] == 'F' || nwline[0] == 'C')
-		{
-			fill_colors(map, nwline);
-			elmant++;
-		}
-		else if ((map_lines_read != map->rows && inside_map) || (nwline[0]=='0' || nwline[0]=='1'))
-		{
-			if (nwline[0] == '\0')
-            {
-                free(nwline);
-                free(line);
-                printerr(1, "Error: Empty line inside map");
-            }
-             inside_map = 1;
-            pl = fill_map(map, &myarr, line, &i, &inside_map);
-            map_lines_read++;
-		}
-		else if(nwline[0]!='\0')
-			printerr(1,"Error! : invalid content in the file");
-		free(nwline);
-		free(line);
-	}
-	if (elmant != 6)
-		printerr(1, "Error: The textures and Colors must be in the first");
-	return (pl);
 }
 
 t_map	*read_map(char *av)
