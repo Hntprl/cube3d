@@ -6,108 +6,88 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/25 17:06:14 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/07 17:11:03 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int get_color(int r, int g, int b)
+int	get_color(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
-int put_pixel(t_addr *addr, int x, int y, int color)
+int	put_pixel(t_addr *addr, int x, int y, int color)
 {
 	char	*dst;
 
+	// if (x < 0 || x || y < 0 || y >= 600)
+	// 	return (0);
 	dst = addr->pixels + (y * addr->size_line + x * (addr->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 	return (0);
 }
 
-int destroy_win(void *param)
+int	destroy_win(void *param)
 {
-	t_mlx *mlx = (t_mlx *)param;
-	
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)param;
 	mlx_destroy_window(mlx->ptr, mlx->window);
 	exit(0);
 }
 
-void rotate_player(t_mlx *mlx)
+void	handle_arrows(int keycode, t_mlx *mlx)
 {
-	float rotate = convert_to_radian(mlx->addr->p->rotation_angle);
-	mlx->addr->p->x += cos(rotate) * 10;
-	mlx->addr->p->y += sin(rotate) * 10;
-}
+	float	rotate;
 
-void handle_arrows(int keycode, t_mlx *mlx)
-{
-	float rotate = 90.0;
-	
+	rotate = 5.0;
 	if (keycode == 65361)
 	{
-		mlx->addr->p->rotation_angle -= 90;
-		rotate_player(mlx);
+		mlx->p->turn_direction = -1;
 	}
 	else if (keycode == 65363)
 	{
-		mlx->addr->p->rotation_angle += 90;
-		rotate_player(mlx);
+		mlx->p->turn_direction = +1;
 	}
-	if (mlx->addr->p->rotation_angle >= 360)
-		mlx->addr->p->rotation_angle -= 360;
-	if (mlx->addr->p->rotation_angle < 0)
-		mlx->addr->p->rotation_angle += 360;
 }
 
-int key_hook(int keycode,void *param)
+int	key_hook(int keycode, void *param)
 {
-	t_mlx *mlx = (t_mlx *)param;
+	float	new_x;
+	float	new_y;
+	t_mlx	*mlx;
 
+	mlx = (t_mlx *)param;
 	if (keycode == 65307)
 		destroy_win(param);
-	if (keycode == 119)
-    {
-		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->addr->p->y - 10) / mlx->map->block_size][(int)(mlx->addr->p->x) / mlx->map->block_size] != '1')
-				mlx->addr->p->y -= 10;
-		}
-    }
-	else if (keycode == 115)
+	if (keycode == 'w')
 	{
-		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->addr->p->y + 10) / mlx->map->block_size][(int)(mlx->addr->p->x) / mlx->map->block_size] != '1')
-				mlx->addr->p->y += 10;
-		}
+		mlx->p->walk_direction = 1;
 	}
-	else if (keycode == 100)
+	else if (keycode == 's')
 	{
-		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->addr->p->y) / mlx->map->block_size][(int)(mlx->addr->p->x + 10) / mlx->map->block_size] != '1')
-				mlx->addr->p->x += 10;
-		}
+		mlx->p->walk_direction = -1;
 	}
-	else if (keycode == 97)
+	else if (keycode == 'a')
 	{
-		if (mlx->map->map[(int)mlx->addr->p->y / mlx->map->block_size][(int)mlx->addr->p->x / mlx->map->block_size] != '1')
-		{
-			if (mlx->map->map[(int)(mlx->addr->p->y) / mlx->map->block_size][(int)(mlx->addr->p->x - 10) / mlx->map->block_size] != '1')
-				mlx->addr->p->x -= 10;
-		}
+		mlx->p->side_walk = 1;
+		mlx->p->walk_direction = -1;
+	}
+	else if (keycode == 'd')
+	{
+		mlx->p->side_walk = 1;
+		mlx->p->walk_direction = 1;
 	}
 	else
 		handle_arrows(keycode, mlx);
 	return (0);
 }
 
-void event_handling(t_mlx *mlx)
+void	event_handling(t_mlx *mlx)
 {
-	mlx_hook(mlx->window, 2, 1L<<0, NULL, mlx);
-    mlx_hook(mlx->window, 3, 1L<<1, NULL, mlx);
+	mlx_hook(mlx->window, 2, 1L << 0, NULL, mlx);
+	mlx_hook(mlx->window, 3, 1L << 1, NULL, mlx);
 	mlx_key_hook(mlx->window, &key_hook, mlx);
 	mlx_loop_hook(mlx->ptr, ft_cube, mlx);
 	mlx_hook(mlx->window, 17, 0, destroy_win, mlx);
