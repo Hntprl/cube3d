@@ -57,6 +57,6 @@ void	draw_lines(t_mlx *mlx, int x, int y)
 
 	adj = 100 * cos(convert_to_radian(mlx->p->rotation_angle));
 	opp = 100 * sin(convert_to_radian(mlx->p->rotation_angle));
-	if (x + adj < mlx->cube->width && y + opp < mlx->cube->height && x + adj > 0 && y + opp > 0)
-		bresenham(mlx, x, y, x + adj, y + opp);
+	// if (x + adj < mlx->cube->width && y + opp < mlx->cube->height && x + adj > 0 && y + opp > 0)
+	// 	bresenham(mlx, x, y, x + adj, y + opp);
 }

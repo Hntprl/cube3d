@@ -24,12 +24,14 @@ float	convert_to_degree(float radian)
 
 bool	check_walls(t_mlx *mlx, float x, float y)
 {
+	if (x < 0 || x >= mlx->cube->width || y < 0 || y >= mlx->cube->height)
+		return (false);
 	if (mlx->map->map[(int)(y / mlx->map->block_size)][(int)(x / mlx->map->block_size)] == '1')
 		return (true);
 	return (false);
 }
 
-long	calculate_distance(float x1, float y1, float x2, float y2)
+double	calculate_distance(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }

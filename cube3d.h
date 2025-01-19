@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <mlx.h>
+#include "mlx.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,14 +25,16 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# define WTH 300
+# define HTH 200
 # define W
 # define PI 3.14159265358979323846
 
 typedef struct s_cast
 {
-	long 	distance;
-	long	xstep;
-	long	ystep;
+	double 	distance;
+	double	xstep;
+	double	ystep;
 }				t_cast;
 
 typedef struct s_cube
@@ -44,7 +46,10 @@ typedef struct s_cube
 
 typedef struct s_ray
 {
+	double		distance;
 	float 		ray_angle;
+	float       x_hit;
+	float       y_hit;
 	int			was_hit_vertical;
 	int			was_hit_horizontal;
 	int			is_ray_facing_down;
@@ -94,7 +99,7 @@ typedef struct s_mlx
 	t_ray 		*ray;
 }				t_mlx;
 
-long			calculate_distance(float x1, float y1, float x2, float y2);
+double			calculate_distance(float x1, float y1, float x2, float y2);
 int				vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int				horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void			build_rays(t_mlx *mlx, int rays_count);

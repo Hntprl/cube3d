@@ -21,12 +21,12 @@ int	ft_cube(void *param)
 	mlx->addr->pixels = mlx_get_data_addr(mlx->image,
 			&mlx->addr->bits_per_pixel, &mlx->addr->size_line,
 			&mlx->addr->endian);
-	draw_map(mlx);
-	draw_grid(mlx);
-	draw_lines(mlx, mlx->p->x, mlx->p->y);
-	ft_draw_block(mlx, mlx->p->x, mlx->p->y, 3093247);
+	// draw_grid(mlx);
+	// draw_lines(mlx, mlx->p->x, mlx->p->y);
+	// ft_draw_block(mlx, mlx->p->x, mlx->p->y, 3093247);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
+	draw_map(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
 	mlx_destroy_image(mlx->ptr, mlx->image);
 	mlx->p->walk_direction = 0;

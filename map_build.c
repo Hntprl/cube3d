@@ -19,10 +19,10 @@ void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 
 	i = 0;
 	j = 0;
-	while (i < mlx->map->block_size)
+	while (i < mlx->map->block_size / 4)
 	{
 		j = 0;
-		while (j < mlx->map->block_size)
+		while (j < mlx->map->block_size / 4)
 		{
 			put_pixel(mlx->addr, x + i, y + j, color);
 			j++;
@@ -65,10 +65,10 @@ void	draw_map(t_mlx *mlx)
 				}
 				ft_draw_block(mlx, mlx->p->x, mlx->p->y, 3093247);
 			}
-			x += mlx->map->block_size;
+			x += mlx->map->block_size / 4;
 			j++;
 		}
-		y += mlx->map->block_size;
+		y += mlx->map->block_size / 4;
 		i++;
 	}
 }
@@ -84,11 +84,15 @@ void	bresenham(t_mlx *mlx, int x, int y, int x2, int y2)
 
 	dx = abs(x2 - mlx->p->x);
 	dy = abs(y2 - mlx->p->y);
-	if (mlx->p->x < x2)
+	if (x == x)
+		sx = 0;
+	else if (x < x2)
 		sx = 1;
 	else
 		sx = -1;
-	if (mlx->p->y < y2)
+	if (y == y2)
+		sy = 0;
+	else if (y < y2)
 		sy = 1;
 	else
 		sy = -1;

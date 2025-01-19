@@ -21,8 +21,6 @@ int	put_pixel(t_addr *addr, int x, int y, int color)
 {
 	char	*dst;
 
-	// if (x < 0 || x || y < 0 || y >= 600)
-	// 	return (0);
 	dst = addr->pixels + (y * addr->size_line + x * (addr->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 	return (0);
