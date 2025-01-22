@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/22 09:50:07 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/22 13:14:16 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ void	move_player(t_mlx *mlx, int x, int y)
 
 	rotate_player(mlx);
 	pov = mlx->p->rotation_angle;
-	if (mlx->p->side_walk == 1 && mlx->p->rotation_angle > 180
-		&& mlx->p->rotation_angle < 360)
+	if (mlx->p->side_walk)
 		pov += 90;
-	else if (mlx->p->side_walk == 1 && mlx->p->rotation_angle < 180
-			&& mlx->p->rotation_angle > 0)
-		pov -= 90;
 	adj = 10 * cos(convert_to_radian(pov));
 	opp = 10 * sin(convert_to_radian(pov));
 	if (mlx->map->map[(int)(y + opp * mlx->p->walk_direction)

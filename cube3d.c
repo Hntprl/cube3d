@@ -6,11 +6,40 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/22 10:12:33 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/22 13:25:59 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void sky_floor(t_mlx *mlx)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < HTH / 2)
+	{
+		j = 0;
+		while (j < WTH)
+		{
+			put_pixel(mlx->addr, j, i, 3114676);
+			j ++;
+		}
+		i ++;
+	}
+	while (i < HTH)
+	{
+		j = 0;
+		while (j < WTH)
+		{
+			put_pixel(mlx->addr, j, i,  4598828);
+			j ++;
+		}
+		i ++;
+	}
+}
 
 int	ft_cube(void *param)
 {
@@ -22,6 +51,7 @@ int	ft_cube(void *param)
 											&mlx->addr->bits_per_pixel,
 											&mlx->addr->size_line,
 											&mlx->addr->endian);
+	sky_floor(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
