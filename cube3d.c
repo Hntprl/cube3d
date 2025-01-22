@@ -19,8 +19,9 @@ int	ft_cube(void *param)
 	mlx = (t_mlx *)param;
 	mlx->image = mlx_new_image(mlx->ptr, WTH, HTH);
 	mlx->addr->pixels = mlx_get_data_addr(mlx->image,
-			&mlx->addr->bits_per_pixel, &mlx->addr->size_line,
-			&mlx->addr->endian);
+											&mlx->addr->bits_per_pixel,
+											&mlx->addr->size_line,
+											&mlx->addr->endian);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
@@ -54,12 +55,12 @@ t_map	*read_map(void)
 	return (map);
 }
 
-void find_player_pos(t_mlx *mlx)
+void	find_player_pos(t_mlx *mlx)
 {
-	int x;
-	int y;
-	int i;
-	int j;
+	int	x;
+	int	y;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -71,7 +72,8 @@ void find_player_pos(t_mlx *mlx)
 		x = 0;
 		while (j < mlx->map->columns && mlx->map->map[i][j])
 		{
-			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S' || mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
+			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S'
+				|| mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
 			{
 				mlx->p->x = x;
 				mlx->p->y = y;
@@ -97,7 +99,7 @@ int	main(void)
 	mlx.addr = &addr;
 	init_data(&mlx, &cube, &p, map);
 	find_player_pos(&mlx);
-	mlx.window = mlx_new_window(mlx.ptr,  WTH, HTH, "Map");
+	mlx.window = mlx_new_window(mlx.ptr, WTH, HTH, "Map");
 	ft_cube(&mlx);
 	event_handling(&mlx);
 }

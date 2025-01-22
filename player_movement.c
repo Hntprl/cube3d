@@ -42,9 +42,11 @@ void	move_player(t_mlx *mlx, int x, int y)
 
 	rotate_player(mlx);
 	pov = mlx->p->rotation_angle;
-	if (mlx->p->side_walk == 1 && mlx->p->rotation_angle > 180 && mlx->p->rotation_angle < 360)
+	if (mlx->p->side_walk == 1 && mlx->p->rotation_angle > 180
+		&& mlx->p->rotation_angle < 360)
 		pov += 90;
-	else if (mlx->p->side_walk == 1 && mlx->p->rotation_angle < 180 && mlx->p->rotation_angle > 0)
+	else if (mlx->p->side_walk == 1 && mlx->p->rotation_angle < 180
+			&& mlx->p->rotation_angle > 0)
 		pov -= 90;
 	adj = 10 * cos(convert_to_radian(pov));
 	opp = 10 * sin(convert_to_radian(pov));

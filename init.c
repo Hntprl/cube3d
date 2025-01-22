@@ -1,4 +1,5 @@
 #include "cube3d.h"
+
 void	printerr(int status, char *str)
 {
 	printf("%s\n", str);
@@ -79,7 +80,7 @@ void	add_allocation(MemoryManager *manager, void *ptr)
 
 void	free_all_allocations(MemoryManager *manager)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < manager->count)

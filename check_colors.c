@@ -56,9 +56,11 @@ int	*min_fill(t_map *map, char *str, int i, int start)
 {
 	int			valid_range;
 	char		*substr;
-	static int	ce_index = 0;
-	static int	fl_index = 0;
+	static int	ce_index;
+	static int	fl_index;
 
+	ce_index = 0;
+	fl_index = 0;
 	valid_range = 0;
 	if (ce_index == 0 && fl_index == 0)
 	{
@@ -95,4 +97,3 @@ int	*min_fill(t_map *map, char *str, int i, int start)
 		printerr(1, "Error :  color already set");
 	return (NULL);
 }
-

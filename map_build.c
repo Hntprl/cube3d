@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/22 10:25:00 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/22 11:04:59 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 
 void	draw_map(t_mlx *mlx)
 {
-	static int	flag;
 	int			i;
 	int			j;
 	int			x;
@@ -59,47 +58,42 @@ void	draw_map(t_mlx *mlx)
 		y += mlx->map->block_size * mlx->map->minimap_scale;
 		i++;
 	}
-	ft_draw_block(mlx, mlx->p->x * mlx->map->minimap_scale, mlx->p->y * mlx->map->minimap_scale, 16711680);
-
+	ft_draw_block(mlx, mlx->p->x * mlx->map->minimap_scale, mlx->p->y
+			* mlx->map->minimap_scale, 16711680);
 }
 
-void	bresenham(t_mlx *mlx, int x, int y, int x2, int y2)
+void	bresenham(t_mlx *mlx, t_wall wall)
 {
-	int	e2;
-	int	dx;
-	int	dy;
-	int	error;
-	int	sx;
-	int	sy;
+	t_bnham bnham;
 
-	dx = abs(x2 - mlx->p->x);
-	dy = abs(y2 - mlx->p->y);
-	if (x == x2)
-		sx = 0;
-	else if (x < x2)
-		sx = 1;
+	bnham.dx = abs(wall.x2 - mlx->p->x);
+	bnham.dy = abs(wall.y2 - mlx->p->y);
+	if (wall.x == wall.x2)
+		bnham.sx = 0;
+	else if (wall.x < wall.x2)
+		bnham.sx = 1;
 	else
-		sx = -1;
-	if (y == y2)
-		sy = 0;
-	else if (y < y2)
-		sy = 1;
+		bnham.sx = -1;
+	if (wall.y == wall.y2)
+		bnham.sy = 0;
+	else if (wall.y < wall.y2)
+		bnham.sy = 1;
 	else
-		sy = -1;
-	error = dx - dy;
-	while (x != x2 || y != y2)
+		bnham.sy = -1;
+	bnham.error = bnham.dx - bnham.dy;
+	while (wall.x != wall.x2 || wall.y != wall.y2)
 	{
-		put_pixel(mlx->addr, x, y, 16711680);
-		e2 = error * 2;
-		if (e2 > -dy)
+		put_pixel(mlx->addr, wall.x, wall.y, 16711680);
+		bnham.e2 = bnham.error * 2;
+		if (bnham.e2 > -bnham.dy)
 		{
-			error -= dy;
-			x += sx;
+			bnham.error -= bnham.dy;
+			wall.x += bnham.sx;
 		}
-		if (e2 < dx)
+		if (bnham.e2 < bnham.dx)
 		{
-			error += dx;
-			y += sy;
+			bnham.error += bnham.dx;
+			wall.y += bnham.sy;
 		}
 	}
 }

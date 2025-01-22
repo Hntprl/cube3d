@@ -54,8 +54,8 @@ void	add_new_garbage(void *allocation, t_garbage *collector, bool is_free)
 
 void	*ft_malloc(size_t size, char alloc, bool is_free)
 {
-	static t_garbage	*collector;
-	void				*allocation;
+	static t_garbage *collector;
+	void *allocation;
 
 	allocation = NULL;
 	if (alloc == 'a')

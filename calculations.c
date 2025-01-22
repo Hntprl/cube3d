@@ -26,7 +26,8 @@ bool	check_walls(t_mlx *mlx, float x, float y)
 {
 	if (x < 0 || x >= mlx->cube->width || y < 0 || y >= mlx->cube->height)
 		return (false);
-	if (mlx->map->map[(int)(y / mlx->map->block_size)][(int)(x / mlx->map->block_size)] == '1')
+	if (mlx->map->map[(int)(y / mlx->map->block_size)][(int)(x
+			/ mlx->map->block_size)] == '1')
 		return (true);
 	return (false);
 }

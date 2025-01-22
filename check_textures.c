@@ -46,8 +46,8 @@ int	count_words(const char *str)
 
 void	fill_textures(t_map *map, char *str)
 {
-	char	**string;
-	int		j;
+	char **string;
+	int j;
 
 	string = ft_split(str, ' ');
 	if (count_words(str) > 2)
@@ -86,5 +86,6 @@ void	fill_textures(t_map *map, char *str)
 			printerr(1, "Error: duplicate or invalid texture already set");
 	}
 	else
-		printerr(1, "the textures should have one of the directions < NO, SO,WE, EA > ");
+		printerr(1, "the textures should have one of the directions < NO, SO,WE,
+				EA > ");
 }
