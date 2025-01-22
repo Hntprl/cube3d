@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/07 14:06:51 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/22 09:50:07 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_player_direction(char c, t_mlx *mlx)
 		mlx->p->rotation_angle = 270;
 }
 
-void	trurn_player(t_mlx *mlx)
+void	rotate_player(t_mlx *mlx)
 {
 	mlx->p->rotation_speed = 5;
 	mlx->p->rotation_angle += mlx->p->turn_direction * mlx->p->rotation_speed;
@@ -40,7 +40,7 @@ void	move_player(t_mlx *mlx, int x, int y)
 	float	adj;
 	float	opp;
 
-	trurn_player(mlx);
+	rotate_player(mlx);
 	pov = mlx->p->rotation_angle;
 	if (mlx->p->side_walk == 1 && mlx->p->rotation_angle > 180 && mlx->p->rotation_angle < 360)
 		pov += 90;

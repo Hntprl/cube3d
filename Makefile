@@ -1,11 +1,11 @@
 NAME = cube3d
 CC = gcc
-Cflags = -Wall -Wextra -Werror -I/home/hamza/minilibx-linux
-MLX = -L/home/hamza/minilibx-linux -lX11 -lm -lpng -lz -O3 -lXext
+Cflags = -Wall -Wextra -Werror 
+MLX =  -lmlx -lXext -lX11 -lm -lpng -lz -O3
 
 
 SRC = cube3d.c get_next_line.c get_next_line_utils.c mlx_functions.c pov.c map_build.c player_movement.c raycasting.c\
-	calculations.c \
+	calculations.c ft_malloc.c\
 
 OBJ = $(SRC:.c=.o)
 

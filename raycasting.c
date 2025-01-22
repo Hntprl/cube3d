@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/13 09:30:05 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/22 10:27:43 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ int vertical_raycast(t_mlx *mlx, float rayangle, int index, t_cast *v_cast)
 	if (mlx->ray[index].is_ray_facing_left)
 		xstep--;
 	if (check_walls(mlx, xstep, ystep))
-	{
 		return (1);
-	}
 	xstep = mlx->map->block_size;
 	if (mlx->ray[index].is_ray_facing_left)
 		xstep *= -1;
@@ -45,9 +43,7 @@ int horizontal_raycast(t_mlx *mlx, float rayangle, int index, t_cast *h_cast)
 		ystep--;
 	
 	if (check_walls(mlx, xstep, ystep))
-	{
 		return 1;
-	}
 	ystep = mlx->map->block_size;
 	if (mlx->ray[index].is_ray_facing_up)
 		ystep *= -1;
@@ -94,26 +90,44 @@ void fix(int *x, int *y, t_mlx *mlx)
 	
 	if (*x < 0)
 		*x = 0;
-	if (*x > mlx->cube->width)
-		*x =  mlx->cube->width;
+	if (*x > WTH)
+		*x =  WTH;
 	if (*y < 0)
 		*y = 0;
-	if (*y > mlx->cube->height)
-		*y =  mlx->cube->height;
+	if (*y > HTH)
+		*y =  HTH;
 }
 
 void draw_wall(t_mlx *mlx, int index)
 {
-	double plane_distance = ( mlx->cube->width / 2) / tan(mlx->p->pov / 2);
+	double plane_distance = ( WTH / 2) / tan(mlx->p->pov / 2);
 	double wall_height = (mlx->map->block_size / mlx->ray[index].distance) * plane_distance;
 
-	int y = mlx->cube->height / 2 - wall_height / 2;
+	int y = HTH / 2 - wall_height / 2;
 	int x = index;
 	fix(&x, &y, mlx);
 	int endy = y + wall_height;
 	fix(&x, &endy, mlx);
 
 	bresenham(mlx, x, y, x, endy);
+}
+
+void check_distance(t_mlx *mlx, t_cast *h_cast, t_cast *v_cast, int index)
+{
+	if (h_cast->distance < v_cast->distance)
+	{
+		mlx->ray[index].distance = h_cast->distance;
+		mlx->ray[index].x_hit = h_cast->xstep;
+		mlx->ray[index].y_hit = h_cast->ystep;
+		mlx->ray[index].was_hit_horizontal = 1;
+	}
+	else
+	{
+		mlx->ray[index].distance = v_cast->distance;
+		mlx->ray[index].x_hit = v_cast->xstep;
+		mlx->ray[index].y_hit = v_cast->ystep;
+		mlx->ray[index].was_hit_vertical = 1;
+	}
 }
 
 void build_rays(t_mlx *mlx, int rays_count)
@@ -133,13 +147,10 @@ void build_rays(t_mlx *mlx, int rays_count)
 		mlx->ray[index].was_hit_vertical = 0;
 		mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle - pov + (index * gap_angle));
 		find_ray_direction(mlx->ray[index].ray_angle, &mlx->ray[index]);
-		// Initialize horizontal intersection
 		h_cast.ystep = floor(mlx->p->y / mlx->map->block_size) * mlx->map->block_size;
 		if (mlx->ray[index].is_ray_facing_down)
 			h_cast.ystep += mlx->map->block_size;
 		h_cast.xstep = mlx->p->x + (h_cast.ystep - mlx->p->y) / tan(convert_to_radian(mlx->ray[index].ray_angle));
-
-		// Initialize vertical intersection
 		v_cast.xstep = floor(mlx->p->x / mlx->map->block_size) * mlx->map->block_size;
 		if (mlx->ray[index].is_ray_facing_right)
 			v_cast.xstep += mlx->map->block_size;
@@ -152,7 +163,6 @@ void build_rays(t_mlx *mlx, int rays_count)
 		}
 		fix_intersection(&h_cast.xstep, &h_cast.ystep, mlx);
 		h_cast.distance = calculate_distance(mlx->p->x, mlx->p->y, h_cast.xstep, h_cast.ystep);
-		// Cast rays
 		while (v_cast.ystep >= 0 && v_cast.ystep < mlx->cube->height && v_cast.xstep >= 0 && v_cast.xstep < mlx->cube->width)
 		{
 			if (vertical_raycast(mlx, mlx->ray[index].ray_angle, index, &v_cast))
@@ -160,20 +170,7 @@ void build_rays(t_mlx *mlx, int rays_count)
 		}
 		fix_intersection(&v_cast.xstep, &v_cast.ystep, mlx);
 		v_cast.distance = calculate_distance(mlx->p->x, mlx->p->y, v_cast.xstep, v_cast.ystep);
-		if (h_cast.distance <= v_cast.distance)
-		{
-			mlx->ray[index].x_hit = h_cast.xstep;
-			mlx->ray[index].y_hit = h_cast.ystep;
-			mlx->ray[index].was_hit_horizontal = 1;
-			mlx->ray[index].distance = h_cast.distance;
-		}
-		else
-		{
-			mlx->ray[index].x_hit = v_cast.xstep;
-			mlx->ray[index].y_hit = v_cast.ystep;
-			mlx->ray[index].was_hit_vertical = 1;
-			mlx->ray[index].distance = v_cast.distance;
-		}
+		check_distance(mlx, &h_cast, &v_cast, index);
 		draw_wall(mlx, index);
 		index++;
 	}
@@ -186,7 +183,7 @@ void	raycaster(t_mlx *mlx, int x, int y)
 	
 	rays_count = mlx->cube->width / mlx->cube->wall_line;
 
-	ray = malloc(sizeof(t_ray) * rays_count);
+	ray = ft_malloc(sizeof(t_ray) * rays_count, 'a', false);
 	mlx->ray = ray;
 	build_rays(mlx, rays_count);
 }
