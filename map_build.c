@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 17:13:48 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/24 21:07:44 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ void	bresenham(t_mlx *mlx, t_wall wall)
 	}
 }
 
-void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
+void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map, char *av)
 {
 	mlx->ptr = mlx_init();
-	map = read_map();
+	map = read_map(av);
 	cube->height = map->rows * map->block_size;
 	cube->width = map->columns * map->block_size;
 	cube->wall_line = 1;

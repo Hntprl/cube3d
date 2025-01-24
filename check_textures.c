@@ -86,6 +86,5 @@ void	fill_textures(t_map *map, char *str)
 			printerr(1, "Error: duplicate or invalid texture already set");
 	}
 	else
-		printerr(1, "the textures should have one of the directions < NO, SO,WE,
-				EA > ");
+		printerr(1, "the textures should have one of the directions < NO, SO,WE, EA > ");
 }

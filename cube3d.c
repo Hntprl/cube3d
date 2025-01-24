@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 17:56:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/24 21:17:18 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,41 @@ int	ft_cube(void *param)
 	return (0);
 }
 
-t_map	*read_map(void)
+t_map	*read_map(char *av)
 {
-	int		fd;
 	int		i;
+	int		fd;
+	char	*line;
 	t_map	*map;
+	char	**myarr;
 
-	fd = open("maps/mapp.cub", O_RDONLY, 0777);
 	i = 0;
-	map = ft_malloc(sizeof(t_map), 'a', false);
-	map->rows = 12;
+	if (!av)
+		return (NULL);
+	map = ft_calloc(1, sizeof(t_map));
+	init_t_map(&map);
 	map->block_size = 40;
-	map->columns = 58;
-	map->map = ft_malloc(sizeof(char *) * map->rows, 'a', false);
-	while (i < map->rows)
+	checkpath(av);
+	map->rows = nbrs_lines(av, &map->columns);
+	myarr = ft_calloc(map->columns, sizeof(char *));
+	map->map = ft_calloc(map->rows, sizeof(char *));
+	if (!map->map)
 	{
-		map->map[i] = get_next_line(fd);
-		i++;
+		free_map(map);
+		free_arg(myarr);
+		return (NULL);
 	}
+	fd = open(av, O_RDONLY, 0777);
+	if (fd == -1)
+	{
+		free_map(map);
+		free_arg(myarr);
+		return (NULL);
+	}
+	if (to_map(fd, myarr, map) != 1)
+		printerr(1, "Error: the game must have one player ");
+	isvalid_map(map, myarr);
+	free_arg(myarr);
 	close(fd);
 	return (map);
 }
@@ -113,7 +130,7 @@ void	find_player_pos(t_mlx *mlx)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_cube		cube;
 	t_player	p;
@@ -121,8 +138,10 @@ int	main(void)
 	t_addr		addr;
 	t_map		*map;
 
+	char *str = ft_strdup(av[1]);
+
 	mlx.addr = &addr;
-	init_data(&mlx, &cube, &p, map);
+	init_data(&mlx, &cube, &p, map, str);
 	find_player_pos(&mlx);
 	mlx.window = mlx_new_window(mlx.ptr, WTH, HTH, "Map");
 	ft_cube(&mlx);
