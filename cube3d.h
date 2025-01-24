@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/22 11:03:45 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/23 08:59:37 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
 
+# define BUFFER_SIZE 1
 # define WTH 2000
 # define HTH 1000
 # define W
@@ -48,11 +46,11 @@ typedef struct s_bnham
 
 typedef struct s_wall
 {
-	int x;
-	int y;
-	int x2;
-	int y2;
-}				t_wall;
+	int	x;
+	int	y;
+	int	x2;
+	int	y2;
+}		t_wall;
 
 typedef struct s_garbage
 {
@@ -139,8 +137,14 @@ typedef struct s_mlx
 	t_ray		*ray;
 }				t_mlx;
 
+void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
+void	draw_wall(t_mlx *mlx, int index);
+void	fix_intersection(double *x, double *y, t_mlx *mlx);
+void	fix(int *x, int *y, t_mlx *mlx);
+void	find_ray_direction(float angle, t_ray *ray);
+float	fix_rayangle(float angle);
 void	*ft_malloc(size_t size, char alloc, bool is_free);
-double	calculate_distance(float x1, float y1, float x2, float y2);
+double	ft_distance(float x1, float y1, float x2, float y2);
 int		vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int		horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void	build_rays(t_mlx *mlx, int rays_count);
@@ -177,16 +181,16 @@ int		destroy_win(void *param);
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 int		countword(char *str, char sep);
-void 	printerr(int status,char *str);
+void	printerr(int status, char *str);
 void	checkpath(char *av);
 int		is_validtexture(char **str);
-void 	fill_textures(t_map *map,char *str);
-void	spliit(char *str,t_map *map);
-void 	fill_colors(t_map *map, char *str);
+void	fill_textures(t_map *map, char *str);
+void	spliit(char *str, t_map *map);
+void	fill_colors(t_map *map, char *str);
 int		ft_isdigit(int c);
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_isalpha(int c);
-int		nbrs_lines(char *av,int *columns);
+int		nbrs_lines(char *av, int *columns);
 int		fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map);
 void	init_t_map(t_map **map);
 void	free_map(t_map *map);

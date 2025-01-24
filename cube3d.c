@@ -6,16 +6,16 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/22 13:25:59 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/24 17:56:43 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void sky_floor(t_mlx *mlx)
+void	sky_floor(t_mlx *mlx)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -24,7 +24,7 @@ void sky_floor(t_mlx *mlx)
 		j = 0;
 		while (j < WTH)
 		{
-			put_pixel(mlx->addr, j, i, 3114676);
+			put_pixel(mlx->addr, j, i, get_color(0 ,250 ,250));
 			j ++;
 		}
 		i ++;
@@ -34,7 +34,7 @@ void sky_floor(t_mlx *mlx)
 		j = 0;
 		while (j < WTH)
 		{
-			put_pixel(mlx->addr, j, i,  4598828);
+			put_pixel(mlx->addr, j, i, get_color(70, 44, 44));
 			j ++;
 		}
 		i ++;
@@ -48,9 +48,9 @@ int	ft_cube(void *param)
 	mlx = (t_mlx *)param;
 	mlx->image = mlx_new_image(mlx->ptr, WTH, HTH);
 	mlx->addr->pixels = mlx_get_data_addr(mlx->image,
-											&mlx->addr->bits_per_pixel,
-											&mlx->addr->size_line,
-											&mlx->addr->endian);
+			&mlx->addr->bits_per_pixel,
+			&mlx->addr->size_line,
+			&mlx->addr->endian);
 	sky_floor(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
@@ -87,11 +87,7 @@ t_map	*read_map(void)
 
 void	find_player_pos(t_mlx *mlx)
 {
-	int	x;
-	int	y;
-	int	i;
-	int	j;
-
+	int (x), (y), (i), (j);
 	i = 0;
 	j = 0;
 	x = 0;
@@ -107,8 +103,7 @@ void	find_player_pos(t_mlx *mlx)
 			{
 				mlx->p->x = x;
 				mlx->p->y = y;
-				set_player_direction(mlx->map->map[i][j], mlx);
-				return ;
+				return (set_player_direction(mlx->map->map[i][j], mlx));
 			}
 			x += mlx->map->block_size;
 			j++;
@@ -120,11 +115,11 @@ void	find_player_pos(t_mlx *mlx)
 
 int	main(void)
 {
-	t_cube cube;
-	t_player p;
-	t_mlx mlx;
-	t_addr addr;
-	t_map *map;
+	t_cube		cube;
+	t_player	p;
+	t_mlx		mlx;
+	t_addr		addr;
+	t_map		*map;
 
 	mlx.addr = &addr;
 	init_data(&mlx, &cube, &p, map);
