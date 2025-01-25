@@ -87,10 +87,10 @@ int	fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
 		{
 			if (map->map[*i][j] == 'N' || map->map[*i][j] == 'E'
 				|| map->map[*i][j] == 'W' || map->map[*i][j] == 'S')
-				number_p++;
+				map->nb_player++;
 			j++;
 		}
 		(*i)++;
 	}
-	return (number_p);
+	return (map->nb_player);
 }

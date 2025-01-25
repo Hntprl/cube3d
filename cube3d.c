@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 21:17:18 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/25 10:38:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,11 @@ int	main(int ac, char **av)
 	t_addr		addr;
 	t_map		*map;
 
-	char *str = ft_strdup(av[1]);
-
+	if (ac != 2)
+		printerr(1, "Error: u must enter the map file");
+	map = read_map(av[1]);
 	mlx.addr = &addr;
-	init_data(&mlx, &cube, &p, map, str);
+	init_data(&mlx, &cube, &p, map,av[1]);
 	find_player_pos(&mlx);
 	mlx.window = mlx_new_window(mlx.ptr, WTH, HTH, "Map");
 	ft_cube(&mlx);
