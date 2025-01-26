@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 21:13:11 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/24 21:26:03 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdint.h>
 
 # define BUFFER_SIZE 1
 # define WTH 2000
@@ -151,8 +150,8 @@ int		horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void	build_rays(t_mlx *mlx, int rays_count);
 void	raycaster(t_mlx *mlx, int x, int y);
 bool	check_walls(t_mlx *mlx, float x, float y);
-void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map, char *av);
-t_map	*read_map(char *av);
+void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
+t_map	*read_map(void);
 void	move_player(t_mlx *mlx, int x, int y);
 void	trurn_player(t_mlx *mlx);
 void	bresenham(t_mlx *mlx, t_wall wall);

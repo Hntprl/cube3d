@@ -4,11 +4,8 @@ Cflags = -Wall -Wextra -Werror
 MLX =  -lmlx -lXext -lX11 -lm -lpng -lz -O3
 
 
-SRC = calculations.c  cube3d.c get_next_line_utils.c  mlx_functions.c raycasting_fixes.c \
-check_colors.c init.c  pars_map.c \
-check_file.c   ft_malloc.c player_movement.c  to_map.c \
-check_map.c    ft_split.c    map_build.c     raycasting2.c   utils.c\
-check_textures.c  get_next_line.c  raycasting.c \
+SRC = cube3d.c get_next_line.c get_next_line_utils.c mlx_functions.c map_build.c player_movement.c raycasting.c\
+	calculations.c ft_malloc.c raycasting_fixes.c raycasting2.c\
 
 OBJ = $(SRC:.c=.o)
 
