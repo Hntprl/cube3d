@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "../cube3d.h"
 
 void	check_zero(char **myarr, t_map *map, int i, int j)
 {

@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 19:01:03 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 int	vertical_raycast(t_mlx *mlx, float rayangle, int index, t_cast *v_cast)
 {
@@ -84,18 +84,14 @@ void	build_rays(t_mlx *mlx, int rays_count)
 		init_first_inter(&h, &v, mlx, index);
 		while (h.ystep >= 0 && h.ystep < mlx->cube->height
 			&& h.xstep >= 0 && h.xstep < mlx->cube->width)
-		{
 			if (horizontal_raycast(mlx, mlx->ray[index].ray_angle, index, &h))
 				break ;
-		}
 		fix_intersection(&h.xstep, &h.ystep, mlx);
 		h.distance = ft_distance(mlx->p->x, mlx->p->y, h.xstep, h.ystep);
 		while (v.ystep >= 0 && v.ystep < mlx->cube->height
 			&& v.xstep >= 0 && v.xstep < mlx->cube->width)
-		{
 			if (vertical_raycast(mlx, mlx->ray[index].ray_angle, index, &v))
 				break ;
-		}
 		fix_intersection(&v.xstep, &v.ystep, mlx);
 		v.distance = ft_distance(mlx->p->x, mlx->p->y, v.xstep, v.ystep);
 		(check_distance(mlx, &h, &v, index), draw_wall(mlx, index));
@@ -104,11 +100,10 @@ void	build_rays(t_mlx *mlx, int rays_count)
 
 void	raycaster(t_mlx *mlx, int x, int y)
 {
-	t_ray *ray;
-	int rays_count;
+	t_ray	*ray;
+	int		rays_count;
 
 	rays_count = mlx->cube->width / mlx->cube->wall_line;
-
 	ray = ft_malloc(sizeof(t_ray) * rays_count, 'a', false);
 	mlx->ray = ray;
 	build_rays(mlx, rays_count);

@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "../cube3d.h"
 
 int	is_valid_format(char *str)
 {
@@ -31,6 +31,7 @@ int	is_valid_format(char *str)
 		return (0);
 	return (1);
 }
+
 int	isnot_alpha(char *str)
 {
 	while (*str)
@@ -41,6 +42,7 @@ int	isnot_alpha(char *str)
 	}
 	return (1);
 }
+
 void	is_validcolor(char *str)
 {
 	char	**split;
@@ -52,6 +54,7 @@ void	is_validcolor(char *str)
 		printerr(1, "Error: Colors have 3 elements (R, G, B)");
 	free(split);
 }
+
 int	*min_fill(t_map *map, char *str, int i, int start)
 {
 	int			valid_range;

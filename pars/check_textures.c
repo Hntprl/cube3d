@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "../cube3d.h"
 
 int	is_validtexture(char **str)
 {

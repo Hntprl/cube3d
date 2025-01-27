@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 14:48:36 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 void	set_player_direction(char c, t_mlx *mlx)
 {

@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 14:47:56 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 {
@@ -33,22 +33,12 @@ void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 
 void	minimap_player(t_mlx *mlx)
 {
-	// t_wall wall;
-	// float line_size;
-
-	// line_size = 5;
-	// wall.x = mlx->p->x * mlx->map->minimap_scale;
-	// wall.y = mlx->p->y * mlx->map->minimap_scale;
-	// wall.x2 = wall.x + cos(convert_to_radian(mlx->p->pov)) * line_size;
-	// wall.y2 = wall.y + sin(convert_to_radian(mlx->p->pov)) * line_size;
 	ft_draw_block(mlx, mlx->p->x * mlx->map->minimap_scale, mlx->p->y
-			* mlx->map->minimap_scale, 16711680);
-	// bresenham(mlx, wall);
+		* mlx->map->minimap_scale, 16711680);
 }
 
 void	draw_map(t_mlx *mlx)
 {
-	int flag;
 	int			i;
 	int			j;
 	int			x;
@@ -58,7 +48,6 @@ void	draw_map(t_mlx *mlx)
 	j = 0;
 	x = 0;
 	y = 0;
-	flag = 0;
 	while (i < mlx->map->rows && mlx->map->map[i])
 	{
 		j = 0;
@@ -70,13 +59,13 @@ void	draw_map(t_mlx *mlx)
 				ft_draw_block(mlx, x, y, get_color(0 ,0 ,255));
 			if (mlx->map->map[i][j] == '1')
 				ft_draw_block(mlx, x, y, 16777215);
-			minimap_player(mlx);
 			x += mlx->map->block_size * mlx->map->minimap_scale;
 			j++;
 		}
 		y += mlx->map->block_size * mlx->map->minimap_scale;
 		i++;
 	}
+	minimap_player(mlx);
 }
 
 void	bresenham(t_mlx *mlx, t_wall wall)
@@ -126,7 +115,7 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
 	p->walk_direction = 0;
 	p->rotation_angle = 0;
 	p->move_speed = 5;
-	p->rotation_speed = 3;
+	p->rotation_speed = 2.5;
 	p->side_walk = 0;
 	p->pov = 90;
 	mlx->map = map;

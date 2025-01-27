@@ -1,4 +1,16 @@
-#include "cube3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cube3d.h"
 
 void	diff_symbol(char line, int *inside_map)
 {
@@ -9,6 +21,7 @@ void	diff_symbol(char line, int *inside_map)
 		printerr(1, "Error: found a different symbol inside map ");
 	}
 }
+
 int	count_map_lines(char *line, int *inside_map)
 {
 	int		i;

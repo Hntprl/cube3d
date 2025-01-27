@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "../cube3d.h"
 
 void	printerr(int status, char *str)
 {

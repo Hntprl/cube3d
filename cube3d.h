@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 21:26:03 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:23:11 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <math.h>
 # include <mlx.h>
+# include <stdint.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -137,6 +138,7 @@ typedef struct s_mlx
 	t_ray		*ray;
 }				t_mlx;
 
+void	release_arrows(int keycode, t_mlx *mlx);
 void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
 void	fix_intersection(double *x, double *y, t_mlx *mlx);

@@ -1,4 +1,16 @@
-#include "cube3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 22:19:55 by amarouf           #+#    #+#             */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cube3d.h"
 
 int	countword(char *str, char sep)
 {
@@ -67,8 +79,8 @@ static char	**free_split(char **str, int i)
 
 char	**ft_split(char const *s, char c)
 {
-	char **string;
-	int index_string;
+	char	**string;
+	int		index_string;
 
 	index_string = 0;
 	if (!s)

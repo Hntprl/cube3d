@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 19:57:15 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 void	find_ray_direction(float angle, t_ray *ray)
 {
@@ -58,8 +58,10 @@ void	draw_wall(t_mlx *mlx, int index)
 	double	plane_distance;
 	double	wall_height;
 	t_wall	wall;
-	
-	mlx->ray[index].distance = mlx->ray[index].distance * cos(convert_to_radian(mlx->ray[index].ray_angle - mlx->p->rotation_angle));
+
+	mlx->ray[index].distance = mlx->ray[index].distance
+		* cos(convert_to_radian(mlx->ray[index].ray_angle
+				- mlx->p->rotation_angle));
 	plane_distance = (WTH / 2) / tan(mlx->p->pov / 2);
 	wall_height = (mlx->map->block_size / mlx->ray[index].distance)
 		* plane_distance;

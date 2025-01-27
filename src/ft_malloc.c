@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 21:55:12 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/21 21:55:23 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 t_garbage	*new_garbage(void *allocation, bool is_free)
 {
