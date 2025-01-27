@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:43:58 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/22 15:50:01 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../cube3d.h"
 
 char	*ft_editbackup(char *line)
 {
@@ -21,7 +21,7 @@ char	*ft_editbackup(char *line)
 		return (NULL);
 	i = 0;
 	while (line[i] != '\n' && line[i])
-		i ++;
+		i++;
 	backup = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (!backup)
 		return (free(backup), free(line), NULL);
