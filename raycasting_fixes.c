@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_fixes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 19:57:15 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/02 00:28:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ void	fix(int *x, int *y, t_mlx *mlx)
 		*y = HTH;
 }
 
+
+
 void	draw_wall(t_mlx *mlx, int index)
 {
 	double	plane_distance;
 	double	wall_height;
 	t_wall	wall;
-	
+
 	mlx->ray[index].distance = mlx->ray[index].distance * cos(convert_to_radian(mlx->ray[index].ray_angle - mlx->p->rotation_angle));
 	plane_distance = (WTH / 2) / tan(mlx->p->pov / 2);
 	wall_height = (mlx->map->block_size / mlx->ray[index].distance)
@@ -69,5 +71,6 @@ void	draw_wall(t_mlx *mlx, int index)
 	wall.y2 = wall.y + wall_height;
 	fix(&wall.x, &wall.y2, mlx);
 	wall.x2 = wall.x;
-	bresenham(mlx, wall);
+	bresenham(mlx, wall,index);
 }
+	// update_texture_pixel(mlx,index,wall_height);

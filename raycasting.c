@@ -3,14 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 19:01:03 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/01 23:00:25 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+#include <stdlib.h>
+#include <string.h> // For memset
+
+void init_texture(t_mlx *mlx)
+{
+    mlx->texture->n_xpm = NULL;
+    mlx->texture->s_xpm = NULL;
+    mlx->texture->e_xpm = NULL;
+    mlx->texture->w_xpm = NULL;
+
+    mlx->texture->t_height = 0;
+    mlx->texture->t_width = 0;
+}
+
+void images_to_xpm(t_mlx *wind)
+{
+
+    init_texture(wind);
+
+    // printf("North texture path: %s\n", wind->map->no_img);
+    // printf("West texture path: %s\n", wind->map->we_img);
+    // printf("East texture path: %s\n", wind->map->es_img);
+    // printf("South texture path: %s\n", wind->map->su_img);
+
+    // Load images
+    wind->texture->n_xpm = mlx_xpm_file_to_image(wind->ptr, wind->map->no_img, &wind->texture->t_width, &wind->texture->t_height);
+    wind->texture->w_xpm = mlx_xpm_file_to_image(wind->ptr, wind->map->we_img, &wind->texture->t_width, &wind->texture->t_height);
+    wind->texture->e_xpm = mlx_xpm_file_to_image(wind->ptr, wind->map->es_img, &wind->texture->t_width, &wind->texture->t_height);
+    wind->texture->s_xpm = mlx_xpm_file_to_image(wind->ptr, wind->map->su_img, &wind->texture->t_width, &wind->texture->t_height);
+
+    // Check if any texture failed to load
+    if (!wind->texture->n_xpm || !wind->texture->w_xpm || !wind->texture->e_xpm || !wind->texture->s_xpm)
+    {
+        printf("Error loading textures. Check file paths or file permissions.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Get image data addresses
+    wind->addr->addr_n = mlx_get_data_addr(wind->texture->n_xpm,&wind->addr->addr_n, &wind->addr->n_size_line, &wind->addr->n_endian);
+    wind->addr->addr_w = mlx_get_data_addr(wind->texture->w_xpm, &wind->addr->addr_w,&wind->addr->w_size_line, &wind->addr->w_endian);
+    wind->addr->addr_e = mlx_get_data_addr(wind->texture->e_xpm,&wind->addr->addr_e, &wind->addr->e_size_line, &wind->addr->e_endian);
+    wind->addr->addr_s = mlx_get_data_addr(wind->texture->s_xpm, &wind->addr->addr_s,&wind->addr->s_size_line, &wind->addr->s_endian);
+
+    // printf("Textures successfully loaded and addresses retrieved.\n");
+}
+
 
 int	vertical_raycast(t_mlx *mlx, float rayangle, int index, t_cast *v_cast)
 {

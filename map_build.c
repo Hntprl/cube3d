@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/24 21:07:44 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/02 17:38:36 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,42 +78,31 @@ void	draw_map(t_mlx *mlx)
 		i++;
 	}
 }
-
-void	bresenham(t_mlx *mlx, t_wall wall)
+void update_texture_pixel(t_mlx *mlx,int index,double wall_height)
 {
-	t_bnham bnham;
+double wall_x = (mlx->ray->was_hit_vertical) ? mlx->ray->y_hit : mlx->ray->x_hit;
+wall_x -= floor(wall_x);
 
-	bnham.dx = abs(wall.x2 - mlx->p->x);
-	bnham.dy = abs(wall.y2 - mlx->p->y);
-	if (wall.x == wall.x2)
-		bnham.sx = 0;
-	else if (wall.x < wall.x2)
-		bnham.sx = 1;
-	else
-		bnham.sx = -1;
-	if (wall.y == wall.y2)
-		bnham.sy = 0;
-	else if (wall.y < wall.y2)
-		bnham.sy = 1;
-	else
-		bnham.sy = -1;
-	bnham.error = bnham.dx - bnham.dy;
-	while (wall.x != wall.x2 || wall.y != wall.y2)
-	{
-		put_pixel(mlx->addr, wall.x, wall.y, 16711680);
-		bnham.e2 = bnham.error * 2;
-		if (bnham.e2 > -bnham.dy)
-		{
-			bnham.error -= bnham.dy;
-			wall.x += bnham.sx;
-		}
-		if (bnham.e2 < bnham.dx)
-		{
-			bnham.error += bnham.dx;
-			wall.y += bnham.sy;
-		}
-	}
+
+int tex_x = (int)(wall_x * (double)mlx->texture->t_width);
+if ((mlx->ray->was_hit_vertical && mlx->ray->is_ray_facing_left) || 
+    (!mlx->ray->was_hit_vertical && mlx->ray->is_ray_facing_up))
+    tex_x = mlx->texture->t_width - tex_x - 1;
+
+int draw_start=0;
+double step = 1.0 * mlx->texture->t_height / wall_height;
+double tex_pos = (draw_start - WTH / 2 + wall_height / 2) * step;
+int x=0;
+for (int y = draw_start; y < wall_height; y++) {
+    int tex_y = (int)tex_pos & (mlx->texture->t_height - 1);
+    tex_pos += step;
+    int color = *(int *)(mlx->addr->addr_e + (tex_y * mlx->addr->e_size_line) + (tex_x * mlx->addr->e_bits_per_pixel / 8));
+    
+    put_pixel(mlx->addr, x, y, color);
 }
+
+}
+
 
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map, char *av)
 {

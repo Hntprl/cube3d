@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/25 10:36:24 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:46:34 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -125,8 +125,42 @@ typedef struct s_addr
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
+
+	char		*addr_w;
+	int			w_bits_per_pixel;
+	int			w_size_line;
+	int			w_endian;
+
+	char		*addr_e;
+	int			e_bits_per_pixel;
+	int			e_size_line;
+	int			e_endian;
+
+	char		*addr_n;
+	int			n_bits_per_pixel;
+	int			n_size_line;
+	int			n_endian;
+
+	char		*addr_s;
+	int			s_bits_per_pixel;
+	int			s_size_line;
+	int			s_endian;
+
 }				t_addr;
 
+typedef struct s_texture
+{
+	int t_height;
+	int t_width;
+	char		*n_xpm;
+	char		*s_xpm;
+	char		*e_xpm;
+	char		*w_xpm;
+	t_addr	address;
+	int x;
+	int y;
+	
+}			t_texture;
 typedef struct s_mlx
 {
 	void		*ptr;
@@ -135,9 +169,10 @@ typedef struct s_mlx
 	t_addr		*addr;
 	t_map		*map;
 	t_cube		*cube;
+	t_texture	texture[5];
 	t_player	*p;
 	t_ray		*ray;
-}				t_mlx;
+}					t_mlx;
 
 void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
@@ -156,7 +191,7 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map, char *av);
 t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
 void	trurn_player(t_mlx *mlx);
-void	bresenham(t_mlx *mlx, t_wall wall);
+void	bresenham(t_mlx *mlx, t_wall wall,int texture_index);
 void	draw_map(t_mlx *mlx);
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color);
 void	set_player_direction(char c, t_mlx *mlx);
@@ -179,6 +214,10 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
+
+
+
+void	images_to_xpm(t_mlx *wind);
 // parsing functions
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
@@ -204,4 +243,7 @@ void	is_validcolor(char *str);
 int		is_space(char str);
 int		*min_fill(t_map *map, char *str, int i, int start);
 int		to_map(int fd, char **myarr, t_map *map);
+
+
+
 #endif

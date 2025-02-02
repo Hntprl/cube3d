@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/25 10:38:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:47:53 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_cube(void *param)
 			&mlx->addr->size_line,
 			&mlx->addr->endian);
 	sky_floor(mlx);
+	images_to_xpm(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
