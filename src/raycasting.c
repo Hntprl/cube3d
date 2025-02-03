@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:24:34 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	build_rays(t_mlx *mlx, int rays_count)
 	int		index;
 
 	index = -1;
-
 	while (++ index < rays_count)
 	{
 		init_first_inter(&h, &v, mlx, index);
@@ -105,8 +104,9 @@ void	raycaster(t_mlx *mlx, int x, int y)
 	t_ray	*ray;
 	int		rays_count;
 
-	rays_count = mlx->cube->width / mlx->cube->wall_line;
+	rays_count = WTH / mlx->cube->wall_line;
 	ray = ft_malloc(sizeof(t_ray) * rays_count, 'a', false);
 	mlx->ray = ray;
 	build_rays(mlx, rays_count);
+	free(ray);
 }

@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:24:05 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	move_player(t_mlx *mlx, int x, int y)
 		pov += 90;
 	adj = mlx->p->move_speed * cos(convert_to_radian(pov));
 	opp = mlx->p->move_speed * sin(convert_to_radian(pov));
-	if (check_walls(mlx, x + adj * mlx->p->walk_direction, y + opp * mlx->p->walk_direction) == false)
+	if (check_walls(mlx, x + adj * mlx->p->walk_direction
+			, y + opp * mlx->p->walk_direction) == false)
 	{
 		x += adj * mlx->p->walk_direction;
 		y += opp * mlx->p->walk_direction;

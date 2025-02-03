@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:18:57 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sky_floor(t_mlx *mlx)
 		j = 0;
 		while (j < WTH)
 		{
-			put_pixel(mlx->addr, j, i, get_color(0 ,250 ,250));
+			put_pixel(mlx->addr, j, i, get_color(0, 250, 250));
 			j ++;
 		}
 		i ++;
@@ -79,23 +79,13 @@ t_map	*read_map(char *av)
 	myarr = ft_calloc(map->columns, sizeof(char *));
 	map->map = ft_calloc(map->rows, sizeof(char *));
 	if (!map->map)
-	{
-		free_map(map);
-		free_arg(myarr);
-		return (NULL);
-	}
+		return (free_arg(myarr), free_map(map), NULL);
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
-	{
-		free_map(map);
-		free_arg(myarr);
-		return (NULL);
-	}
+		return (free_arg(myarr), free_map(map), NULL);
 	if (to_map(fd, myarr, map) != 1)
 		printerr(1, "Error: the game must have one player ");
-	isvalid_map(map, myarr);
-	free_arg(myarr);
-	close(fd);
+	(isvalid_map(map, myarr), free_arg(myarr), close(fd));
 	return (map);
 }
 

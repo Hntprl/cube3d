@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:28:59 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ void	minimap_player(t_mlx *mlx)
 
 void	draw_map(t_mlx *mlx)
 {
-	int			i;
-	int			j;
-	int			x;
-	int			y;
-
+	int (i), (j), (x), (y);
 	i = 0;
 	j = 0;
 	x = 0;
@@ -54,9 +50,10 @@ void	draw_map(t_mlx *mlx)
 		x = 0;
 		while (j < mlx->map->columns && mlx->map->map[i][j])
 		{
-			if (mlx->map->map[i][j] == '0' || mlx->map->map[i][j] == 'W' || mlx->map->map[i][j] == 'N'
+			if (mlx->map->map[i][j] == '0' || mlx->map->map[i][j] == 'W'
+				|| mlx->map->map[i][j] == 'N'
 				|| mlx->map->map[i][j] == 'S' || mlx->map->map[i][j] == 'E')
-				ft_draw_block(mlx, x, y, get_color(0 ,0 ,255));
+				ft_draw_block(mlx, x, y, get_color(0, 0, 255));
 			if (mlx->map->map[i][j] == '1')
 				ft_draw_block(mlx, x, y, 16777215);
 			x += mlx->map->block_size * mlx->map->minimap_scale;
@@ -70,7 +67,7 @@ void	draw_map(t_mlx *mlx)
 
 void	bresenham(t_mlx *mlx, t_wall wall)
 {
-	t_bnham bnham;
+	t_bnham	bnham;
 
 	bnham.dx = abs((int)(wall.x2 - mlx->p->x));
 	bnham.dy = abs((int)(wall.y2 - mlx->p->y));

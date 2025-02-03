@@ -2,6 +2,7 @@
 
 void	printerr(int status, char *str)
 {
+	printf("Error\n");
 	printf("%s\n", str);
 	exit(status);
 }

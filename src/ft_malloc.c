@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 21:55:12 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:25:56 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	add_new_garbage(void *allocation, t_garbage *collector, bool is_free)
 
 void	*ft_malloc(size_t size, char alloc, bool is_free)
 {
-	static t_garbage *collector;
-	void *allocation;
+	static t_garbage	*collector;
+	void				*allocation;
 
 	allocation = NULL;
 	if (alloc == 'a')
