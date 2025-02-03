@@ -25,15 +25,8 @@
 
 # define BUFFER_SIZE 1
 # define WTH 2000
-# define HTH 1000
-# define W
+# define HTH 800
 # define PI 3.14159265358979323846
-
-// typedef	struct 
-// {
-//     void	*allocations[100];
-//     int		count;
-// }			MemoryManager;
 
 typedef struct s_bnham
 {

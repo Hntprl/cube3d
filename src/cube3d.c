@@ -51,7 +51,7 @@ int	ft_cube(void *param)
 			&mlx->addr->bits_per_pixel,
 			&mlx->addr->size_line,
 			&mlx->addr->endian);
-	sky_floor(mlx);
+	// sky_floor(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);

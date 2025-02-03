@@ -105,8 +105,9 @@ void	raycaster(t_mlx *mlx, int x, int y)
 	t_ray	*ray;
 	int		rays_count;
 
-	rays_count = mlx->cube->width / mlx->cube->wall_line;
+	rays_count = WTH / mlx->cube->wall_line;
 	ray = ft_malloc(sizeof(t_ray) * rays_count, 'a', false);
 	mlx->ray = ray;
 	build_rays(mlx, rays_count);
+	free(ray);
 }

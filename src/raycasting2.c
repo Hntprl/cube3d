@@ -18,7 +18,7 @@ void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 	float	gap_angle;
 	int		rays_count;
 
-	rays_count = mlx->cube->width / mlx->cube->wall_line;
+	rays_count = WTH / mlx->cube->wall_line;
 	gap_angle = mlx->p->pov / (rays_count);
 	pov = mlx->p->pov / 2;
 	mlx->ray[index].was_hit_horizontal = 0;
