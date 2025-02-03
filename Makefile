@@ -1,6 +1,6 @@
 NAME = cube3d
 CC = cc
-Cflags = -Wall -Wextra -Werror -g3 -fsanitize=address	
+Cflags = -Wall -Wextra -Werror #-g3 -fsanitize=address	
 
 MLX =  -lmlx -lXext -lX11 -lm -lpng -lz -O3
 

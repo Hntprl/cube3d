@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/02 17:46:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/03 08:15:33 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,37 +126,19 @@ typedef struct s_addr
 	int			size_line;
 	int			endian;
 
-	char		*addr_w;
-	int			w_bits_per_pixel;
-	int			w_size_line;
-	int			w_endian;
-
-	char		*addr_e;
-	int			e_bits_per_pixel;
-	int			e_size_line;
-	int			e_endian;
-
-	char		*addr_n;
-	int			n_bits_per_pixel;
-	int			n_size_line;
-	int			n_endian;
-
-	char		*addr_s;
-	int			s_bits_per_pixel;
-	int			s_size_line;
-	int			s_endian;
-
 }				t_addr;
+
 
 typedef struct s_texture
 {
+	char	*xpm;
 	int t_height;
 	int t_width;
-	char		*n_xpm;
-	char		*s_xpm;
-	char		*e_xpm;
-	char		*w_xpm;
-	t_addr	address;
+		
+	char	*addr;
+	int	line_len;
+	int	endian;
+	int	bpp;
 	int x;
 	int y;
 	

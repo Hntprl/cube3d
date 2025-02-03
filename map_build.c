@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/02 17:38:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:20:50 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,30 +78,30 @@ void	draw_map(t_mlx *mlx)
 		i++;
 	}
 }
-void update_texture_pixel(t_mlx *mlx,int index,double wall_height)
-{
-double wall_x = (mlx->ray->was_hit_vertical) ? mlx->ray->y_hit : mlx->ray->x_hit;
-wall_x -= floor(wall_x);
+// void update_texture_pixel(t_mlx *mlx,int index,double wall_height)
+// {
+// double wall_x = (mlx->ray->was_hit_vertical) ? mlx->ray->y_hit : mlx->ray->x_hit;
+// wall_x -= floor(wall_x);
 
 
-int tex_x = (int)(wall_x * (double)mlx->texture->t_width);
-if ((mlx->ray->was_hit_vertical && mlx->ray->is_ray_facing_left) || 
-    (!mlx->ray->was_hit_vertical && mlx->ray->is_ray_facing_up))
-    tex_x = mlx->texture->t_width - tex_x - 1;
+// int tex_x = (int)(wall_x * (double)mlx->texture->t_width);
+// if ((mlx->ray->was_hit_vertical && mlx->ray->is_ray_facing_left) || 
+//     (!mlx->ray->was_hit_vertical && mlx->ray->is_ray_facing_up))
+//     tex_x = mlx->texture->t_width - tex_x - 1;
 
-int draw_start=0;
-double step = 1.0 * mlx->texture->t_height / wall_height;
-double tex_pos = (draw_start - WTH / 2 + wall_height / 2) * step;
-int x=0;
-for (int y = draw_start; y < wall_height; y++) {
-    int tex_y = (int)tex_pos & (mlx->texture->t_height - 1);
-    tex_pos += step;
-    int color = *(int *)(mlx->addr->addr_e + (tex_y * mlx->addr->e_size_line) + (tex_x * mlx->addr->e_bits_per_pixel / 8));
+// int draw_start=0;
+// double step = 1.0 * mlx->texture->t_height / wall_height;
+// double tex_pos = (draw_start - WTH / 2 + wall_height / 2) * step;
+// int x=0;
+// for (int y = draw_start; y < wall_height; y++) {
+//     int tex_y = (int)tex_pos & (mlx->texture->t_height - 1);
+//     tex_pos += step;
+//     int color = *(int *)(mlx->addr->addr_e + (tex_y * mlx->addr->e_size_line) + (tex_x * mlx->addr->e_bits_per_pixel / 8));
     
-    put_pixel(mlx->addr, x, y, color);
-}
+//     put_pixel(mlx->addr, x, y, color);
+// }
 
-}
+// }
 
 
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map, char *av)
