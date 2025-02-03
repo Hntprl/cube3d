@@ -79,22 +79,24 @@ void	build_rays(t_mlx *mlx, int rays_count)
 	int		index;
 
 	index = -1;
+
 	while (++ index < rays_count)
 	{
 		init_first_inter(&h, &v, mlx, index);
-		while (h.ystep >= 0 && h.ystep < mlx->cube->height
-			&& h.xstep >= 0 && h.xstep < mlx->cube->width)
+		while (h.ystep >= 0 && h.ystep <= mlx->cube->height
+			&& h.xstep >= 0 && h.xstep <= mlx->cube->width)
 			if (horizontal_raycast(mlx, mlx->ray[index].ray_angle, index, &h))
 				break ;
 		fix_intersection(&h.xstep, &h.ystep, mlx);
 		h.distance = ft_distance(mlx->p->x, mlx->p->y, h.xstep, h.ystep);
-		while (v.ystep >= 0 && v.ystep < mlx->cube->height
-			&& v.xstep >= 0 && v.xstep < mlx->cube->width)
+		while (v.ystep >= 0 && v.ystep <= mlx->cube->height
+			&& v.xstep >= 0 && v.xstep <= mlx->cube->width)
 			if (vertical_raycast(mlx, mlx->ray[index].ray_angle, index, &v))
 				break ;
 		fix_intersection(&v.xstep, &v.ystep, mlx);
 		v.distance = ft_distance(mlx->p->x, mlx->p->y, v.xstep, v.ystep);
-		(check_distance(mlx, &h, &v, index), draw_wall(mlx, index));
+		check_distance(mlx, &h, &v, index);
+		draw_wall(mlx, index);
 	}
 }
 

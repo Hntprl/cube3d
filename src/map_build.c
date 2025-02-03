@@ -72,8 +72,8 @@ void	bresenham(t_mlx *mlx, t_wall wall)
 {
 	t_bnham bnham;
 
-	bnham.dx = abs(wall.x2 - mlx->p->x);
-	bnham.dy = abs(wall.y2 - mlx->p->y);
+	bnham.dx = abs((int)(wall.x2 - mlx->p->x));
+	bnham.dy = abs((int)(wall.y2 - mlx->p->y));
 	if (wall.x == wall.x2)
 		bnham.sx = 0;
 	else if (wall.x < wall.x2)
@@ -107,7 +107,6 @@ void	bresenham(t_mlx *mlx, t_wall wall)
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
 {
 	mlx->ptr = mlx_init();
-	map = read_map();
 	cube->height = map->rows * map->block_size;
 	cube->width = map->columns * map->block_size;
 	cube->wall_line = 1;

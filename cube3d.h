@@ -116,6 +116,7 @@ typedef struct s_map
 	float	minimap_scale;
 	int		columns;
 	int		block_size;
+	int		nb_player;
 }			t_map;
 
 typedef struct s_addr
@@ -153,7 +154,7 @@ void	build_rays(t_mlx *mlx, int rays_count);
 void	raycaster(t_mlx *mlx, int x, int y);
 bool	check_walls(t_mlx *mlx, float x, float y);
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
-t_map	*read_map(void);
+t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
 void	trurn_player(t_mlx *mlx);
 void	bresenham(t_mlx *mlx, t_wall wall);
