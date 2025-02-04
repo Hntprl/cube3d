@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 08:15:33 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:47:41 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@
 # define W
 # define PI 3.14159265358979323846
 
-// typedef	struct 
-// {
-//     void	*allocations[100];
-//     int		count;
-// }			MemoryManager;
 
 typedef struct s_bnham
 {
@@ -143,6 +138,7 @@ typedef struct s_texture
 	int y;
 	
 }			t_texture;
+
 typedef struct s_mlx
 {
 	void		*ptr;
@@ -154,6 +150,7 @@ typedef struct s_mlx
 	t_texture	texture[5];
 	t_player	*p;
 	t_ray		*ray;
+	t_cast	*cast;
 }					t_mlx;
 
 void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
@@ -201,6 +198,7 @@ int		destroy_win(void *param);
 
 void	images_to_xpm(t_mlx *wind);
 // parsing functions
+t_map	*read_map(char *av)
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 int		countword(char *str, char sep);

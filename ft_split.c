@@ -1,4 +1,6 @@
-#include "cube3d.h"
+ #include "cube3d.h"
+
+
 
 int	countword(char *str, char sep)
 {

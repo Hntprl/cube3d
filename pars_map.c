@@ -1,4 +1,4 @@
-#include "cube3d.h"
+ #include "cube3d.h"
 
 void	diff_symbol(char line, int *inside_map)
 {

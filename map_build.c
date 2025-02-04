@@ -6,11 +6,12 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/02 18:20:50 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:39:01 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
+
 
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 {

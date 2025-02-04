@@ -1,4 +1,5 @@
-#include "cube3d.h"
+ #include "cube3d.h"
+
 
 void	checkpath(char *av)
 {

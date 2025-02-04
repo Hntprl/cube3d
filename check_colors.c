@@ -1,4 +1,5 @@
-#include "cube3d.h"
+ #include "cube3d.h"
+
 
 int	is_valid_format(char *str)
 {

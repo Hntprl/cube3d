@@ -6,25 +6,14 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 09:29:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:39:31 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
 
 #include <stdlib.h>
 #include <string.h> // For memset
-
-// void init_texture(t_mlx *mlx)
-// {
-//     mlx->texture->n_xpm = NULL;
-//     mlx->texture->s_xpm = NULL;
-//     mlx->texture->e_xpm = NULL;
-//     mlx->texture->w_xpm = NULL;
-
-//     mlx->texture->t_height = 0;
-//     mlx->texture->t_width = 0;
-// }
 
 void images_to_xpm(t_mlx *wind) {
     char *directs[5];
@@ -38,7 +27,6 @@ void images_to_xpm(t_mlx *wind) {
     i = 0;
     while(i < 4)
     {
-      
         wind->texture[i].xpm = mlx_xpm_file_to_image(wind->ptr, directs[i], 
             &wind->texture[i].t_width,   
             &wind->texture[i].t_height);
@@ -50,14 +38,6 @@ void images_to_xpm(t_mlx *wind) {
             &wind->texture[i].bpp,
             &wind->texture[i].line_len,
             &wind->texture[i].endian);
-            
-        printf("Texture %d debug: width=%d, height=%d, line_len=%d, bpp=%d\n",
-            i,
-            wind->texture[i].t_width,
-            wind->texture[i].t_height,
-            wind->texture[i].line_len,
-            wind->texture[i].bpp);
-            
         i++;
     }
 }

@@ -6,11 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:26:16 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/01 17:48:14 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:38:08 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+  #include "cube3d.h"
+
+
 
 float	convert_to_radian(float angle)
 {

@@ -6,11 +6,11 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/01 17:47:53 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:48:43 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
 
 void	sky_floor(t_mlx *mlx)
 {
@@ -24,7 +24,7 @@ void	sky_floor(t_mlx *mlx)
 		j = 0;
 		while (j < WTH)
 		{
-			put_pixel(mlx->addr, j, i, get_color(0 ,250 ,250));
+			put_pixel(mlx->addr, j, i, get_color(157, 163, 164));
 			j ++;
 		}
 		i ++;
@@ -34,7 +34,7 @@ void	sky_floor(t_mlx *mlx)
 		j = 0;
 		while (j < WTH)
 		{
-			put_pixel(mlx->addr, j, i, get_color(70, 44, 44));
+			put_pixel(mlx->addr, j, i, get_color(79, 79, 79));//floor
 			j ++;
 		}
 		i ++;
