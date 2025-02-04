@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 13:39:31 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:22:53 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	raycaster(t_mlx *mlx, int x, int y)
 {
 	t_ray *ray;
 	int rays_count;
+	(void)x;
+	(void)y;
 
 	rays_count = mlx->cube->width / mlx->cube->wall_line;
 

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 13:48:43 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 20:45:15 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int	ft_cube(void *param)
 
 t_map	*read_map(char *av)
 {
-	int		i;
+	// int		i;
 	int		fd;
-	char	*line;
+	// char	*line;
 	t_map	*map;
 	char	**myarr;
 
-	i = 0;
+	// i = 0;
 	if (!av)
 		return (NULL);
 	map = ft_calloc(1, sizeof(t_map));

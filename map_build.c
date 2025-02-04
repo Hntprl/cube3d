@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 13:39:01 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:22:25 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	minimap_player(t_mlx *mlx)
 
 void	draw_map(t_mlx *mlx)
 {
-	int flag;
+	// int flag;
 	int			i;
 	int			j;
 	int			x;
@@ -59,7 +59,7 @@ void	draw_map(t_mlx *mlx)
 	j = 0;
 	x = 0;
 	y = 0;
-	flag = 0;
+	// flag = 0;
 	while (i < mlx->map->rows && mlx->map->map[i])
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 13:39:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:20:47 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void fix_intersection(double *x, double *y, t_mlx *mlx)
 
 void fix(int *x, int *y, t_mlx *mlx)
 {
+    (void)mlx;
     if (*x < 0)
         *x = 0;
     if (*x > WTH)
@@ -70,7 +71,9 @@ int get_wall_orientation(t_mlx *mlx,int index)
         else
             return 3;
     }
+    return 0;
 }
+
 void rendering_texture(t_mlx *mlx, int index, t_wall wall)
 {
     double wall_height = wall.y2 - wall.y;
@@ -78,7 +81,7 @@ void rendering_texture(t_mlx *mlx, int index, t_wall wall)
     int texture_x;
     double texture_pos = 0.0;
     int d = get_wall_orientation(mlx,index);
-    int original_y = wall.y;
+    // int original_y = wall.y;
 
     if (mlx->ray[wall.x].was_hit_vertical)
         texture_x = (int)(fmod(mlx->ray[wall.x].y_hit, mlx->map->block_size) / mlx->map->block_size * mlx->texture[d].t_width);
