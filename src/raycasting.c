@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 18:24:34 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:20:01 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ void	check_distance(t_mlx *mlx, t_cast *h_cast, t_cast *v_cast, int index)
 		mlx->ray[index].distance = h_cast->distance;
 		mlx->ray[index].x_hit = h_cast->xstep;
 		mlx->ray[index].y_hit = h_cast->ystep;
-		mlx->ray[index].was_hit_horizontal = 1;
 	}
 	else
 	{
 		mlx->ray[index].distance = v_cast->distance;
 		mlx->ray[index].x_hit = v_cast->xstep;
 		mlx->ray[index].y_hit = v_cast->ystep;
-		mlx->ray[index].was_hit_vertical = 1;
 	}
 }
 

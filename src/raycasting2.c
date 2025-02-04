@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:20:33 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 	rays_count = WTH / mlx->cube->wall_line;
 	gap_angle = mlx->p->pov / (rays_count);
 	pov = mlx->p->pov / 2;
-	mlx->ray[index].was_hit_horizontal = 0;
-	mlx->ray[index].was_hit_vertical = 0;
 	mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle - pov
 			+ (index * gap_angle));
 	find_ray_direction(mlx->ray[index].ray_angle, &mlx->ray[index]);

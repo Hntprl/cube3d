@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 18:13:34 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:20:15 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <unistd.h>
 # include "parsing.h"
 
+# define SP 180
 # define BUFFER_SIZE 1
 # define WTH 2000
 # define HTH 800
@@ -75,8 +76,6 @@ typedef struct s_ray
 	float	ray_angle;
 	float	x_hit;
 	float	y_hit;
-	int		was_hit_vertical;
-	int		was_hit_horizontal;
 	int		is_ray_facing_down;
 	int		is_ray_facing_up;
 	int		is_ray_facing_right;
@@ -116,6 +115,7 @@ typedef struct s_mlx
 	t_ray		*ray;
 }				t_mlx;
 
+void	render_animation(t_mlx *mlx);
 void	release_arrows(int keycode, t_mlx *mlx);
 void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
@@ -157,4 +157,5 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
+char	*ft_itoa(int n);
 #endif

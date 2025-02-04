@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 18:18:57 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:24:48 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_cube(void *param)
 	sky_floor(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
+	// render_animation(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
 	mlx_destroy_image(mlx->ptr, mlx->image);
