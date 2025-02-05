@@ -76,64 +76,39 @@ int nbrs_lines(char *av, int *columns)
     return nbr_line;
 }
 
-// int	fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
-// {
-// 	int			j;
-
-// 	if (!map || !line || !i || !inside_map)
-// 		return (-1);
-// 	if (count_map_lines(line, inside_map))
-// 	{
-// 		map->map[*i] = ft_strdup(line);
-// 		(*myarr)[*i] = ft_strdup(line);
-// 		j = 0;
-// 		while (map->map[*i][j])
-// 		{
-// 			if (map->map[*i][j] == 'N' || map->map[*i][j] == 'E'
-// 				|| map->map[*i][j] == 'W' || map->map[*i][j] == 'S')
-// 				map->nb_player++;
-// 			j++;
-// 		}
-// 		(*i)++;
-// 	}
-// 	return (map->nb_player);
-// }
-
 
 int fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
 {
+    char *myline=NULL;
+    int line_len=0;
+    int j=0;
     if (!map || !line || !i || !inside_map)
         return (-1);
 
     if (count_map_lines(line, inside_map))
     {
-        int line_len = ft_strlen(line);
+        line_len = ft_strlen(line);
         if (line_len > 0 && line[line_len - 1] == '\n')
             line_len--;
-        char *padded_line = malloc(map->columns + 1);
-        if (!padded_line)
+        myline = malloc(map->columns + 1);
+        if (!myline)
             return (-1);
-
-        // copy and pad with spaces
-        strncpy(padded_line, line, line_len);// need equivalent 
-        int j = line_len;
+        ft_strcpy(myline,line);
+        j = line_len;
         while (j < map->columns)
         {
-            padded_line[j] = ' ';
+            myline[j] = ' ';
             j++;
         }
-        padded_line[map->columns] = '\0';
+        myline[map->columns] = '\0';
+        map->map[*i] = myline;
+        (*myarr)[*i] = ft_strdup(myline);
 
-        // Store the padded line
-        map->map[*i] = padded_line;
-        (*myarr)[*i] = ft_strdup(padded_line);
-
-        // Check for player position
-        int j = 0; 
-        for (j < map->columns)
+        j = 0; 
+        while (j < map->columns)
         {
-            if (padded_line[j] == 'N' || padded_line[j] == 'E' 
-                || padded_line[j] == 'W' || padded_line[j] == 'S')
+            if (myline[j] == 'N' || myline[j] == 'E' 
+                || myline[j] == 'W' || myline[j] == 'S')
                 map->nb_player++;
             j++;
         }

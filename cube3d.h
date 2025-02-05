@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 14:18:00 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:42:13 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,6 @@ void	is_validcolor(char *str);
 int		is_space(char str);
 int		*min_fill(t_map *map, char *str, int i, int start);
 int		to_map(int fd, char **myarr, t_map *map);
-
-
+char	*ft_strcpy(char *dest, char *src);
 
 #endif
