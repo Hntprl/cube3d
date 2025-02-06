@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 20:20:15 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:40:01 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ typedef struct s_ray
 {
 	double	distance;
 	float	ray_angle;
-	float	x_hit;
-	float	y_hit;
+	double	x_hit;
+	double	y_hit;
 	int		is_ray_facing_down;
 	int		is_ray_facing_up;
 	int		is_ray_facing_right;
@@ -117,14 +117,14 @@ typedef struct s_mlx
 
 void	render_animation(t_mlx *mlx);
 void	release_arrows(int keycode, t_mlx *mlx);
-void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
+int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
 void	fix_intersection(double *x, double *y, t_mlx *mlx);
 void	fix(int *x, int *y, t_mlx *mlx);
 void	find_ray_direction(float angle, t_ray *ray);
 float	fix_rayangle(float angle);
 void	*ft_malloc(size_t size, char alloc, bool is_free);
-double	ft_distance(float x1, float y1, float x2, float y2);
+double	ft_distance(double x1, double y1, double x2, double y2);
 int		vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int		horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void	build_rays(t_mlx *mlx, int rays_count);

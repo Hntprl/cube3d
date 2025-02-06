@@ -6,13 +6,13 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/04 20:20:33 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:49:03 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
+int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 {
 	float	pov;
 	float	gap_angle;
@@ -28,12 +28,16 @@ void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 		* mlx->map->block_size;
 	if (mlx->ray[index].is_ray_facing_down)
 		h_cast->ystep += mlx->map->block_size;
-	h_cast->xstep = mlx->p->x + (h_cast->ystep - mlx->p->y)
-		/ tan(convert_to_radian(mlx->ray[index].ray_angle));
+	h_cast->xstep = mlx->p->x + (h_cast->ystep - mlx->p->y) / tan(convert_to_radian(mlx->ray[index].ray_angle));
+	if (mlx->ray[index].ray_angle == 0 || mlx->ray[index].ray_angle == 360)
+	{	
+		mlx->ray[index].distance = WTH;
+		return (1);
+	}
 	v_cast->xstep = floor(mlx->p->x / mlx->map->block_size)
 		* mlx->map->block_size;
 	if (mlx->ray[index].is_ray_facing_right)
 		v_cast->xstep += mlx->map->block_size;
-	v_cast->ystep = mlx->p->y + (v_cast->xstep - mlx->p->x)
-		* tan(convert_to_radian(mlx->ray[index].ray_angle));
+	v_cast->ystep = mlx->p->y + (v_cast->xstep - mlx->p->x) * tan(convert_to_radian(mlx->ray[index].ray_angle));
+	return (0);
 }

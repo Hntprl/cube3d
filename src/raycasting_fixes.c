@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/05 09:11:44 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	fix(int *x, int *y, t_mlx *mlx)
 void	draw_wall(t_mlx *mlx, int index)
 {
 	double	plane_distance;
-	double	wall_height;
+	int		wall_height;
 	t_wall	wall;
 
 	mlx->ray[index].distance = mlx->ray[index].distance
-		* cos(convert_to_radian(mlx->ray[index].ray_angle
-				- mlx->p->rotation_angle));
-	plane_distance = (WTH / 2) / tan(mlx->p->pov / 2);
+		* cos(convert_to_radian(fix_rayangle(mlx->ray[index].ray_angle
+				- mlx->p->rotation_angle)));
+	plane_distance = (WTH / 2) / tan(convert_to_radian(mlx->p->pov / 2));
 	wall_height = (mlx->map->block_size / mlx->ray[index].distance)
 		* plane_distance;
 	wall.y = HTH / 2 - wall_height / 2;
