@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/06 17:00:32 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:36:51 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 	if (mlx->ray[index].is_ray_facing_right)
 		v_cast->xstep += mlx->map->block_size;
 	v_cast->ystep = mlx->p->y + (v_cast->xstep - mlx->p->x) * tan(convert_to_radian(mlx->ray[index].ray_angle));
+	if (mlx->ray[index].ray_angle == 90 || mlx->ray[index].ray_angle == 270)
+	{
+		return (2);
+	}
 	return (0);
 }
