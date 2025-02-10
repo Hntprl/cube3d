@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/06 17:38:13 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/10 18:01:31 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,7 @@ void	build_rays(t_mlx *mlx, int rays_count)
 	index = -1;
 	while (++ index < rays_count)
 	{
-		flag = 0;
-		if (init_first_inter(&h, &v, mlx, index) == 1)
-			flag = 1;
-		else if (init_first_inter(&h, &v, mlx, index) == 2)
-			flag = 2;
-		while (h.ystep >= 0 && h.ystep <= mlx->cube->height
-			&& h.xstep >= 0 && h.xstep <= mlx->cube->width)
-			if (horizontal_raycast(mlx, mlx->ray[index].ray_angle, index, &h))
-				break ;
-		fix_intersection(&h.xstep, &h.ystep, mlx);
-		h.distance = ft_distance(mlx->p->x, mlx->p->y, h.xstep, h.ystep);
-		while (v.ystep >= 0 && v.ystep <= mlx->cube->height
-			&& v.xstep >= 0 && v.xstep <= mlx->cube->width)
-			if (vertical_raycast(mlx, mlx->ray[index].ray_angle, index, &v))
-				break ;
-		fix_intersection(&v.xstep, &v.ystep, mlx);
-		v.distance = ft_distance(mlx->p->x, mlx->p->y, v.xstep, v.ystep);
+		flag = calculate_distance(mlx, index, &v, &h);
 		if (flag == 1)
 		{
 			mlx->ray[index].distance = v.distance;

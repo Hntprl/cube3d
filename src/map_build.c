@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 18:28:59 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/10 18:06:31 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,7 @@ void	bresenham(t_mlx *mlx, t_wall wall)
 
 	bnham.dx = abs((int)(wall.x2 - mlx->p->x));
 	bnham.dy = abs((int)(wall.y2 - mlx->p->y));
-	if (wall.x == wall.x2)
-		bnham.sx = 0;
-	else if (wall.x < wall.x2)
-		bnham.sx = 1;
-	else
-		bnham.sx = -1;
-	if (wall.y == wall.y2)
-		bnham.sy = 0;
-	else if (wall.y < wall.y2)
-		bnham.sy = 1;
-	else
-		bnham.sy = -1;
+	init_br(wall, &bnham);
 	bnham.error = bnham.dx - bnham.dy;
 	while (wall.x != wall.x2 || wall.y != wall.y2)
 	{
