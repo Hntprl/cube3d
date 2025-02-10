@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:06:45 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/10 18:14:25 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,15 @@ typedef struct s_mlx
 	t_player	*p;
 	t_ray		*ray;
 }				t_mlx;
+
+typedef struct s_c
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+}				t_c;
+
 
 void	init_br(t_wall wall, t_bnham *bnham);
 int		calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h);

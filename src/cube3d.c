@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:04:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/10 18:15:28 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,29 +91,29 @@ t_map	*read_map(char *av)
 
 void	find_player_pos(t_mlx *mlx)
 {
-	int (x), (y), (i), (j);
-	i = 0;
-	j = 0;
-	x = 0;
-	y = 0;
-	while (i < mlx->map->rows && mlx->map->map[i])
+	t_c	c;
+
+	c.i = 0;
+	c.y = 0;
+	while (c.i < mlx->map->rows && mlx->map->map[c.i])
 	{
-		j = 0;
-		x = 0;
-		while (j < mlx->map->columns && mlx->map->map[i][j])
+		c.j = 0;
+		c.x = 0;
+		while (c.j < mlx->map->columns && mlx->map->map[c.i][c.j])
 		{
-			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S'
-				|| mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
+			if (mlx->map->map[c.i][c.j] == 'N' || mlx->map->map[c.i][c.j] == 'S'
+				|| mlx->map->map[c.i][c.j] == 'E'
+				|| mlx->map->map[c.i][c.j] == 'W')
 			{
-				mlx->p->x = x;
-				mlx->p->y = y;
-				return (set_player_direction(mlx->map->map[i][j], mlx));
+				mlx->p->x = c.x;
+				mlx->p->y = c.y;
+				return (set_player_direction(mlx->map->map[c.i][c.j], mlx));
 			}
-			x += mlx->map->block_size;
-			j++;
+			c.x += mlx->map->block_size;
+			c.j++;
 		}
-		y += mlx->map->block_size;
-		i++;
+		c.y += mlx->map->block_size;
+		c.i++;
 	}
 }
 

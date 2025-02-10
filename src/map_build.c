@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:06:31 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/10 18:15:52 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,28 @@ void	minimap_player(t_mlx *mlx)
 
 void	draw_map(t_mlx *mlx)
 {
-	int (i), (j), (x), (y);
-	i = 0;
-	j = 0;
-	x = 0;
-	y = 0;
-	while (i < mlx->map->rows && mlx->map->map[i])
+	t_c	c;
+
+	c.i = 0;
+	c.y = 0;
+	while (c.i < mlx->map->rows && mlx->map->map[c.i])
 	{
-		j = 0;
-		x = 0;
-		while (j < mlx->map->columns && mlx->map->map[i][j])
+		c.j = 0;
+		c.x = 0;
+		while (c.j < mlx->map->columns && mlx->map->map[c.i][c.j])
 		{
-			if (mlx->map->map[i][j] == '0' || mlx->map->map[i][j] == 'W'
-				|| mlx->map->map[i][j] == 'N'
-				|| mlx->map->map[i][j] == 'S' || mlx->map->map[i][j] == 'E')
-				ft_draw_block(mlx, x, y, get_color(0, 0, 255));
-			if (mlx->map->map[i][j] == '1')
-				ft_draw_block(mlx, x, y, 16777215);
-			x += mlx->map->block_size * mlx->map->minimap_scale;
-			j++;
+			if (mlx->map->map[c.i][c.j] == '0' || mlx->map->map[c.i][c.j] == 'W'
+				|| mlx->map->map[c.i][c.j] == 'N'
+				|| mlx->map->map[c.i][c.j] == 'S'
+				|| mlx->map->map[c.i][c.j] == 'E')
+				ft_draw_block(mlx, c.x, c.y, get_color(0, 0, 255));
+			if (mlx->map->map[c.i][c.j] == '1')
+				ft_draw_block(mlx, c.x, c.y, 16777215);
+			c.x += mlx->map->block_size * mlx->map->minimap_scale;
+			c.j++;
 		}
-		y += mlx->map->block_size * mlx->map->minimap_scale;
-		i++;
+		c.y += mlx->map->block_size * mlx->map->minimap_scale;
+		c.i++;
 	}
 	minimap_player(mlx);
 }
