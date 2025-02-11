@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:15:52 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/11 21:22:34 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
 	mlx->map = map;
 	mlx->cube = cube;
 	mlx->p = p;
-	mlx->map->minimap_scale = 0.2;
+	if (mlx->map->columns > 70 || mlx->map->rows > 70)
+		mlx->map->minimap_scale = 0.15;
+	else
+		mlx->map->minimap_scale = 0.2;
 }
