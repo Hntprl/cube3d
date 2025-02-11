@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_fixes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:04:03 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/11 22:32:44 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
+
+void images_to_xpm(t_mlx *wind)
+{
+    char *directs[5];
+    int i = 0;
+    
+    directs[0] = wind->map->no_img;
+    directs[1] = wind->map->su_img;
+    directs[2] = wind->map->es_img;
+    directs[3] = wind->map->we_img;
+    
+    i = 0;
+    while(i < 4)
+    {
+        wind->texture[i].xpm = mlx_xpm_file_to_image(wind->ptr, directs[i], 
+            &wind->texture[i].t_width,   
+            &wind->texture[i].t_height);  
+        if(!wind->texture[i].xpm)
+            printerr(1, "ERROR LOADING TEXTURE");
+            
+        wind->texture[i].addr = mlx_get_data_addr(wind->texture[i].xpm,
+            &wind->texture[i].bpp,
+            &wind->texture[i].line_len,
+            &wind->texture[i].endian);
+        i++;
+    }
+}
 
 void	find_ray_direction(float angle, t_ray *ray)
 {
@@ -53,6 +80,56 @@ void	fix(int *x, int *y, t_mlx *mlx)
 		*y = HTH;
 }
 
+//txtures
+
+int get_wall_orientation(t_mlx *mlx,int index)
+{
+    if (mlx->ray[index].was_hit_horizontal)
+    {
+        if(mlx->ray[index].is_ray_facing_up)
+            return 0;
+        else    
+            return 1;
+    }
+    else if(mlx->ray[index].was_hit_vertical)
+    {
+        if(mlx->ray[index].is_ray_facing_right)
+            return 2;
+        else
+            return 3;
+    }
+    return 0;
+}
+
+void rendering_texture(t_mlx *mlx, int index, t_wall wall)
+{
+    double wall_height = wall.y2 - wall.y;
+    double step;
+    int texture_x;
+    double texture_pos = 0.0;
+    int d = get_wall_orientation(mlx,index);
+
+    if (mlx->ray[wall.x].was_hit_vertical)
+        texture_x = (int)(fmod(mlx->ray[wall.x].y_hit, mlx->map->block_size) / mlx->map->block_size * mlx->texture[d].t_width);
+    else
+        texture_x = (int)(fmod(mlx->ray[wall.x].x_hit, mlx->map->block_size) / mlx->map->block_size * mlx->texture[d].t_width);
+    step = 1.0 * mlx->texture[d].t_height / wall_height;
+    while (wall.y < wall.y2)
+    {
+        int texture_y = (int)texture_pos & (mlx->texture[d].t_height - 1); // calculate the current position in the texture
+        int offset = (texture_y * mlx->texture[d].line_len) +
+                     (texture_x * (mlx->texture[d].bpp / 8));
+        if (wall.y >= 0 && wall.y < HTH &&
+            texture_x >= 0 && texture_x < mlx->texture[d].t_width &&
+            texture_y >= 0 && texture_y < mlx->texture[d].t_height)
+        {
+            int color = *(int *)(mlx->texture[d].addr + offset);
+            put_pixel(mlx->addr, wall.x, wall.y, color);
+        }
+        wall.y++;
+        texture_pos += step;
+    }
+}
 void	draw_wall(t_mlx *mlx, int index)
 {
 	double	plane_distance;
@@ -71,5 +148,6 @@ void	draw_wall(t_mlx *mlx, int index)
 	wall.y2 = wall.y + wall_height;
 	fix(&wall.x, &wall.y2, mlx);
 	wall.x2 = wall.x;
-	bresenham(mlx, wall);
+	// bresenham(mlx, wall);
+	rendering_texture(mlx,index,wall);
 }

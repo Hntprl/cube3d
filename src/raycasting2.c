@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:06:38 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/11 22:30:03 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 {
 	float	pov;
 	float	gap_angle;
-
+	mlx->ray[index].was_hit_horizontal = 0;
+	mlx->ray[index].was_hit_vertical = 0;
+	
 	gap_angle = mlx->p->pov / (WTH / mlx->cube->wall_line);
 	pov = mlx->p->pov / 2;
 	mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle - pov

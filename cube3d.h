@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:14:25 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/11 22:27:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_ray
 	float	ray_angle;
 	double	x_hit;
 	double	y_hit;
+	int		was_hit_vertical;
+	int		was_hit_horizontal;
 	int		is_ray_facing_down;
 	int		is_ray_facing_up;
 	int		is_ray_facing_right;
@@ -103,6 +105,21 @@ typedef struct s_addr
 	int			endian;
 }				t_addr;
 
+typedef struct s_texture
+{
+	char	*xpm;
+	int t_height;
+	int t_width;
+		
+	char	*addr;
+	int	line_len;
+	int	endian;
+	int	bpp;
+	int x;
+	int y;
+	
+}			t_texture;
+
 typedef struct s_mlx
 {
 	void		*ptr;
@@ -113,6 +130,7 @@ typedef struct s_mlx
 	t_cube		*cube;
 	t_player	*p;
 	t_ray		*ray;
+	t_texture	texture[5];
 }				t_mlx;
 
 typedef struct s_c
@@ -169,4 +187,5 @@ int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
 char	*ft_itoa(int n);
+void images_to_xpm(t_mlx *wind);
 #endif

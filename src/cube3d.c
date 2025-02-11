@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/11 21:22:47 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/11 22:19:18 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	ft_cube(void *param)
 			&mlx->addr->endian);
 	sky_floor(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
+	images_to_xpm(mlx);//
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
