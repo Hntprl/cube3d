@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/11 22:12:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/11 22:43:20 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,17 @@ int	key_hook(int keycode, void *param)
 		handle_arrows(keycode, mlx);
 	return (0);
 }
-int mouse_move( int x, int y, t_mlx *mlx)
-{
-	static int	last_x = WTH / 2;
-	(void)y;
-	if(x>last_x)
-		mlx->p->turn_direction +=1;
-	if(x< last_x)
-		mlx->p->turn_direction -=1;	
-	last_x=x;
-	return(0);
-}
+// int mouse_move( int x, int y, t_mlx *mlx)
+// {
+// 	static int	last_x = WTH / 2;
+// 	(void)y;
+// 	if(x>last_x)
+// 		mlx->p->turn_direction +=1;
+// 	if(x< last_x)
+// 		mlx->p->turn_direction -=1;	
+// 	last_x=x;
+// 	return(0);
+// }
 
 // void	event_handling(t_mlx *mlx)
 // {
@@ -109,7 +109,7 @@ void	event_handling(t_mlx *mlx)
 	mlx_hook(mlx->window, 3, 1L << 1, NULL, mlx);
 	mlx_key_hook(mlx->window, &key_hook, mlx);
 	mlx_loop_hook(mlx->ptr, ft_cube, mlx);
-	mlx_hook(mlx->window,6,1L << 6,mouse_move,mlx);//bonus mouses 
+	// mlx_hook(mlx->window,6,1L << 6,mouse_move,mlx);//bonus mouses 
 	mlx_hook(mlx->window, 17, 0, destroy_win, mlx);
 	mlx_loop(mlx->ptr);
 }

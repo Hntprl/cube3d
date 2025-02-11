@@ -1,7 +1,7 @@
-NO xpm/1.xpm
-SO xpm/2.xpm
-EA xpm/3.xpm
-WE xpm/4.xpm
+NO xpm/north_resized.xpm
+SO xpm/south_resized.xpm
+EA xpm/brick-wall.xpm
+WE xpm/weast_resized.xpm
 
 F 255,255,255
 C 0,0,0
