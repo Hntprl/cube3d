@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:16:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/11 22:56:01 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:19:13 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,13 @@ int mouse_move( int x, int y, t_mlx *mlx)
 	(void)y;
 	if(x>last_x)
 		mlx->p->turn_direction =+1;
-	if(x< last_x)
+	else if(x< last_x)
 		mlx->p->turn_direction =-1;	
+	else
+		mlx->p->turn_direction =0;	
+
 	last_x=x;
+
 	return(0);
 }
 
@@ -98,7 +102,8 @@ void	event_handling(t_mlx *mlx)
 	mlx_hook(mlx->window, 2, 1L << 0, key_hook, mlx);
 	mlx_hook(mlx->window, 3, 1L << 1, key_release, mlx);
 	mlx_loop_hook(mlx->ptr, ft_cube, mlx);
-	// mlx_hook(mlx->window,6,1L << 6,mouse_move,mlx);//bonus mouses 
+	mlx_hook(mlx->window,6,1L << 6,mouse_move,mlx);//bonus mouses 
+	mlx->p->turn_direction = 0;
 	mlx_hook(mlx->window, 17, 0, destroy_win, mlx);
 	mlx_loop(mlx->ptr);
 }
