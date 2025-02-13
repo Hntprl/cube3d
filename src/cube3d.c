@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/13 17:09:09 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ void	sky_floor(t_mlx *mlx)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < HTH / 2)
 	{
 		j = 0;
 		while (j < WTH)
 		{
-			put_pixel(mlx->addr, j, i, get_color(0 ,250 ,250));
+			put_pixel(mlx->addr, j, i, get_color(0, 250, 250));
 			j ++;
 		}
 		i ++;
@@ -51,7 +50,7 @@ int	ft_cube(void *param)
 			&mlx->addr->bits_per_pixel,
 			&mlx->addr->size_line,
 			&mlx->addr->endian);
-	// sky_floor(mlx);
+	sky_floor(mlx);
 	raycaster(mlx, mlx->p->x, mlx->p->y);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
@@ -79,51 +78,41 @@ t_map	*read_map(char *av)
 	myarr = ft_calloc(map->columns, sizeof(char *));
 	map->map = ft_calloc(map->rows, sizeof(char *));
 	if (!map->map)
-	{
-		free_map(map);
-		free_arg(myarr);
-		return (NULL);
-	}
+		return (free_arg(myarr), free_map(map), NULL);
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
-	{
-		free_map(map);
-		free_arg(myarr);
-		return (NULL);
-	}
+		return (free_arg(myarr), free_map(map), NULL);
 	if (to_map(fd, myarr, map) != 1)
 		printerr(1, "Error: the game must have one player ");
-	isvalid_map(map, myarr);
-	free_arg(myarr);
-	close(fd);
+	(isvalid_map(map, myarr), free_arg(myarr), close(fd));
 	return (map);
 }
 
 void	find_player_pos(t_mlx *mlx)
 {
-	int (x), (y), (i), (j);
-	i = 0;
-	j = 0;
-	x = 0;
-	y = 0;
-	while (i < mlx->map->rows && mlx->map->map[i])
+	t_c	c;
+
+	c.i = 0;
+	c.y = 0;
+	while (c.i < mlx->map->rows && mlx->map->map[c.i])
 	{
-		j = 0;
-		x = 0;
-		while (j < mlx->map->columns && mlx->map->map[i][j])
+		c.j = 0;
+		c.x = 0;
+		while (c.j < mlx->map->columns && mlx->map->map[c.i][c.j])
 		{
-			if (mlx->map->map[i][j] == 'N' || mlx->map->map[i][j] == 'S'
-				|| mlx->map->map[i][j] == 'E' || mlx->map->map[i][j] == 'W')
+			if (mlx->map->map[c.i][c.j] == 'N' || mlx->map->map[c.i][c.j] == 'S'
+				|| mlx->map->map[c.i][c.j] == 'E'
+				|| mlx->map->map[c.i][c.j] == 'W')
 			{
-				mlx->p->x = x;
-				mlx->p->y = y;
-				return (set_player_direction(mlx->map->map[i][j], mlx));
+				mlx->p->x = c.x;
+				mlx->p->y = c.y;
+				return (set_player_direction(mlx->map->map[c.i][c.j], mlx));
 			}
-			x += mlx->map->block_size;
-			j++;
+			c.x += mlx->map->block_size;
+			c.j++;
 		}
-		y += mlx->map->block_size;
-		i++;
+		c.y += mlx->map->block_size;
+		c.i++;
 	}
 }
 
