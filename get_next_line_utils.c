@@ -6,11 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:45:39 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/09 18:14:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:38:47 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
+
+
 
 size_t	ft_strlen(const char *s)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/07 17:11:03 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:19:35 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
 
 int	get_color(int r, int g, int b)
 {
@@ -37,9 +37,9 @@ int	destroy_win(void *param)
 
 void	handle_arrows(int keycode, t_mlx *mlx)
 {
-	float	rotate;
+	// float	rotate;
 
-	rotate = 5.0;
+	// rotate = 5.0;
 	if (keycode == 65361)
 	{
 		mlx->p->turn_direction = -1;
@@ -52,8 +52,8 @@ void	handle_arrows(int keycode, t_mlx *mlx)
 
 int	key_hook(int keycode, void *param)
 {
-	float	new_x;
-	float	new_y;
+	// float	new_x;
+	// float	new_y;
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;

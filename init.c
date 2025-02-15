@@ -1,8 +1,10 @@
-#include "cube3d.h"
+ #include "cube3d.h"
+
 
 void	printerr(int status, char *str)
 {
-	printf("%s\n", str);
+	write(2,str,ft_strlen(str));
+	write(2,"\n",2);
 	exit(status);
 }
 
@@ -66,27 +68,3 @@ void	free_map(t_map *map)
 	free(map->ce_color);
 	init_t_map(&map);
 }
-// void	add_allocation(MemoryManager *manager, void *ptr)
-// {
-// 	if (manager->count < 100)
-// 	{
-// 		manager->allocations[manager->count++] = ptr;
-// 	}
-// 	else
-// 	{
-// 		fprintf(stderr, "Memory Manager: Exceeded allocation limit!\n");
-// 	}
-// }
-
-// void	free_all_allocations(MemoryManager *manager)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < manager->count)
-// 	{
-// 		free(manager->allocations[i]);
-// 		i++;
-// 	}
-// 	manager->count = 0;
-// }

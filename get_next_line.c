@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:43:58 by amarouf           #+#    #+#             */
-/*   Updated: 2024/12/22 15:50:01 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:38:52 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
+
 
 char	*ft_editbackup(char *line)
 {

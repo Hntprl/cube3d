@@ -121,3 +121,16 @@ int	ft_atoi(const char *str)
 		res = res * 10 + str[i++] - '0';
 	return (sign * res);
 }
+char	*ft_strcpy(char *dest, char *src)
+{
+	int i;
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = src[i];
+	return (dest);
+}

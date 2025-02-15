@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 21:55:12 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/21 21:55:23 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:38:39 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+ #include "cube3d.h"
+
 
 t_garbage	*new_garbage(void *allocation, bool is_free)
 {

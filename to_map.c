@@ -1,4 +1,5 @@
-#include "cube3d.h"
+ 
+ #include "cube3d.h"
 
 void	is_newline(char *nwline, char *line)
 {
@@ -20,6 +21,7 @@ int	is_texture_line(const char *line)
 		return (1);
 	return (0);
 }
+
 int	to_map(int fd, char **myarr, t_map *map)
 {
 	int elmant;

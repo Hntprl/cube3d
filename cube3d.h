@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/25 10:36:24 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:42:13 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -29,11 +29,6 @@
 # define W
 # define PI 3.14159265358979323846
 
-// typedef	struct 
-// {
-//     void	*allocations[100];
-//     int		count;
-// }			MemoryManager;
 
 typedef struct s_bnham
 {
@@ -125,7 +120,24 @@ typedef struct s_addr
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
+
 }				t_addr;
+
+
+typedef struct s_texture
+{
+	char	*xpm;
+	int t_height;
+	int t_width;
+		
+	char	*addr;
+	int	line_len;
+	int	endian;
+	int	bpp;
+	int x;
+	int y;
+	
+}			t_texture;
 
 typedef struct s_mlx
 {
@@ -135,9 +147,11 @@ typedef struct s_mlx
 	t_addr		*addr;
 	t_map		*map;
 	t_cube		*cube;
+	t_texture	texture[5];
 	t_player	*p;
 	t_ray		*ray;
-}				t_mlx;
+	t_cast	*cast;
+}					t_mlx;
 
 void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
@@ -156,7 +170,7 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map, char *av);
 t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
 void	trurn_player(t_mlx *mlx);
-void	bresenham(t_mlx *mlx, t_wall wall);
+void	bresenham(t_mlx *mlx, t_wall wall,int texture_index);
 void	draw_map(t_mlx *mlx);
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color);
 void	set_player_direction(char c, t_mlx *mlx);
@@ -179,7 +193,12 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
+
+
+
+void	images_to_xpm(t_mlx *wind);
 // parsing functions
+// t_map	*read_map(char *av)
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 int		countword(char *str, char sep);
@@ -204,4 +223,6 @@ void	is_validcolor(char *str);
 int		is_space(char str);
 int		*min_fill(t_map *map, char *str, int i, int start);
 int		to_map(int fd, char **myarr, t_map *map);
+char	*ft_strcpy(char *dest, char *src);
+
 #endif

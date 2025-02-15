@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "chrono": "c",
-        "variant": "c"
-    }
+        "variant": "c",
+        "cube3d.h": "c",
+        "string.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
