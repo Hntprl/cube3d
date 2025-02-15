@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:19:08 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 11:50:02 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 15:38:28 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	checkpath(char *av)
 {
+	int i=0;
+	char *str=ft_strdup(av+ft_strlen(av) - 5);
 	if (ft_strcmp(av + ft_strlen(av) - 4, ".cub"))
 		printerr(1, "Error: The file must end with .cub");
+	if(av[0]=='.' || str[0]== '/')
+		printerr(1, "Error: .cub file invalid without extention .cub");
 }
 
 void	spliit(char *str, t_map *map)

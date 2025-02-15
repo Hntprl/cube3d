@@ -2,8 +2,8 @@
 
 void	printerr(int status, char *str)
 {
-	printf("Error\n");
-	printf("%s\n", str);
+	write(2,str,ft_strlen(str));
+	write(2,"\n",2);
 	exit(status);
 }
 

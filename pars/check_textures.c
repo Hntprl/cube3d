@@ -48,7 +48,7 @@ void	fill_textures(t_map *map, char *str)
 {
 	char **string;
 	int j;
-
+	int fd ;
 	string = ft_split(str, ' ');
 	if (count_words(str) > 2)
 		printerr(1, "Error : the args of textures must be 2");
@@ -60,6 +60,8 @@ void	fill_textures(t_map *map, char *str)
 	}
 	if ((ft_strcmp(string[1] + ft_strlen(string[1]) - 4, ".xpm")))
 		printerr(1, "the texture should end with .xpm");
+	if(open(string[1], O_RDONLY, 0777)==-1)//adding here ttexture file check
+		printerr(1,"Cannot open texture file");
 	if (!(is_validtexture(string)))
 	{
 		if (str[0] == 'N' && map->text[0] == 0)

@@ -36,7 +36,7 @@ int	isnot_alpha(char *str)
 {
 	while (*str)
 	{
-		if (!ft_isdigit(*str) && *str != ',' && !is_space(*str))
+		if (!ft_isdigit(*str) && *str != ',' && *(str+1)!=',' && !is_space(*str))//comma prob
 			return (0);
 		str++;
 	}
