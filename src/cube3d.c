@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/13 17:09:09 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 11:48:14 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_cube(void *param)
 			&mlx->addr->size_line,
 			&mlx->addr->endian);
 	sky_floor(mlx);
-	raycaster(mlx, mlx->p->x, mlx->p->y);
+	raycaster(mlx);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
@@ -63,7 +63,6 @@ t_map	*read_map(char *av)
 {
 	int		i;
 	int		fd;
-	char	*line;
 	t_map	*map;
 	char	**myarr;
 
@@ -124,6 +123,8 @@ int	main(int ac, char **av)
 	t_addr		addr;
 	t_map		*map;
 
+	if (ac != 2)
+		printerr(1, "Error: invalid number of arguments");
 	map = read_map(ft_strdup(av[1]));
 	map->columns -= 1;
 	mlx.addr = &addr;

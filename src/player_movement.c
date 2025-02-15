@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/13 17:05:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 10:35:49 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,27 @@ void	rotate_player(t_mlx *mlx)
 
 void	move_player(t_mlx *mlx, int x, int y)
 {
-	float	pov;
+	float	fov;
 	float	adj;
 	float	opp;
 
 	rotate_player(mlx);
-	pov = mlx->p->rotation_angle;
+	fov = mlx->p->rotation_angle;
 	if (mlx->p->side_walk)
-		pov += 90;
-	adj = (mlx->p->move_speed * cos(convert_to_radian(pov)))
+		fov += 90;
+	adj = (mlx->p->move_speed * cos(convert_to_radian(fov)))
 		* mlx->p->walk_direction;
-	opp = (mlx->p->move_speed * sin(convert_to_radian(pov)))
+	opp = (mlx->p->move_speed * sin(convert_to_radian(fov)))
 		* mlx->p->walk_direction;
-	if (check_walls(mlx, x + adj - 5, y + opp - 5) == false
-		&& check_walls(mlx, x + adj + 5, y + opp + 5) == false)
+	if (!check_walls(mlx, x + adj, y + opp)
+		&& !check_walls(mlx, x + adj, y + opp))
 	{
-		x += adj;
-		y += opp;
+		if (!check_walls(mlx, x + adj - 5, y - 5)
+			&& !check_walls(mlx, x + adj + 5, y + 5))
+			x += adj;
+		if (!check_walls(mlx, x - 5, y + opp - 5)
+			&& !check_walls(mlx, x + 5, y + opp + 5))
+			y += opp;
 	}
 	mlx->p->x = x;
 	mlx->p->y = y;

@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/10 18:06:38 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 10:37:00 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 {
-	float	pov;
+	float	fov;
 	float	gap_angle;
 
-	gap_angle = mlx->p->pov / (WTH / mlx->cube->wall_line);
-	pov = mlx->p->pov / 2;
-	mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle - pov
+	gap_angle = mlx->p->fov / (WTH / mlx->cube->wall_line);
+	fov = mlx->p->fov / 2;
+	mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle - fov
 			+ (index * gap_angle));
 	find_ray_direction(mlx->ray[index].ray_angle, &mlx->ray[index]);
 	h_cast->ystep = floor(mlx->p->y / mlx->map->block_size)
@@ -45,6 +45,8 @@ int	calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h)
 {
 	int	flag;
 
+	mlx->ray[index].was_hit_horizontal = 0;
+	mlx->ray[index].was_hit_vertical = 0;
 	flag = init_first_inter(h, v, mlx, index);
 	while (h->ystep >= 0 && h->ystep <= mlx->cube->height
 		&& h->xstep >= 0 && h->xstep <= mlx->cube->width)
@@ -75,4 +77,13 @@ void	init_br(t_wall wall, t_bnham *bnham)
 		bnham->sy = 1;
 	else
 		bnham->sy = -1;
+}
+
+void	init_ray_hit(t_ray *ray, int index, t_cast hit)
+{
+	ray[index].was_hit_horizontal = 0;
+	ray[index].was_hit_vertical = 0;
+	ray[index].distance = hit.distance;
+	ray[index].x_hit = hit.xstep;
+	ray[index].y_hit = hit.ystep;
 }

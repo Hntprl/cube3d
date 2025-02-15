@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/13 20:20:31 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 11:48:26 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,15 @@ void	build_rays(t_mlx *mlx, int rays_count)
 	index = -1;
 	while (++ index < rays_count)
 	{
-		mlx->ray[index].was_hit_horizontal = 0;
-		mlx->ray[index].was_hit_vertical = 0;
 		flag = calculate_distance(mlx, index, &v, &h);
 		if (flag == 1)
 		{
-			mlx->ray[index].distance = v.distance;
-			mlx->ray[index].x_hit = v.xstep;
-			mlx->ray[index].y_hit = v.ystep;
+			init_ray_hit(mlx->ray, index, v);
 			mlx->ray[index].was_hit_vertical = 1;
 		}
 		else if (flag == 2)
 		{
-			mlx->ray[index].distance = h.distance;
-			mlx->ray[index].x_hit = h.xstep;
-			mlx->ray[index].y_hit = h.ystep;
+			init_ray_hit(mlx->ray, index, h);
 			mlx->ray[index].was_hit_horizontal = 1;
 		}
 		else
@@ -105,7 +99,7 @@ void	build_rays(t_mlx *mlx, int rays_count)
 	}
 }
 
-void	raycaster(t_mlx *mlx, int x, int y)
+void	raycaster(t_mlx *mlx)
 {
 	t_ray	*ray;
 	int		rays_count;

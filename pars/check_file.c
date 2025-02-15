@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:19:08 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 11:50:02 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	spliit(char *str, t_map *map)
 
 void	fill_colors(t_map *map, char *str)
 {
-	if ((str[0] == 'C' || str[0] == 'F') && str[1] == ' ' || str[1] == '	')
+	if ((str[0] == 'C' || str[0] == 'F') && (str[1] == ' ' || str[1] == '	'))
 		spliit(str, map);
 	else
 		printerr(1, "error the format of color invalid");

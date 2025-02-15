@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/11 21:47:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 11:49:23 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fix_intersection(double *x, double *y, t_mlx *mlx)
 		*y = mlx->cube->height;
 }
 
-void	fix(int *x, int *y, t_mlx *mlx)
+void	fix(int *x, int *y)
 {
 	if (*x < 0)
 		*x = 0;
@@ -62,14 +62,14 @@ void	draw_wall(t_mlx *mlx, int index)
 	mlx->ray[index].distance = mlx->ray[index].distance
 		* cos(convert_to_radian(fix_rayangle(mlx->ray[index].ray_angle
 					- mlx->p->rotation_angle)));
-	plane_distance = (WTH / 2) / tan(convert_to_radian(mlx->p->pov / 2));
+	plane_distance = (WTH / 2) / tan(convert_to_radian(mlx->p->fov / 2));
 	wall_height = (mlx->map->block_size / mlx->ray[index].distance)
 		* plane_distance;
 	wall.y = HTH / 2 - wall_height / 2;
 	wall.x = index;
-	fix(&wall.x, &wall.y, mlx);
+	fix(&wall.x, &wall.y);
 	wall.y2 = wall.y + wall_height;
-	fix(&wall.x, &wall.y2, mlx);
+	fix(&wall.x, &wall.y2);
 	wall.x2 = wall.x;
 	bresenham(mlx, wall);
 }

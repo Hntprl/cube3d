@@ -4,7 +4,7 @@ void	check_zero(char **myarr, t_map *map, int i, int j)
 {
 	if (myarr[i][j] == '0')
 	{
-		if (i == 0 || j == 0 || i == map->rows - 1 || j == ft_strlen(myarr[i])
+		if ((i == 0 || j == 0) || i == map->rows - 1 || j == ft_strlen(myarr[i])
 			- 1)
 			printerr(1,
 					"Error : Invalid map not surrounded by valid characters");

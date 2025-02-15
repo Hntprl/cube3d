@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/13 20:19:14 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 11:49:04 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_player
 	float	move_speed;
 	float	rotation_speed;
 	int		side_walk;
-	float	pov;
+	float	fov;
 }				t_player;
 
 typedef struct s_addr
@@ -125,7 +125,7 @@ typedef struct s_c
 	int	y;
 }				t_c;
 
-
+void	init_ray_hit(t_ray *ray, int index, t_cast hit);
 void	init_br(t_wall wall, t_bnham *bnham);
 int		calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h);
 void	render_animation(t_mlx *mlx);
@@ -133,7 +133,7 @@ void	release_arrows(int keycode, t_mlx *mlx);
 int		init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
 void	fix_intersection(double *x, double *y, t_mlx *mlx);
-void	fix(int *x, int *y, t_mlx *mlx);
+void	fix(int *x, int *y);
 void	find_ray_direction(float angle, t_ray *ray);
 float	fix_rayangle(float angle);
 void	*ft_malloc(size_t size, char alloc, bool is_free);
@@ -141,7 +141,7 @@ double	ft_distance(double x1, double y1, double x2, double y2);
 int		vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int		horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void	build_rays(t_mlx *mlx, int rays_count);
-void	raycaster(t_mlx *mlx, int x, int y);
+void	raycaster(t_mlx *mlx);
 bool	check_walls(t_mlx *mlx, float x, float y);
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
 t_map	*read_map(char *av);

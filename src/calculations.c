@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:26:16 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/06 16:32:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 09:31:51 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ float	convert_to_degree(float radian)
 
 bool	check_walls(t_mlx *mlx, float x, float y)
 {
-	if (x < 0 || x >= WTH || y < 0 || y >= HTH)
+	if (x < 0 || x >= mlx->cube->width || y < 0 || y >= mlx->cube->height)
 		return (true);
 	if (mlx->map->map[(int)((y / mlx->map->block_size))][(int)(x
 			/ mlx->map->block_size)] == '1')

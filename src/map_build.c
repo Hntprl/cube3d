@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/13 17:16:44 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 09:22:23 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_map(t_mlx *mlx)
 				|| mlx->map->map[c.i][c.j] == 'E')
 				ft_draw_block(mlx, c.x, c.y, get_color(0, 0, 255));
 			if (mlx->map->map[c.i][c.j] == '1')
-				ft_draw_block(mlx, c.x, c.y, 16777215);
+				ft_draw_block(mlx, c.x, c.y, get_color(255, 255, 255));
 			c.x += mlx->map->block_size * mlx->map->minimap_scale;
 			c.j++;
 		}
@@ -69,8 +69,8 @@ void	bresenham(t_mlx *mlx, t_wall wall)
 {
 	t_bnham	bnham;
 
-	bnham.dx = abs((int)(wall.x2 - mlx->p->x));
-	bnham.dy = abs((int)(wall.y2 - mlx->p->y));
+	bnham.dx = abs((int)(wall.x2 - wall.x));
+	bnham.dy = abs((int)(wall.y2 - wall.y));
 	init_br(wall, &bnham);
 	bnham.error = bnham.dx - bnham.dy;
 	while (wall.x != wall.x2 || wall.y != wall.y2)
@@ -102,7 +102,7 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
 	p->move_speed = 5;
 	p->rotation_speed = 2.5;
 	p->side_walk = 0;
-	p->pov = 90;
+	p->fov = 90;
 	mlx->map = map;
 	mlx->cube = cube;
 	mlx->p = p;
