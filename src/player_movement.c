@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 10:35:49 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 15:13:23 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	set_player_direction(char c, t_mlx *mlx)
 void	rotate_player(t_mlx *mlx)
 {
 	mlx->p->rotation_angle += mlx->p->turn_direction * mlx->p->rotation_speed;
+	mlx->p->turn_direction = 0;
 	if (mlx->p->rotation_angle > 360)
 		mlx->p->rotation_angle = mlx->p->rotation_angle - 360;
 	if (mlx->p->rotation_angle < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:16:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 18:25:05 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 15:11:41 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,26 @@ int	key_hook(int keycode, void *param)
 	return (0);
 }
 
+int mouse_move( int x, int y, t_mlx *mlx)
+{
+	static int	last_x ;
+	
+	mlx_mouse_get_pos(mlx->ptr,mlx->window, &x, &y);
+	(void)y;
+	if(x > last_x)
+		mlx->p->turn_direction = (x - last_x) / 2 ;
+	else if(x < last_x )
+	
+		mlx->p->turn_direction = (x - last_x) / 2;	
+	last_x = x;
+	return(0);
+}
+
 void	event_handling(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, 2, 1L << 0, key_hook, mlx);
 	mlx_hook(mlx->window, 3, 1L << 1, key_release, mlx);
+	mlx_hook(mlx->window,6,1L << 6,mouse_move,mlx);//bonus mouses  
 	mlx_loop_hook(mlx->ptr, ft_cube, mlx);
 	mlx_hook(mlx->window, 17, 0, destroy_win, mlx);
 	mlx_loop(mlx->ptr);

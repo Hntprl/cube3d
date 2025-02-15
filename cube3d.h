@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 11:49:04 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/15 15:08:11 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,21 @@ typedef struct s_addr
 	int			endian;
 }				t_addr;
 
+typedef struct s_texture
+{
+	char	*xpm;
+	int t_height;
+	int t_width;
+		
+	char	*addr;
+	int	line_len;
+	int	endian;
+	int	bpp;
+	int x;
+	int y;
+	
+}			t_texture;
+
 typedef struct s_mlx
 {
 	void		*ptr;
@@ -115,6 +130,7 @@ typedef struct s_mlx
 	t_cube		*cube;
 	t_player	*p;
 	t_ray		*ray;
+	t_texture	texture[5];
 }				t_mlx;
 
 typedef struct s_c
@@ -171,4 +187,7 @@ int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
 char	*ft_itoa(int n);
+
+void images_to_xpm(t_mlx *wind);
+
 #endif
