@@ -1,0 +1,15 @@
+bool	check_walls(t_mlx *mlx, float x, float y)
+{
+	if (x < 0 || x >= mlx->cube->width || y < 0 || y >= mlx->cube->height)
+		return (true);
+	if (mlx->map->map[(int)(((y -5 ) / mlx->map->block_size))][(int)((x + 5)
+			/ mlx->map->block_size)] == '1'
+			&& mlx->map->map[(int)(((y  - 5)/ mlx->map->block_size))][(int)((x -5)
+			/ mlx->map->block_size)] == '1'
+			&& mlx->map->map[(int)(((y + 5)/ mlx->map->block_size))][(int)((x + 5) 
+			/ mlx->map->block_size)] == '1'
+			&& mlx->map->map[(int)(((y  +5) / mlx->map->block_size))][(int)((x -5)
+			/ mlx->map->block_size)] == '1')
+		return (true);
+	return (false);
+}

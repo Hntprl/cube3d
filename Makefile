@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 all:$(NAME)
 
 $(NAME) : $(OBJ)
-		$(CC) $(Cflags) $(OBJ) $(MLX) -o $(NAME)
+		$(CC) $(Cflags) $(OBJ) $(MLX) -o $(NAME) #-g3 -fsanitize=address
 
 clean:
 	rm -rf $(OBJ)
