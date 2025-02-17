@@ -6,13 +6,11 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/16 22:24:47 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:06:09 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
-
 
 void images_to_xpm(t_mlx *wind)
 {
@@ -108,6 +106,8 @@ void rendering_texture(t_mlx *mlx, int index, t_wall wall)
     double wall_height = wall.y2 - wall.y;
     int d = get_wall_orientation(mlx, index);
     int texture_x;
+    int texture_y;
+    double texture_pos;
     
     if (mlx->ray[wall.x].was_hit_vertical)
         texture_x = (int)(fmod(mlx->ray[wall.x].y_hit*(mlx->texture[d].t_width / mlx->map->block_size) , 
@@ -116,57 +116,25 @@ void rendering_texture(t_mlx *mlx, int index, t_wall wall)
         texture_x = (int)(fmod(mlx->ray[wall.x].x_hit*(mlx->texture[d].t_width / mlx->map->block_size) , 
                          mlx->texture[d].t_width));
     
-    double step = 1.0 * mlx->texture[d].t_height / wall_height;
-    double texture_pos = 0.0;
 
-    while (wall.y < wall.y2 && wall.y < HTH)
+    while (wall.y < wall.y2)
     {
         // simple modulo operation to keep texture_y within bounds
-        int texture_y = ((int)texture_pos) % mlx->texture[d].t_height;
-        
+        texture_pos=wall.y + (wall_height/2)- (HTH/2);
+         texture_y = ((int)texture_pos) * (mlx->texture[d].t_height/wall_height);  
         int offset = (texture_y * mlx->texture[d].line_len) + 
                     (texture_x * (mlx->texture[d].bpp / 8));
-        
-        if (wall.y >= 0 && wall.y < HTH &&
-            texture_x >= 0 && texture_x < mlx->texture[d].t_width &&
+        if (wall.y >= 0 && wall.y < HTH 
+        && texture_x >= 0 && texture_x < mlx->texture[d].t_width &&
             texture_y >= 0 && texture_y < mlx->texture[d].t_height)
         {
             int color = *(int *)(mlx->texture[d].addr + offset);
             put_pixel(mlx->addr, wall.x, wall.y, color);
         }
-        
         wall.y++;
-        texture_pos += step;
     }
 
-    // int        x=0;
-    // int        y=0;
-    // double    color;
-
-    // if (mlx->ray[wall.x].was_hit_vertical)
-    //     x =(int)(fmod(mlx->ray[wall.x].y_hit*(mlx->texture[d].t_width / mlx->map->block_size) , 
-    //                      mlx->texture[d].t_width));
-    // else
-    //     x = (int)(fmod(mlx->ray[wall.x].x_hit*(mlx->texture[d].t_width / mlx->map->block_size) , 
-    //                      mlx->texture[d].t_width));
-    // while (wall.y < wall.y2 && wall.y < HTH)
-    // {
-    //     y = (wall.y - ((HTH - wall_height) / 2)) * (mlx->texture[index].t_width
-    //             / wall_height);
-    //     int offset = (y * mlx->texture[d].line_len) + 
-    //                     (x * (mlx->texture[d].bpp / 8));
-    //     if (wall.y >= 0 && wall.y < HTH &&
-    //         x >= 0 && x < mlx->texture[d].t_width &&
-    //         y >= 0 && y < mlx->texture[d].t_height && 
-    //         offset < (mlx->texture[d].line_len * mlx->texture[d].t_height))
-    //     {
-    //      color = *(int *)(mlx->texture[d].addr + offset);
-    //         put_pixel(mlx->addr, wall.x, wall.y, color);
-    //     }
-    //     wall.y++;
-    // }
 }
-
 
 void	draw_wall(t_mlx *mlx, int index)
 {
@@ -182,11 +150,11 @@ void	draw_wall(t_mlx *mlx, int index)
 		* plane_distance;
 	wall.y = HTH / 2 - wall_height / 2;
 	wall.x = index;
-	fix(&wall.x, &wall.y);
+	// fix(&wall.x, &wall.y);
 	wall.y2 = wall.y + wall_height;
-	fix(&wall.x, &wall.y2);
+	// fix(&wall.x, &wall.y2);
 	wall.x2 = wall.x;
-	// bresenham(mlx, wall);
+	// bresen(mlx, wall);
 	rendering_texture(mlx,index,wall);
 
 }
