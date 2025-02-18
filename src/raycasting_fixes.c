@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 13:46:30 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:23:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,18 @@ void rendering_texture(t_mlx *mlx, int index, t_wall wall)
     int texture_x;
     int texture_y;
     double texture_pos;
+    double wallX;
+
+    if (mlx->ray[index].was_hit_vertical) {
+        wallX = mlx->ray[index].y_hit;
+    } else {
+        wallX = mlx->ray[index].x_hit;
+    }
+    wallX = fmod(wallX, mlx->map->block_size);// normaliser à la taille du bloc
+    // convertir en coordonnée de texture
+    texture_x = (int)((wallX * mlx->texture[d].t_width) / mlx->map->block_size);
+
     
-    if (mlx->ray[index].was_hit_vertical)
-        texture_x = (int)(fmod(mlx->ray[index].y_hit*(mlx->texture[d].t_height / mlx->map->block_size) , 
-                         mlx->texture[d].t_height));
-    else
-        texture_x = (int)(fmod(mlx->ray[index].x_hit*(mlx->texture[d].t_width / mlx->map->block_size) , 
-                         mlx->texture[d].t_width));
-    // printf(":::::%f\n", index);
     while (wall.y < wall.y2)
     {
         // simple modulo operation to keep texture_y within bounds
