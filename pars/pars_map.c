@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:00:34 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
 		return (-1);
 	if (count_map_lines(line, inside_map))
 	{
-		map->map[*i] = ft_strdup(line);
-		(*myarr)[*i] = ft_strdup(line);
+		map->map[*i] = ft_strdup2(line);
+		(*myarr)[*i] = ft_strdup2(line);
 		j = 0;
 		while (map->map[*i][j])
 		{

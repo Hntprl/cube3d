@@ -4,6 +4,7 @@ void	printerr(int status, char *str)
 {
 	write(2,str,ft_strlen(str));
 	write(2,"\n",2);
+	ft_malloc(sizeof(t_map),'f',false);
 	exit(status);
 }
 

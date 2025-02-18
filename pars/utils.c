@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:21:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:05:38 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,32 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_strchr(set, s1[i]) && i <= len)
 		i++;
 	if (i >= len)
-		return (ft_strdup(""));
+		return (ft_strdup2(""));
 	while (ft_strchr(set, s1[len]) && len >= 0)
 		len--;
-	str = malloc((len - i + 2) * sizeof(char));
+	// str = malloc((len - i + 2) * sizeof(char));
+	str= ft_malloc(sizeof(char) *(len-i+2), 'a', false);
 	if (!str)
 		return (NULL);
 	ft_strlcpy(str, (char *)&s1[i], len - i + 2);
 	return (str);
+}
+char	*ft_strdup2(const char *s1)
+{
+	size_t	i;
+	char	*p;
+
+	i = 0;
+	p = ft_malloc(sizeof(char) * ft_strlen(s1) + 1,'a',false);
+	if (p == NULL)
+	{
+		return (NULL);
+	}
+	while (s1[i] != '\0')
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }

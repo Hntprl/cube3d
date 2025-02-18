@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:09:44 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/03 18:14:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:01:42 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_map
 	char	*su_img;
 	int		*fl_color;
 	int		*ce_color;
+	int ce_index;   
+    int fl_index; 
 	int		colors[2];
 	int		text[4];
 	int		rows;
@@ -55,5 +57,6 @@ void	is_validcolor(char *str);
 int		is_space(char str);
 int		*min_fill(t_map *map, char *str, int i, int start);
 int		to_map(int fd, char **myarr, t_map *map);
+char	*ft_strdup2(const char *s1);
 
 #endif

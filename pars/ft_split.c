@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:19:55 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:04:45 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static char	*alloc(char *s, char c)
 
 	i = 0;
 	lenght = len_word((char *)s, c);
-	string = malloc(sizeof(char) * (lenght + 1));
+	// string = malloc(sizeof(char) * (lenght + 1));
+	string=ft_malloc(sizeof(char )*(lenght + 1), 'a', false);
 	if (!string)
 		return (NULL);
 	while (i < lenght && s[i])
