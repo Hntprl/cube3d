@@ -37,10 +37,10 @@ OBJ := $(SRCS:.c=.o)
 all:$(NAME)
 
 $(NAME) : $(OBJ)
-	$(MLX) -o $(NAME)
+	$(CC) $(OBJ) $(MLX) -o $(NAME)
 
-%.o: %.c
-	$(CC) $(Cflags) -c $< -o $@
+# %.o: %.c
+# 	$(CC) $(Cflags) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
@@ -50,4 +50,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all clean
+.PHONY: all clean fclean re

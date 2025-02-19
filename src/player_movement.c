@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/19 07:52:46 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/19 10:11:50 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	move_player(t_mlx *mlx, int x, int y)
 	if (!check_walls(mlx, x + adj, y + opp)
 		&& !check_walls(mlx, x + adj, y + opp))
 	{
-		if (!check_walls(mlx, x + adj - 10, y - 10)
-			&& !check_walls(mlx, x + adj + 10, y + 10))
+		if (!check_walls(mlx, x + adj - 5, y)
+			&& !check_walls(mlx, x + adj + 5, y))
 			x += adj;
-		if (!check_walls(mlx, x - 10, y + opp - 10)
-			&& !check_walls(mlx, x + 10, y + opp + 10))
+		if (!check_walls(mlx, x, y + opp - 5)
+			&& !check_walls(mlx, x, y + opp + 5))
 			y += opp;
 	}
 	mlx->p->x = x;
