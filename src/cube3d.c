@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 11:01:16 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/19 08:36:56 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,23 @@ void	sky_floor(t_mlx *mlx)
 {
 	int	i;
 	int	j;
+	int hth;
 
-	i = 0;
-	while (i < HTH / 2)
+	hth = HTH / 2;
+	i = -1;
+	while (++i < hth)
 	{
-		j = 0;
-		while (j < WTH)
-		{
-			put_pixel(mlx->addr, j, i, get_color(0, 250, 250));
-			j ++;
-		}
-		i ++;
+		j = -1;
+		while (++j < WTH)
+			put_pixel(mlx->addr, j, i, get_color(mlx->map->fl_color[0]
+				, mlx->map->fl_color[1], mlx->map->fl_color[2]));
 	}
-	while (i < HTH)
+	while (++i < HTH)
 	{
-		j = 0;
-		while (j < WTH)
-		{
-			put_pixel(mlx->addr, j, i, get_color(70, 44, 44));
-			j ++;
-		}
-		i ++;
+		j = -1;
+		while (++j < WTH)
+			put_pixel(mlx->addr, j, i, get_color(mlx->map->ce_color[0]
+				, mlx->map->ce_color[1], mlx->map->ce_color[2]));
 	}
 }
 
@@ -52,7 +48,7 @@ int	ft_cube(void *param)
 			&mlx->addr->endian);
 	sky_floor(mlx);
 	raycaster(mlx);
-	images_to_xpm(mlx);//
+	images_to_xpm(mlx);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
@@ -85,9 +81,6 @@ t_map	*read_map(char *av)
 	if (to_map(fd, myarr, map) != 1)
 		printerr(1, "Error: the game must have one player ");
 	(isvalid_map(map, myarr), free_arg(myarr), close(fd));
-	
-printf("ceiling color: %d, %d, %d\n", map->ce_color[0], map->ce_color[1], map->ce_color[2]);
-printf("floor color: %d, %d, %d\n", map->fl_color[0], map->fl_color[1], map->fl_color[2]);
 	return (map);
 }
 
@@ -107,8 +100,8 @@ void	find_player_pos(t_mlx *mlx)
 				|| mlx->map->map[c.i][c.j] == 'E'
 				|| mlx->map->map[c.i][c.j] == 'W')
 			{
-				mlx->p->x = c.x;
-				mlx->p->y = c.y;
+				mlx->p->x = c.x + mlx->map->block_size / 2;
+				mlx->p->y = c.y + mlx->map->block_size / 2;
 				return (set_player_direction(mlx->map->map[c.i][c.j], mlx));
 			}
 			c.x += mlx->map->block_size;
@@ -136,5 +129,4 @@ int	main(int ac, char **av)
 	find_player_pos(&mlx);
 	mlx.window = mlx_new_window(mlx.ptr, WTH, HTH, "Map");
 	event_handling(&mlx);
-	ft_cube(&mlx);
 }

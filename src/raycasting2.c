@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 10:37:00 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/19 08:38:52 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 	float	fov;
 	float	gap_angle;
 
-	gap_angle = mlx->p->fov / (WTH / mlx->cube->wall_line);
+	gap_angle = mlx->p->fov / WTH;
 	fov = mlx->p->fov / 2;
 	mlx->ray[index].ray_angle = fix_rayangle(mlx->p->rotation_angle - fov
 			+ (index * gap_angle));
@@ -61,22 +61,6 @@ int	calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h)
 	fix_intersection(&v->xstep, &v->ystep, mlx);
 	v->distance = ft_distance(mlx->p->x, mlx->p->y, v->xstep, v->ystep);
 	return (flag);
-}
-
-void	init_br(t_wall wall, t_bnham *bnham)
-{
-	if (wall.x == wall.x2)
-		bnham->sx = 0;
-	else if (wall.x < wall.x2)
-		bnham->sx = 1;
-	else
-		bnham->sx = -1;
-	if (wall.y == wall.y2)
-		bnham->sy = 0;
-	else if (wall.y < wall.y2)
-		bnham->sy = 1;
-	else
-		bnham->sy = -1;
 }
 
 void	init_ray_hit(t_ray *ray, int index, t_cast hit)

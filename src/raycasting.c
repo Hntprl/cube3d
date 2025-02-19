@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 13:46:48 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/19 08:38:18 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	raycaster(t_mlx *mlx)
 	t_ray	*ray;
 	int		rays_count;
 
-	rays_count = WTH / mlx->cube->wall_line;
-	ray = ft_malloc(sizeof(t_ray) * rays_count, 'a', false);
+	rays_count = WTH;
+	ray = malloc(sizeof(t_ray) * rays_count);
 	mlx->ray = ray;
 	build_rays(mlx, rays_count);
 	free(ray);

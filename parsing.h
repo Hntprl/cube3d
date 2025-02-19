@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:09:44 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 11:01:42 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/19 08:30:10 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct s_map
 	char	*su_img;
 	int		*fl_color;
 	int		*ce_color;
-	int ce_index;   
-    int fl_index; 
+	int		ce_index;   
+    int		fl_index; 
 	int		colors[2];
 	int		text[4];
 	int		rows;

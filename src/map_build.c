@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 09:22:23 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/19 08:39:13 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,37 +65,11 @@ void	draw_map(t_mlx *mlx)
 	minimap_player(mlx);
 }
 
-void	bresenham(t_mlx *mlx, t_wall wall)
-{
-	t_bnham	bnham;
-
-	bnham.dx = abs((int)(wall.x2 - wall.x));
-	bnham.dy = abs((int)(wall.y2 - wall.y));
-	init_br(wall, &bnham);
-	bnham.error = bnham.dx - bnham.dy;
-	while (wall.x != wall.x2 || wall.y != wall.y2)
-	{
-		put_pixel(mlx->addr, wall.x, wall.y, 14666399);
-		bnham.e2 = bnham.error * 2;
-		if (bnham.e2 > -bnham.dy)
-		{
-			bnham.error -= bnham.dy;
-			wall.x += bnham.sx;
-		}
-		if (bnham.e2 < bnham.dx)
-		{
-			bnham.error += bnham.dx;
-			wall.y += bnham.sy;
-		}
-	}
-}
-
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
 {
 	mlx->ptr = mlx_init();
 	cube->height = map->rows * map->block_size;
 	cube->width = map->columns * map->block_size;
-	cube->wall_line = 1;
 	p->turn_direction = 0;
 	p->walk_direction = 0;
 	p->rotation_angle = 0;

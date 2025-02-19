@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 15:08:11 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/19 08:54:11 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@
 # define WTH 2000
 # define HTH 800
 # define PI 3.14159265358979323846
-
-typedef struct s_bnham
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
-	int	e2;
-}				t_bnham;
 
 typedef struct s_wall
 {
@@ -67,7 +57,6 @@ typedef struct s_cube
 {
 	float		height;
 	float		width;
-	float		wall_line;
 }				t_cube;
 
 typedef struct s_ray
@@ -108,15 +97,14 @@ typedef struct s_addr
 typedef struct s_texture
 {
 	char	*xpm;
-	int t_height;
-	int t_width;
-		
+	int		t_height;
+	int		t_width;
 	char	*addr;
-	int	line_len;
-	int	endian;
-	int	bpp;
-	int x;
-	int y;
+	int		line_len;
+	int		endian;
+	int		bpp;
+	int		x;
+	int		y;
 	
 }			t_texture;
 
@@ -142,7 +130,6 @@ typedef struct s_c
 }				t_c;
 
 void	init_ray_hit(t_ray *ray, int index, t_cast hit);
-void	init_br(t_wall wall, t_bnham *bnham);
 int		calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h);
 void	render_animation(t_mlx *mlx);
 void	release_arrows(int keycode, t_mlx *mlx);
@@ -163,7 +150,6 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
 t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
 void	trurn_player(t_mlx *mlx);
-void	bresenham(t_mlx *mlx, t_wall wall);
 void	draw_map(t_mlx *mlx);
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color);
 void	set_player_direction(char c, t_mlx *mlx);

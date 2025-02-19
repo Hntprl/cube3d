@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_fixes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 15:23:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/19 08:31:42 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,7 @@ void	draw_wall(t_mlx *mlx, int index)
 		* plane_distance;
 	wall.y = HTH / 2 - wall_height / 2;
 	wall.x = index;
-	// fix(&wall.x, &wall.y);
 	wall.y2 = wall.y + wall_height;
-	// fix(&wall.x, &wall.y2);
 	wall.x2 = wall.x;
-	// bresen(mlx, wall);
 	rendering_texture(mlx,index,wall);
-
 }
