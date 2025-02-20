@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:19:55 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 11:04:45 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:04:02 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ static char	*alloc(char *s, char c)
 
 	i = 0;
 	lenght = len_word((char *)s, c);
-	// string = malloc(sizeof(char) * (lenght + 1));
-	string=ft_malloc(sizeof(char )*(lenght + 1), 'a', false);
+	string = ft_malloc(sizeof(char) * (lenght + 1), 'a', false);
 	if (!string)
 		return (NULL);
 	while (i < lenght && s[i])
@@ -78,7 +77,7 @@ static char	**free_split(char **str, int i)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**string;
 	int		index_string;
@@ -86,7 +85,7 @@ char	**ft_split(char const *s, char c)
 	index_string = 0;
 	if (!s)
 		return (NULL);
-	string = (char **)malloc(sizeof(char *) * (countword((char *)s, c) + 1));
+	string = ft_malloc(sizeof(char *) * (countword(s, c) + 1), 'a', false);
 	if (!string)
 		return (NULL);
 	while (*s)

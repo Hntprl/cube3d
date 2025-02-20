@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 21:16:53 by bbenjrai          #+#    #+#             */
+/*   Updated: 2025/02/20 23:38:00 by bbenjrai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cube3d.h"
 
 void	printerr(int status, char *str)
 {
-	write(2,str,ft_strlen(str));
-	write(2,"\n",2);
-	ft_malloc(sizeof(t_map),'f',false);
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 2);
+	ft_malloc(sizeof(t_map), 'f', false);
 	exit(status);
 }
 
@@ -21,16 +33,6 @@ void	init_t_map(t_map **map)
 	(*map)->we_img = NULL;
 	(*map)->no_img = NULL;
 	(*map)->su_img = NULL;
-	(*map)->fl_color = ft_calloc(3, sizeof(int));
-	(*map)->ce_color = ft_calloc(3, sizeof(int));
-	if (!(*map)->fl_color || !(*map)->ce_color)
-	{
-		free((*map)->fl_color);
-		free((*map)->ce_color);
-		free(*map);
-		*map = NULL;
-		return ;
-	}
 	(*map)->rows = 0;
 	(*map)->columns = 0;
 	(*map)->text[0] = 0;
@@ -55,6 +57,7 @@ void	free_arg(char **str)
 	}
 	free(str);
 }
+
 void	free_map(t_map *map)
 {
 	if (!map)
@@ -68,27 +71,3 @@ void	free_map(t_map *map)
 	free(map->ce_color);
 	init_t_map(&map);
 }
-// void	add_allocation(MemoryManager *manager, void *ptr)
-// {
-// 	if (manager->count < 100)
-// 	{
-// 		manager->allocations[manager->count++] = ptr;
-// 	}
-// 	else
-// 	{
-// 		fprintf(stderr, "Memory Manager: Exceeded allocation limit!\n");
-// 	}
-// }
-
-// void	free_all_allocations(MemoryManager *manager)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < manager->count)
-// 	{
-// 		free(manager->allocations[i]);
-// 		i++;
-// 	}
-// 	manager->count = 0;
-// }

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/18 11:00:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/20 23:48:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,29 @@ int	count_map_lines(char *line, int *inside_map)
 	if (trimedline[0] == '1' || trimedline[0] == '0')
 	{
 		*inside_map = 1;
-		free(trimedline);
 		return (1);
 	}
 	if (*inside_map)
 		*inside_map = 0;
-	free(trimedline);
 	return (0);
+}
+
+int	process(char *line, int *inside, int *nbr_line)
+{
+	char	*trimline;
+	int		column;
+
+	column = 0;
+	trimline = ft_strtrim(line, " \t\n");
+	if (trimline[0] == '0' || trimline[0] == '1')
+		(*inside) = 1;
+	if ((*inside) && trimline[0] != '\0')
+	{
+		if ((int)ft_strlen(line) > column)
+			column = ft_strlen(line);
+		(*nbr_line)++;
+	}
+	return (column);
 }
 
 int	nbrs_lines(char *av, int *columns)
@@ -55,7 +71,6 @@ int	nbrs_lines(char *av, int *columns)
 	char	*line;
 	int		nbr_line;
 	int		inside;
-	char	*trimline;
 
 	nbr_line = 0;
 	inside = 0;
@@ -64,18 +79,12 @@ int	nbrs_lines(char *av, int *columns)
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
 		printerr(1, "Error: Cannot open file");
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line)
 	{
-		trimline = ft_strtrim(line, " \t\n");
-		if (trimline[0] == '0' || trimline[0] == '1')
-			inside = 1;
-		if (inside && trimline[0] != '\0')
-		{
-			if (ft_strlen(line) > *columns)
-				*columns = ft_strlen(line);
-			nbr_line++;
-		}
+		*columns = process(line, &inside, &nbr_line);
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	if (nbr_line == 0)
@@ -83,27 +92,27 @@ int	nbrs_lines(char *av, int *columns)
 	return (nbr_line);
 }
 
-int	fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map)
+int	fill_map(t_map *map, char ***myarr, char *line, t_map_fill *fill_info)
 {
-	static int	number_p;
-	int			j;
+	int	j;
 
-	number_p = 0;
-	if (!map || !line || !i || !inside_map)
+	if (!map || !line || !fill_info)
 		return (-1);
-	if (count_map_lines(line, inside_map))
+	if (count_map_lines(line, fill_info->inside_map))
 	{
-		map->map[*i] = ft_strdup2(line);
-		(*myarr)[*i] = ft_strdup2(line);
+		map->map[*(fill_info->map_index)] = ft_strdup2(line);
+		(*myarr)[*(fill_info->map_index)] = ft_strdup2(line);
 		j = 0;
-		while (map->map[*i][j])
+		while (map->map[*(fill_info->map_index)][j])
 		{
-			if (map->map[*i][j] == 'N' || map->map[*i][j] == 'E'
-				|| map->map[*i][j] == 'W' || map->map[*i][j] == 'S')
+			if (map->map[*(fill_info->map_index)][j] == 'N'
+				|| map->map[*(fill_info->map_index)][j] == 'E'
+				|| map->map[*(fill_info->map_index)][j] == 'W'
+				|| map->map[*(fill_info->map_index)][j] == 'S')
 				map->nb_player++;
 			j++;
 		}
-		(*i)++;
+		(*(fill_info->map_index))++;
 	}
 	return (map->nb_player);
 }

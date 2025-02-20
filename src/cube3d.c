@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/19 08:36:56 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/20 23:38:21 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ int	ft_cube(void *param)
 
 t_map	*read_map(char *av)
 {
-	int		i;
 	int		fd;
 	t_map	*map;
 	char	**myarr;
+	int pl;
 
-	i = 0;
 	if (!av)
 		return (NULL);
 	map = ft_calloc(1, sizeof(t_map));
@@ -78,9 +77,11 @@ t_map	*read_map(char *av)
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
 		return (free_arg(myarr), free_map(map), NULL);
-	if (to_map(fd, myarr, map) != 1)
+	to_map(fd, myarr, map,&pl);
+	if (pl != 1)
 		printerr(1, "Error: the game must have one player ");
 	(isvalid_map(map, myarr), free_arg(myarr), close(fd));
+	
 	return (map);
 }
 

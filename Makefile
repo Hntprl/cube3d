@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = cc
-Cflags = -Wall -Wextra -Werror -Wunused-function
+Cflags = -Wall -Wextra -Werror -Wunused-function  
 MLX = -lmlx -lXext -lX11 -lm -O3
 RM = rm -f
 SRC_DIR := src
@@ -28,7 +28,9 @@ PARS := $(PARS_DIR)/check_colors.c \
         $(PARS_DIR)/init.c \
         $(PARS_DIR)/pars_map.c \
         $(PARS_DIR)/to_map.c \
-        $(PARS_DIR)/utils.c
+        $(PARS_DIR)/utils.c \
+        $(PARS_DIR)/utils2.c \
+
 
 SRCS := $(SRC) $(PARS)
 
@@ -39,8 +41,8 @@ all:$(NAME)
 $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(MLX) -o $(NAME)
 
-# %.o: %.c
-# 	$(CC) $(Cflags) -c $< -o $@
+%.o: %.c
+	$(CC) $(Cflags) -c $< -o $@ 
 
 clean:
 	$(RM) $(OBJ)
