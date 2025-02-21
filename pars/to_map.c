@@ -62,6 +62,7 @@ void	process_map_line(char *line, t_map *map, t_map_fill *fill_info,
 		char **myarr)
 {
 	char	*nwline;
+
 	nwline = ft_strtrim(line, " \t\n");
 	if (nwline[0] != '0' && nwline[0] != '1')
 		fill_texture_color(nwline, map, &fill_info->element);
