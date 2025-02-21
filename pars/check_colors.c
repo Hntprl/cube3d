@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:26 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/20 22:25:02 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:57:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	is_validcolor(char *str)
 	split = ft_split(str, ',');
 	if (split[3])
 		printerr(1, "Error: Colors have 3 elements (R, G, B)");
-	free(split);
 }
 
 void	check_cei_flo(char *str, t_map *map, int valid_range)

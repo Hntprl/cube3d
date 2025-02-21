@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:09:44 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/20 23:52:21 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:31:37 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ typedef struct s_map
 }			t_map;
 
 typedef struct s_map_fill {
-    int *map_index;        // Replaces i
-    int *inside_map;       // Keeps inside_map
-    int player_count;      // Tracks player count
+    int *map_index;        
+    int *inside_map;      
+    int player_count;      
+	int			element;
+	int			map_lines_read;
 } t_map_fill;
 
 int		ft_strcmp(const char *s1, const char *s2);

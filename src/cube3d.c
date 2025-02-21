@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/20 23:38:21 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:54:53 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,16 @@ t_map	*read_map(char *av)
 	map->rows = nbrs_lines(av, &map->columns);
 	myarr = ft_calloc(map->columns, sizeof(char *));
 	map->map = ft_calloc(map->rows, sizeof(char *));
+	printf(" nbr lines %d\n",map->columns);
 	if (!map->map)
-		return (free_arg(myarr), free_map(map), NULL);
+		return NULL;
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
-		return (free_arg(myarr), free_map(map), NULL);
+		return NULL;
 	to_map(fd, myarr, map,&pl);
 	if (pl != 1)
 		printerr(1, "Error: the game must have one player ");
-	(isvalid_map(map, myarr), free_arg(myarr), close(fd));
+	(isvalid_map(map, myarr), close(fd));
 	
 	return (map);
 }

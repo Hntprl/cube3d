@@ -42,7 +42,7 @@ $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(MLX) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(Cflags) -c $< -o $@ 
+	$(CC) $(Cflags) -c $< -o $@  #-g3 -fsanitize=address
 
 clean:
 	$(RM) $(OBJ)

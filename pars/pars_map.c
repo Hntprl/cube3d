@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/20 23:48:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:00:53 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,20 @@ int	count_map_lines(char *line, int *inside_map)
 	return (0);
 }
 
-int	process(char *line, int *inside, int *nbr_line)
+int	process(char *line, int *inside,int *column, int *nbr_line)
 {
 	char	*trimline;
-	int		column;
 
-	column = 0;
 	trimline = ft_strtrim(line, " \t\n");
 	if (trimline[0] == '0' || trimline[0] == '1')
 		(*inside) = 1;
 	if ((*inside) && trimline[0] != '\0')
 	{
-		if ((int)ft_strlen(line) > column)
-			column = ft_strlen(line);
+		if ((int)ft_strlen(line) > *column)
+			*column = ft_strlen(line);
 		(*nbr_line)++;
 	}
-	return (column);
+	return (*nbr_line);
 }
 
 int	nbrs_lines(char *av, int *columns)
@@ -82,14 +80,15 @@ int	nbrs_lines(char *av, int *columns)
 	line = get_next_line(fd);
 	while (line)
 	{
-		*columns = process(line, &inside, &nbr_line);
+		 process(line, &inside,columns, &nbr_line);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	if (nbr_line == 0)
 		printerr(1, "Error: No valid map lines found");
-	return (nbr_line);
+	printf(" nbr lines %d\n",*columns);
+	return (*columns);
 }
 
 int	fill_map(t_map *map, char ***myarr, char *line, t_map_fill *fill_info)
