@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:25:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/20 22:28:59 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:07:56 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ char	*ft_strdup2(const char *s1)
 	}
 	p[i] = '\0';
 	return (p);
+}
+
+void	is_newline(char *line, t_map_fill *fill_info, int rows)
+{
+	char	*str;
+
+	str = ft_strtrim(line, " \t\n");
+	if (str[0] == '\0' && (*fill_info->inside_map) == 1
+		&& fill_info->map_lines_read != rows)
+		printerr(1, "Error: Empty line inside map");
 }

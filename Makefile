@@ -1,7 +1,7 @@
 NAME = cub3d
 CC = cc
-Cflags = -Wall -Wextra -Werror -Wunused-function  
-MLX = -lmlx -lXext -lX11 -lm -O3
+Cflags = -Wall -Wextra -Werror -Wunused-function  -g3
+MLX = -lmlx -lXext -lX11 -lm -O3 
 RM = rm -f
 SRC_DIR := src
 PARS_DIR := pars
@@ -18,7 +18,9 @@ SRC := $(SRC_DIR)/cube3d.c \
        $(SRC_DIR)/raycasting_fixes.c \
        $(SRC_DIR)/raycasting2.c \
        $(SRC_DIR)/key_hook.c \
-       $(SRC_DIR)/utils2.c
+       $(SRC_DIR)/utils2.c \
+       $(SRC_DIR)/textures.c \
+
 
 PARS := $(PARS_DIR)/check_colors.c \
         $(PARS_DIR)/check_file.c \
@@ -42,7 +44,7 @@ $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(MLX) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(Cflags) -c $< -o $@  #-g3 -fsanitize=address
+	$(CC) $(Cflags) -c $< -o $@  
 
 clean:
 	$(RM) $(OBJ)

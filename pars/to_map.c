@@ -6,20 +6,11 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:30:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/21 18:58:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:05:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
-void	is_newline(char *nwline, char *line)
-{
-	if (nwline[0] == '\0')
-	{
-		free(line);
-		printerr(1, "Error: Empty line inside map");
-	}
-}
 
 int	is_texture_line(const char *line)
 {
@@ -62,7 +53,7 @@ void	process_map_line(char *line, t_map *map, t_map_fill *fill_info,
 		char **myarr)
 {
 	char	*nwline;
-	printf("maplines-read = %d\n  rows = %d\n",fill_info->map_lines_read,map->rows);
+
 	nwline = ft_strtrim(line, " \t\n");
 	if (nwline[0] != '0' && nwline[0] != '1')
 		fill_texture_color(nwline, map, &fill_info->element);
@@ -70,9 +61,6 @@ void	process_map_line(char *line, t_map *map, t_map_fill *fill_info,
 			&& *(fill_info->inside_map)) || (nwline[0] == '0'
 			|| nwline[0] == '1'))
 	{
-	// printf("\ninside outof map = %d\n",(*fill_info->inside_map));
-	printf("line = %s\n",nwline);
-		is_newline(nwline, line);
 		(fill_info->player_count) = fill_map(map, &myarr, line, fill_info);
 		(fill_info->map_lines_read)++;
 	}
@@ -92,17 +80,14 @@ void	to_map(int fd, char **myarr, t_map *map, int *pl)
 	fill_info.element = element;
 	fill_info.map_lines_read = map_lines_read;
 	line = get_next_line(fd);
-	printf("\ninside outof map = %d\n",(*fill_info.inside_map));
 	while ((line))
 	{
-		printf("\ninside map = %d\n",(*fill_info.inside_map));
+		is_newline(line, &fill_info, map->rows);
 		process_map_line(line, map, &fill_info, myarr);
 		free(line);
 		line = get_next_line(fd);
-	printf("line ou of process = %s\n",ft_strtrim(line, " \t\n"));//here need to check empty line
 	}
 	(*pl) = fill_info.player_count;
 	if (fill_info.element != 6)
 		printerr(1, "Error: The textures and Colors must be set in the first");
 }
-

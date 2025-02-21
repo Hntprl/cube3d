@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/19 08:54:11 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/21 21:36:01 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,6 @@ int		destroy_win(void *param);
 char	*ft_itoa(int n);
 
 void images_to_xpm(t_mlx *wind);
+void rendering_texture(t_mlx *mlx, int index, t_wall wall);
 
 #endif

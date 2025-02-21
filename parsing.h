@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:09:44 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/21 18:09:14 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:06:11 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		*min_fill(t_map *map, char *str, int i, int start);
 void		to_map(int fd, char **myarr, t_map *map,int *pl);
 char	*ft_strdup2(const char *s1);
 int	isnot_alpha(char *str);
-int open_fd(int fd,char *av);
+void	is_newline(char *line,t_map_fill *fill_info,int rows);
 
 
 

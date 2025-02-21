@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/21 18:11:24 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/21 23:10:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	ft_cube(void *param)
 			&mlx->addr->size_line,
 			&mlx->addr->endian);
 	sky_floor(mlx);
-	raycaster(mlx);
 	images_to_xpm(mlx);
+	raycaster(mlx);
 	draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
@@ -72,7 +72,6 @@ t_map	*read_map(char *av)
 	map->rows = nbrs_lines(av, &map->columns);
 	myarr = ft_calloc(map->columns, sizeof(char *));
 	map->map = ft_calloc(map->rows, sizeof(char *));
-	// printf(" nbr lines %d\n",map->columns);
 	if (!map->map)
 		return NULL;
 	fd = open(av, O_RDONLY, 0777);
