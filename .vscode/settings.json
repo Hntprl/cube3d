@@ -2,6 +2,7 @@
     "files.associations": {
         "chrono": "c",
         "variant": "c",
-        "cube3d.h": "c"
+        "cube3d.h": "c",
+        "sstream": "c"
     }
 }

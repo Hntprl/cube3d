@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:34:06 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/21 23:37:40 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:26:52 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int get_text_x(int index,t_mlx *mlx,int d)
     texture_x = (int)((wallX * mlx->texture[d].t_width) / mlx->map->block_size);
     return texture_x;
 }
+
 void rendering_texture(t_mlx *mlx, int index, t_wall wall)
 {
     double wall_height = wall.y2 - wall.y;

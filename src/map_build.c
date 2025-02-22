@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/19 08:39:13 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/22 11:56:58 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 
 	i = 0;
 	j = 0;
-	while (i < mlx->map->block_size * mlx->map->minimap_scale)
+	while (i < mlx->map->block_size * mlx->map->minimap_scale && i<WTH-x)
 	{
 		j = 0;
-		while (j < mlx->map->block_size * mlx->map->minimap_scale)
+		while (j < mlx->map->block_size * mlx->map->minimap_scale && j< HTH-y )
 		{
 			put_pixel(mlx->addr, x + i, y + j, color);
 			j++;

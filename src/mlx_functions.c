@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/22 10:25:56 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@ int	put_pixel(t_addr *addr, int x, int y, int color)
 int	destroy_win(void *param)
 {
 	t_mlx	*mlx;
+	int i;
 
+	i=0;
 	mlx = (t_mlx *)param;
+	while(i<4)
+	{
+		if (mlx->texture[i].xpm)
+			mlx_destroy_image(mlx->ptr, mlx->texture[i].xpm);
+        i++;
+	}
 	mlx_destroy_window(mlx->ptr, mlx->window);
 	exit(0);
 }
