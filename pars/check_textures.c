@@ -6,21 +6,11 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:41 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/23 10:46:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:58:31 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
-int	is_validtexture(char **str)
-{
-	if ((!ft_strcmp(str[0], "NO") || !ft_strcmp(str[0], "SO")
-			|| !ft_strcmp(str[0], "WE") || !ft_strcmp(str[0], "EA"))
-		&& (ft_strlen(str[1]) > 4))
-		return (0);
-	else
-		return (1);
-}
 
 int	is_space(char str)
 {
@@ -100,10 +90,5 @@ void	fill_textures(t_map *map, char *str)
 		printerr(1, " the texture should end with .xpm");
 	if (open(string[1], O_RDONLY, 0777) == -1)
 		printerr(1, " Cannot open texture file");
-	if (!(is_validtexture(string)))
-	{
-		norm_texture(str, string, map);
-	}
-	else
-		printerr(1, "textures should have one of the directions <NO,SO,WE,EA>");
+	norm_texture(str, string, map);
 }
