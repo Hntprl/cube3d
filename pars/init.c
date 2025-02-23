@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:53 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/22 12:08:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:49:51 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	printerr(int status, char *str)
 {
+	write(2, " Error : \n", 11);
 	write(2, str, ft_strlen(str));
-	write(2, "\n", 2);
 	ft_malloc(sizeof(t_map), 'f', false);
 	exit(status);
 }

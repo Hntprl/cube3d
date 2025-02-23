@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:30:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/21 20:05:55 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:15:48 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fill_texture_color(char *nwline, t_map *map, int *element)
 	}
 	else if (nwline[0] != '\0' && nwline[0] != '0' && nwline[0] != '1')
 	{
-		printerr(1, "Error! : invalid content in the file");
+		printerr(1, " invalid content in the file");
 	}
 }
 
@@ -89,5 +89,5 @@ void	to_map(int fd, char **myarr, t_map *map, int *pl)
 	}
 	(*pl) = fill_info.player_count;
 	if (fill_info.element != 6)
-		printerr(1, "Error: The textures and Colors must be set in the first");
+		printerr(1, " The textures and Colors must be set in the first");
 }

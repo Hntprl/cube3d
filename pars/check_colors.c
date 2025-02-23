@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:26 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/21 10:57:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:44:12 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	is_validcolor(char *str)
 	char	**split;
 
 	if (!(is_valid_format(str)) || !(isnot_alpha(str)))
-		printerr(1, "Error : invalid color the correct format (R, G, B)");
+		printerr(1, " invalid color the correct format (R, G, B)");
 	split = ft_split(str, ',');
 	if (split[3])
-		printerr(1, "Error: Colors have 3 elements (R, G, B)");
+		printerr(1, " Colors have 3 elements (R, G, B)");
 }
 
 void	check_cei_flo(char *str, t_map *map, int valid_range)
@@ -81,7 +81,7 @@ void	check_cei_flo(char *str, t_map *map, int valid_range)
 		}
 	}
 	else
-		printerr(1, "Error : color already set");
+		printerr(1, " color already set");
 }
 
 int	*min_fill(t_map *map, char *str, int i, int start)
@@ -99,7 +99,7 @@ int	*min_fill(t_map *map, char *str, int i, int start)
 	free(substr);
 	if (valid_range < 0 || valid_range > 255)
 	{
-		printerr(1, "Error: The color range should be between 0 & 255");
+		printerr(1, " The color range should be between 0 & 255");
 		return (NULL);
 	}
 	check_cei_flo(str, map, valid_range);

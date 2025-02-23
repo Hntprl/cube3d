@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/21 20:56:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:46:45 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	diff_symbol(char line, int *inside_map)
 			&& line != 'S' && line != 'E' && line != 'W' && line != '\n'
 			&& line != ' '))
 	{
-		printerr(1, "Error: found a different symbol inside map ");
+		printerr(1, " found a different symbol inside map ");
 	}
 }
 
@@ -84,10 +84,10 @@ int	nbrs_lines(char *av, int *columns)
 	*columns = 0;
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
-		printerr(1, "Error: Cannot open file");
+		printerr(1, " Cannot open file");
 	nbr_line = process_map_lines(fd, columns);
 	if (nbr_line == 0)
-		printerr(1, "Error: No valid map lines found");
+		printerr(1, " No valid map lines found");
 	return (nbr_line);
 }
 

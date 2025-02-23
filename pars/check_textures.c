@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:41 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/20 20:01:31 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:46:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	norm_texture(char *str, char **string, t_map *map)
 		map->text[3] = 1;
 	}
 	else
-		printerr(1, "Error: duplicate or invalid texture already set");
+		printerr(1, " duplicate or invalid texture already set");
 }
 
 void	fill_textures(t_map *map, char *str)
@@ -89,7 +89,7 @@ void	fill_textures(t_map *map, char *str)
 
 	string = ft_split(str, ' ');
 	if (count_words(str) > 2)
-		printerr(1, "Error : the args of textures must be 2");
+		printerr(1, " the args of textures must be 2");
 	j = 0;
 	while (string[j])
 	{
@@ -97,9 +97,9 @@ void	fill_textures(t_map *map, char *str)
 		j++;
 	}
 	if ((ft_strcmp(string[1] + ft_strlen(string[1]) - 4, ".xpm")))
-		printerr(1, "the texture should end with .xpm");
+		printerr(1, " the texture should end with .xpm");
 	if (open(string[1], O_RDONLY, 0777) == -1)
-		printerr(1, "Cannot open texture file");
+		printerr(1, " Cannot open texture file");
 	if (!(is_validtexture(string)))
 	{
 		norm_texture(str, string, map);

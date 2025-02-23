@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:34:06 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/22 10:26:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:48:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void images_to_xpm(t_mlx *wind)
             &wind->texture[i].t_width,   
             &wind->texture[i].t_height); 
         if(!wind->texture[i].xpm)
-            printerr(1, "ERROR LOADING TEXTURE");
+            printerr(1, " FAILED LOADING TEXTURE");
         wind->texture[i].addr = mlx_get_data_addr(wind->texture[i].xpm,
             &wind->texture[i].bpp,
             &wind->texture[i].line_len,

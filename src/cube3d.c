@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/22 11:34:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:47:32 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_map	*read_map(char *av)
 		return NULL;
 	to_map(fd, myarr, map,&pl);
 	if (pl != 1)
-		printerr(1, "Error: the game must have one player ");
+		printerr(1, " the game must have one player ");
 	(isvalid_map(map, myarr), close(fd));	
 	return (map);
 }
@@ -120,8 +120,8 @@ int	main(int ac, char **av)
 	t_map		*map;
 
 	if (ac != 2)
-		printerr(1, "Error: invalid number of arguments");
-	map = read_map(ft_strdup2(av[1]));
+		printerr(1, " invalid number of arguments");
+	map = read_map(av[1]);
 	map->columns -= 1;
 	mlx.addr = &addr;
 	init_data(&mlx, &cube, &p, map);
