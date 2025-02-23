@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:25:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/23 11:15:41 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:32:01 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	is_newline(char *line, t_map_fill *fill_info, int rows)
 	str = ft_strtrim(line, " \t\n");
 	if (!str)
 		printerr(1, " Memory allocation failed");
-	if (str[0] == '\0' && (*fill_info->inside_map) == 1
+	if (str[0] == '\0' && (fill_info->inside_map) == 1
 		&& fill_info->map_lines_read != rows)
 	{
 		printerr(1, " Empty line inside map Or the map not the last");

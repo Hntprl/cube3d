@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/23 10:46:45 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:31:43 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,21 +97,21 @@ int	fill_map(t_map *map, char ***myarr, char *line, t_map_fill *fill_info)
 
 	if (!map || !line || !fill_info)
 		return (-1);
-	if (count_map_lines(line, fill_info->inside_map))
+	if (count_map_lines(line, &fill_info->inside_map))
 	{
-		map->map[*(fill_info->map_index)] = ft_strdup2(line);
-		(*myarr)[*(fill_info->map_index)] = ft_strdup2(line);
+		map->map[(fill_info->map_index)] = ft_strdup2(line);
+		(*myarr)[(fill_info->map_index)] = ft_strdup2(line);
 		j = 0;
-		while (map->map[*(fill_info->map_index)][j])
+		while (map->map[(fill_info->map_index)][j])
 		{
-			if (map->map[*(fill_info->map_index)][j] == 'N'
-				|| map->map[*(fill_info->map_index)][j] == 'E'
-				|| map->map[*(fill_info->map_index)][j] == 'W'
-				|| map->map[*(fill_info->map_index)][j] == 'S')
+			if (map->map[(fill_info->map_index)][j] == 'N'
+				|| map->map[(fill_info->map_index)][j] == 'E'
+				|| map->map[(fill_info->map_index)][j] == 'W'
+				|| map->map[(fill_info->map_index)][j] == 'S')
 				map->nb_player++;
 			j++;
 		}
-		(*(fill_info->map_index))++;
+		((fill_info->map_index))++;
 	}
 	return (map->nb_player);
 }
