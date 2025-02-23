@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:30:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/23 11:39:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:43:12 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	is_texture_line(const char *line)
 {
 	if (!line)
 		return (0);
-	if ((line[0] == 'N' && line[1] == 'O') || (line[0] == 'S' && line[1] == 'O')
+	if (((line[0] == 'N' && line[1] == 'O') || (line[0] == 'S' && line[1] == 'O')
 		|| (line[0] == 'W' && line[1] == 'E') || (line[0] == 'E'
-			&& line[1] == 'A'))
+			&& line[1] == 'A')) && (line[2]==' ' || line[2]=='	'))
 		return (1);
 	return (0);
 }

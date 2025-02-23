@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:23:48 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/23 11:31:43 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:50:59 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	count_map_lines(char *line, int *inside_map)
 		*inside_map = 1;
 		return (1);
 	}
-	if (*inside_map)
-		*inside_map = 0;
 	return (0);
 }
 

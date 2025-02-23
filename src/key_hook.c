@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:16:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/15 15:11:41 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:07:11 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ int mouse_move( int x, int y, t_mlx *mlx)
 	if(x > last_x)
 		mlx->p->turn_direction = (x - last_x) / 2 ;
 	else if(x < last_x )
-	
-		mlx->p->turn_direction = (x - last_x) / 2;	
+		mlx->p->turn_direction = (x - last_x) / 2 ;
 	last_x = x;
 	return(0);
 }
