@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/11 22:27:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:20:34 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@
 # define WTH 2000
 # define HTH 800
 # define PI 3.14159265358979323846
-
-typedef struct s_bnham
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
-	int	e2;
-}				t_bnham;
 
 typedef struct s_wall
 {
@@ -67,7 +57,6 @@ typedef struct s_cube
 {
 	float		height;
 	float		width;
-	float		wall_line;
 }				t_cube;
 
 typedef struct s_ray
@@ -76,12 +65,12 @@ typedef struct s_ray
 	float	ray_angle;
 	double	x_hit;
 	double	y_hit;
-	int		was_hit_vertical;
-	int		was_hit_horizontal;
 	int		is_ray_facing_down;
 	int		is_ray_facing_up;
 	int		is_ray_facing_right;
 	int		is_ray_facing_left;
+	int		was_hit_vertical;
+	int		was_hit_horizontal;
 }				t_ray;
 
 typedef struct s_player
@@ -94,7 +83,7 @@ typedef struct s_player
 	float	move_speed;
 	float	rotation_speed;
 	int		side_walk;
-	float	pov;
+	float	fov;
 }				t_player;
 
 typedef struct s_addr
@@ -108,16 +97,14 @@ typedef struct s_addr
 typedef struct s_texture
 {
 	char	*xpm;
-	int t_height;
-	int t_width;
-		
+	int		t_height;
+	int		t_width;
 	char	*addr;
-	int	line_len;
-	int	endian;
-	int	bpp;
-	int x;
-	int y;
-	
+	int		line_len;
+	int		endian;
+	int		bpp;
+	int		x;
+	int		y;
 }			t_texture;
 
 typedef struct s_mlx
@@ -141,15 +128,13 @@ typedef struct s_c
 	int	y;
 }				t_c;
 
-
-void	init_br(t_wall wall, t_bnham *bnham);
+void	init_ray_hit(t_ray *ray, int index, t_cast hit);
 int		calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h);
-void	render_animation(t_mlx *mlx);
 void	release_arrows(int keycode, t_mlx *mlx);
 int		init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
 void	fix_intersection(double *x, double *y, t_mlx *mlx);
-void	fix(int *x, int *y, t_mlx *mlx);
+void	fix(int *x, int *y);
 void	find_ray_direction(float angle, t_ray *ray);
 float	fix_rayangle(float angle);
 void	*ft_malloc(size_t size, char alloc, bool is_free);
@@ -157,18 +142,14 @@ double	ft_distance(double x1, double y1, double x2, double y2);
 int		vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int		horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void	build_rays(t_mlx *mlx, int rays_count);
-void	raycaster(t_mlx *mlx, int x, int y);
+void	raycaster(t_mlx *mlx);
 bool	check_walls(t_mlx *mlx, float x, float y);
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
 t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
-void	trurn_player(t_mlx *mlx);
-void	bresenham(t_mlx *mlx, t_wall wall);
 void	draw_map(t_mlx *mlx);
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color);
 void	set_player_direction(char c, t_mlx *mlx);
-void	draw_lines(t_mlx *mlx, int x, int y);
-void	draw_grid(t_mlx *mlx);
 float	convert_to_degree(float radian);
 void	rotate_player(t_mlx *mlx);
 float	convert_to_radian(float angle);
@@ -187,5 +168,7 @@ int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
 char	*ft_itoa(int n);
-void images_to_xpm(t_mlx *wind);
+void	images_to_xpm(t_mlx *wind);
+void	rendering_texture(t_mlx *mlx, int index, t_wall wall);
+int		mouse_move(int x, int y, t_mlx *mlx);
 #endif
