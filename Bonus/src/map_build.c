@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:39:02 by amarouf           #+#    #+#             */
+<<<<<<< HEAD:Bonus/src/map_build.c
 /*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/22 11:56:58 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/map_build.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +23,18 @@ void	ft_draw_block(t_mlx *mlx, int x, int y, int color)
 
 	i = 0;
 	j = 0;
+<<<<<<< HEAD:Bonus/src/map_build.c
 	while (i < mlx->map->block_size * mlx->map->minimap_scale && i < WTH - x)
 	{
 		j = 0;
 		while (j < mlx->map->block_size
 			* mlx->map->minimap_scale && j < HTH - y)
+=======
+	while (i < mlx->map->block_size * mlx->map->minimap_scale && i<WTH-x)
+	{
+		j = 0;
+		while (j < mlx->map->block_size * mlx->map->minimap_scale && j< HTH-y )
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/map_build.c
 		{
 			put_pixel(mlx->addr, x + i, y + j, color);
 			j++;
@@ -77,7 +88,11 @@ void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map)
 	p->move_speed = 5;
 	p->rotation_speed = 2.5;
 	p->side_walk = 0;
+<<<<<<< HEAD:Bonus/src/map_build.c
 	p->fov = 60;
+=======
+	p->fov = 90;
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/map_build.c
 	mlx->map = map;
 	mlx->cube = cube;
 	mlx->p = p;

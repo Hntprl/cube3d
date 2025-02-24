@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   calculations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:26:16 by amarouf           #+#    #+#             */
+<<<<<<< HEAD:Bonus/src/calculations.c
 /*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/16 22:43:43 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/calculations.c
 /*                                                                            */
 /* ************************************************************************** */
 

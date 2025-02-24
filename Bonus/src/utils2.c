@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:21:39 by amarouf           #+#    #+#             */
+<<<<<<< HEAD:Bonus/src/utils2.c
 /*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/18 11:08:14 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/utils2.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +25,13 @@ void	*ft_calloc(size_t count, size_t size)
 
 	if (size != 0 && count >= SIZE_MAX / size)
 		return (NULL);
+<<<<<<< HEAD:Bonus/src/utils2.c
 	str = ft_malloc(size * count, 'a', false);
+=======
+	}
+	// str = malloc(size * count);
+	str=ft_malloc(size * count, 'a', false);
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/utils2.c
 	if (str == 0)
 		return (0);
 	i = 0;
@@ -87,7 +97,12 @@ char	*ft_itoa(int n)
 
 	num = n;
 	len = ft_number_size(n);
+<<<<<<< HEAD:Bonus/src/utils2.c
 	p = ft_malloc(sizeof(char) * (len + 1), 'a', false);
+=======
+	// p = (char *)malloc(sizeof(char) * (len + 1));
+	p = ft_malloc(sizeof(char)*(len+1), 'a', false);
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/utils2.c
 	if (p == NULL)
 		return (NULL);
 	p[len] = '\0';

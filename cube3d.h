@@ -6,7 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/24 14:20:34 by amarouf          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/22 12:03:30 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +73,11 @@ typedef struct s_ray
 	int		is_ray_facing_up;
 	int		is_ray_facing_right;
 	int		is_ray_facing_left;
+<<<<<<< HEAD
 	int		was_hit_vertical;
+=======
+	int 	was_hit_vertical;
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 	int		was_hit_horizontal;
 }				t_ray;
 
@@ -105,6 +113,10 @@ typedef struct s_texture
 	int		bpp;
 	int		x;
 	int		y;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 }			t_texture;
 
 typedef struct s_mlx
@@ -147,6 +159,10 @@ bool	check_walls(t_mlx *mlx, float x, float y);
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
 t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
+<<<<<<< HEAD
+=======
+void	trurn_player(t_mlx *mlx);
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 void	draw_map(t_mlx *mlx);
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color);
 void	set_player_direction(char c, t_mlx *mlx);
@@ -168,7 +184,14 @@ int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
 char	*ft_itoa(int n);
+<<<<<<< HEAD
 void	images_to_xpm(t_mlx *wind);
 void	rendering_texture(t_mlx *mlx, int index, t_wall wall);
 int		mouse_move(int x, int y, t_mlx *mlx);
+=======
+
+void images_to_xpm(t_mlx *wind);
+void rendering_texture(t_mlx *mlx, int index, t_wall wall);
+
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 #endif

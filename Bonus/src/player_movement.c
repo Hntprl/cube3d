@@ -6,7 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
+<<<<<<< HEAD:Bonus/src/player_movement.c
 /*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/19 10:11:50 by amarouf          ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/player_movement.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +52,7 @@ void	move_player(t_mlx *mlx, int x, int y)
 		* mlx->p->walk_direction;
 	opp = (mlx->p->move_speed * sin(convert_to_radian(fov)))
 		* mlx->p->walk_direction;
+<<<<<<< HEAD:Bonus/src/player_movement.c
 	if (!check_walls(mlx, x + adj, y + opp))
 	{
 		if (!check_walls(mlx, x + adj, y + 5)
@@ -55,6 +60,16 @@ void	move_player(t_mlx *mlx, int x, int y)
 			x += adj;
 		if (!check_walls(mlx, x + 5, y + opp)
 			&& !check_walls(mlx, x - 5, y + opp))
+=======
+	if (!check_walls(mlx, x + adj, y + opp)
+		&& !check_walls(mlx, x + adj, y + opp))
+	{
+		if (!check_walls(mlx, x + adj - 5, y)
+			&& !check_walls(mlx, x + adj + 5, y))
+			x += adj;
+		if (!check_walls(mlx, x, y + opp - 5)
+			&& !check_walls(mlx, x, y + opp + 5))
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/player_movement.c
 			y += opp;
 	}
 	mlx->p->x = x;

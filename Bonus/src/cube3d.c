@@ -6,7 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
+<<<<<<< HEAD:Bonus/src/cube3d.c
 /*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+=======
+/*   Updated: 2025/02/23 10:47:32 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,11 @@ void	sky_floor(t_mlx *mlx)
 {
 	int	i;
 	int	j;
+<<<<<<< HEAD:Bonus/src/cube3d.c
 	int	hth;
+=======
+	int hth;
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 
 	hth = HTH / 2;
 	i = -1;
@@ -24,15 +32,25 @@ void	sky_floor(t_mlx *mlx)
 	{
 		j = -1;
 		while (++j < WTH)
+<<<<<<< HEAD:Bonus/src/cube3d.c
 			put_pixel(mlx->addr, j, i, get_color(mlx->map->fl_color[0],
 					mlx->map->fl_color[1], mlx->map->fl_color[2]));
+=======
+			put_pixel(mlx->addr, j, i, get_color(mlx->map->fl_color[0]
+				, mlx->map->fl_color[1], mlx->map->fl_color[2]));
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 	}
 	while (++i < HTH)
 	{
 		j = -1;
 		while (++j < WTH)
+<<<<<<< HEAD:Bonus/src/cube3d.c
 			put_pixel(mlx->addr, j, i, get_color(mlx->map->ce_color[0],
 					mlx->map->ce_color[1], mlx->map->ce_color[2]));
+=======
+			put_pixel(mlx->addr, j, i, get_color(mlx->map->ce_color[0]
+				, mlx->map->ce_color[1], mlx->map->ce_color[2]));
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 	}
 }
 
@@ -60,7 +78,11 @@ t_map	*read_map(char *av)
 	int		fd;
 	t_map	*map;
 	char	**myarr;
+<<<<<<< HEAD:Bonus/src/cube3d.c
 	int		pl;
+=======
+	int pl;
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 
 	if (!av)
 		return (NULL);
@@ -72,6 +94,7 @@ t_map	*read_map(char *av)
 	myarr = ft_calloc(map->rows, sizeof(char *));
 	map->map = ft_calloc(map->rows, sizeof(char *));
 	if (!map->map)
+<<<<<<< HEAD:Bonus/src/cube3d.c
 		return (NULL);
 	fd = open(av, O_RDONLY, 0777);
 	if (fd == -1)
@@ -80,6 +103,16 @@ t_map	*read_map(char *av)
 	if (pl != 1)
 		printerr(1, "Error: the game must have one player ");
 	(isvalid_map(map, myarr), close(fd));
+=======
+		return NULL;
+	fd = open(av, O_RDONLY, 0777);
+	if (fd == -1)
+		return NULL;
+	to_map(fd, myarr, map,&pl);
+	if (pl != 1)
+		printerr(1, " the game must have one player ");
+	(isvalid_map(map, myarr), close(fd));	
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 	return (map);
 }
 
@@ -120,8 +153,13 @@ int	main(int ac, char **av)
 	t_map		*map;
 
 	if (ac != 2)
+<<<<<<< HEAD:Bonus/src/cube3d.c
 		printerr(1, "Error: invalid number of arguments");
 	map = read_map(ft_strdup2(av[1]));
+=======
+		printerr(1, " invalid number of arguments");
+	map = read_map(av[1]);
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3:src/cube3d.c
 	map->columns -= 1;
 	mlx.addr = &addr;
 	init_data(&mlx, &cube, &p, map);

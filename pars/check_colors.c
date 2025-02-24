@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:26 by bbenjrai          #+#    #+#             */
 /*   Updated: 2025/02/24 14:50:59 by amarouf          ###   ########.fr       */
+=======
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 21:16:26 by bbenjrai          #+#    #+#             */
+/*   Updated: 2025/02/23 10:44:12 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +61,14 @@ void	is_validcolor(char *str)
 	char	**split;
 
 	if (!(is_valid_format(str)) || !(isnot_alpha(str)))
-		printerr(1, "Error : invalid color the correct format (R, G, B)");
+		printerr(1, " invalid color the correct format (R, G, B)");
 	split = ft_split(str, ',');
 	if (split[3])
+<<<<<<< HEAD
 		printerr(1, "Error: Colors have 3 elements (R, G, B)");
+=======
+		printerr(1, " Colors have 3 elements (R, G, B)");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 }
 
 void	check_cei_flo(char *str, t_map *map, int valid_range)
@@ -81,7 +92,11 @@ void	check_cei_flo(char *str, t_map *map, int valid_range)
 		}
 	}
 	else
+<<<<<<< HEAD
 		printerr(1, "Error : color already set");
+=======
+		printerr(1, " color already set");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 }
 
 int	*min_fill(t_map *map, char *str, int i, int start)
@@ -99,7 +114,7 @@ int	*min_fill(t_map *map, char *str, int i, int start)
 	free(substr);
 	if (valid_range < 0 || valid_range > 255)
 	{
-		printerr(1, "Error: The color range should be between 0 & 255");
+		printerr(1, " The color range should be between 0 & 255");
 		return (NULL);
 	}
 	check_cei_flo(str, map, valid_range);

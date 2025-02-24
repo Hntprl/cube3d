@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:53 by bbenjrai          #+#    #+#             */
 /*   Updated: 2025/02/24 14:51:20 by amarouf          ###   ########.fr       */
+=======
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 21:16:53 by bbenjrai          #+#    #+#             */
+/*   Updated: 2025/02/23 10:49:51 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +21,13 @@
 
 void	printerr(int status, char *str)
 {
+<<<<<<< HEAD
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 2);
+=======
+	write(2, " Error : \n", 11);
+	write(2, str, ft_strlen(str));
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 	ft_malloc(sizeof(t_map), 'f', false);
 	exit(status);
 }

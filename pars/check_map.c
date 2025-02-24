@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:36 by bbenjrai          #+#    #+#             */
 /*   Updated: 2025/02/24 14:51:08 by amarouf          ###   ########.fr       */
+=======
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 21:16:36 by bbenjrai          #+#    #+#             */
+/*   Updated: 2025/02/23 11:38:22 by bbenjrai         ###   ########.fr       */
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +25,12 @@ void	check_zero(char **myarr, t_map *map, int i, int j)
 	{
 		if ((i == 0 || j == 0) || i == map->rows - 1
 			|| j == (int)ft_strlen(myarr[i]) - 1)
+<<<<<<< HEAD
 			printerr(1,
 				"Error : Invalid map not surrounded by valid characters");
+=======
+			printerr(1, " Invalid map not surrounded by valid characters");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 		if (!((i > 0 && (myarr[i - 1][j] == '0' || myarr[i - 1][j] == '1'
 				|| ft_strchr("NEWS", myarr[i - 1][j])))
 				&& (i < map->rows - 1 && (myarr[i + 1][j] == '0' || myarr[i
@@ -30,8 +41,12 @@ void	check_zero(char **myarr, t_map *map, int i, int j)
 						|| myarr[i][j + 1] == '1' || ft_strchr("NEWS",
 							myarr[i][j + 1])))))
 		{
+<<<<<<< HEAD
 			printerr(1,
 				"Error : Invalid map not surrounded by valid characters");
+=======
+			printerr(1, " Invalid map not surrounded by valid characters");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 		}
 	}
 }
@@ -42,16 +57,24 @@ void	check_player(char **myarr, t_map *map, int i, int j)
 	{
 		if (i == 0 || j == 0 || i == map->rows - 1
 			|| j == (int)ft_strlen(myarr[i]) - 1)
+<<<<<<< HEAD
 			printerr(1,
 				"Error : Invalid map not surrounded by valid characters");
+=======
+			printerr(1, " Invalid map not surrounded by valid characters");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 		if (!((i > 0 && (myarr[i - 1][j] == '0' || myarr[i - 1][j] == '1'))
 				&& (i < map->rows - 1 && (myarr[i + 1][j] == '0' || myarr[i
 						+ 1][j] == '1')) && (j > 0 && (myarr[i][j - 1] == '0'
 						|| myarr[i][j - 1] == '1'))
 				&& (j < (int)ft_strlen(myarr[i]) - 1 && (myarr[i][j + 1] == '0'
 						|| myarr[i][j + 1] == '1'))))
+<<<<<<< HEAD
 			printerr(1,
 				"Error : Invalid map not surrounded by valid characters");
+=======
+			printerr(1, " Invalid map not surrounded by valid characters");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 	}
 }
 
@@ -67,8 +90,12 @@ void	check_space(char **myarr, t_map *map, int i, int j)
 						- 1] == ' ' || myarr[i][j - 1] == '1') && (myarr[i][j
 						+ 1] == ' ' || myarr[i][j + 1] == '1')))
 			{
+<<<<<<< HEAD
 				printerr(1,
 					"Error: Invalid map not surrounded by valid characters");
+=======
+				printerr(1, " Invalid map not surrounded by valid characters");
+>>>>>>> e6670a3f8cb5374debb8a80e1fdf8e92fe2e58f3
 			}
 		}
 	}
