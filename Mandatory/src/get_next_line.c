@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:43:58 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:14:30 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3d.h"
+#include "../../cube3d.h"
 
 char	*ft_editbackup(char *line)
 {
@@ -74,9 +74,4 @@ char	*get_next_line(int fd)
 		return (free(backup), free(line), backup = NULL);
 	return (line);
 }
-// int main ()
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char *p = get_next_line(fd);
-// 	printf("%s", p);
-// }
+

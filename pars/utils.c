@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:21:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:51:33 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_strchr(set, s1[i]) && i <= len)
 		i++;
 	if (i >= len)
-		return (ft_strdup(""));
+		return (ft_strdup2(""));
 	while (ft_strchr(set, s1[len]) && len >= 0)
 		len--;
-	str = malloc((len - i + 2) * sizeof(char));
+	str = ft_malloc(sizeof(char) * (len - i + 2), 'a', false);
 	if (!str)
 		return (NULL);
 	ft_strlcpy(str, (char *)&s1[i], len - i + 2);

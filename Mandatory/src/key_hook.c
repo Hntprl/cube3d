@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:16:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:44:59 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3d.h"
+#include "../../cube3d.h"
 
 void	release_arrows(int keycode, t_mlx *mlx)
 {
@@ -28,7 +28,7 @@ void	handle_arrows(int keycode, t_mlx *mlx)
 		mlx->p->turn_direction = +1;
 }
 
-int key_release(int keycode, void *param)
+int	key_release(int keycode, void *param)
 {
 	t_mlx	*mlx;
 
@@ -90,4 +90,3 @@ void	event_handling(t_mlx *mlx)
 	mlx_hook(mlx->window, 17, 0, destroy_win, mlx);
 	mlx_loop(mlx->ptr);
 }
-

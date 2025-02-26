@@ -6,12 +6,13 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:23:11 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:56:45 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_3D_H
-# define CUBE_3D_H
+#ifndef CUBE3D_H
+# define CUBE3D_H
+
 # include <X11/X.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -22,28 +23,15 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "parsing.h"
 
+# define TRANSPARENT 0xFF000000
+# define TR -16777216
+# define SP 180
 # define BUFFER_SIZE 1
 # define WTH 2000
-# define HTH 1000
-# define W
+# define HTH 800
 # define PI 3.14159265358979323846
-
-// typedef	struct 
-// {
-//     void	*allocations[100];
-//     int		count;
-// }			MemoryManager;
-
-typedef struct s_bnham
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
-	int	e2;
-}				t_bnham;
 
 typedef struct s_wall
 {
@@ -71,21 +59,20 @@ typedef struct s_cube
 {
 	float		height;
 	float		width;
-	float		wall_line;
 }				t_cube;
 
 typedef struct s_ray
 {
 	double	distance;
 	float	ray_angle;
-	float	x_hit;
-	float	y_hit;
-	int		was_hit_vertical;
-	int		was_hit_horizontal;
+	double	x_hit;
+	double	y_hit;
 	int		is_ray_facing_down;
 	int		is_ray_facing_up;
 	int		is_ray_facing_right;
 	int		is_ray_facing_left;
+	int		was_hit_vertical;
+	int		was_hit_horizontal;
 }				t_ray;
 
 typedef struct s_player
@@ -98,25 +85,8 @@ typedef struct s_player
 	float	move_speed;
 	float	rotation_speed;
 	int		side_walk;
-	float	pov;
+	float	fov;
 }				t_player;
-
-typedef struct s_map
-{
-	char	**map;
-	char	*es_img;
-	char	*we_img;
-	char	*no_img;
-	char	*su_img;
-	int		*fl_color;
-	int		*ce_color;
-	int		colors[2];
-	int		text[4];
-	int		rows;
-	float	minimap_scale;
-	int		columns;
-	int		block_size;
-}			t_map;
 
 typedef struct s_addr
 {
@@ -125,6 +95,19 @@ typedef struct s_addr
 	int			size_line;
 	int			endian;
 }				t_addr;
+
+typedef struct s_texture
+{
+	char	*xpm;
+	int		t_height;
+	int		t_width;
+	char	*addr;
+	int		line_len;
+	int		endian;
+	int		bpp;
+	int		x;
+	int		y;
+}			t_texture;
 
 typedef struct s_mlx
 {
@@ -136,32 +119,40 @@ typedef struct s_mlx
 	t_cube		*cube;
 	t_player	*p;
 	t_ray		*ray;
+	t_texture	texture[5];
 }				t_mlx;
 
+typedef struct s_c
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+}				t_c;
+
+void	render_animation(t_mlx *mlx);
+void	init_ray_hit(t_ray *ray, int index, t_cast hit);
+int		calculate_distance(t_mlx *mlx, int index, t_cast *v, t_cast *h);
 void	release_arrows(int keycode, t_mlx *mlx);
-void	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
+int		init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index);
 void	draw_wall(t_mlx *mlx, int index);
 void	fix_intersection(double *x, double *y, t_mlx *mlx);
-void	fix(int *x, int *y, t_mlx *mlx);
+void	fix(int *x, int *y);
 void	find_ray_direction(float angle, t_ray *ray);
 float	fix_rayangle(float angle);
 void	*ft_malloc(size_t size, char alloc, bool is_free);
-double	ft_distance(float x1, float y1, float x2, float y2);
+double	ft_distance(double x1, double y1, double x2, double y2);
 int		vertical_raycast(t_mlx *mlx, float gap, int index, t_cast *v_cast);
 int		horizontal_raycast(t_mlx *mlx, float gap, int index, t_cast *h_cast);
 void	build_rays(t_mlx *mlx, int rays_count);
-void	raycaster(t_mlx *mlx, int x, int y);
+void	raycaster(t_mlx *mlx);
 bool	check_walls(t_mlx *mlx, float x, float y);
 void	init_data(t_mlx *mlx, t_cube *cube, t_player *p, t_map *map);
-t_map	*read_map(void);
+t_map	*read_map(char *av);
 void	move_player(t_mlx *mlx, int x, int y);
-void	trurn_player(t_mlx *mlx);
-void	bresenham(t_mlx *mlx, t_wall wall);
 void	draw_map(t_mlx *mlx);
 void	ft_draw_block(t_mlx *mlx, int x, int y, int color);
 void	set_player_direction(char c, t_mlx *mlx);
-void	draw_lines(t_mlx *mlx, int x, int y);
-void	draw_grid(t_mlx *mlx);
 float	convert_to_degree(float radian);
 void	rotate_player(t_mlx *mlx);
 float	convert_to_radian(float angle);
@@ -179,29 +170,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		get_color(int r, int g, int b);
 int		put_pixel(t_addr *addr, int x, int y, int color);
 int		destroy_win(void *param);
-// parsing functions
-int		ft_strcmp(const char *s1, const char *s2);
-char	**ft_split(char const *s, char c);
-int		countword(char *str, char sep);
-void	printerr(int status, char *str);
-void	checkpath(char *av);
-int		is_validtexture(char **str);
-void	fill_textures(t_map *map, char *str);
-void	spliit(char *str, t_map *map);
-void	fill_colors(t_map *map, char *str);
-int		ft_isdigit(int c);
-char	*ft_strtrim(char const *s1, char const *set);
-int		ft_isalpha(int c);
-int		nbrs_lines(char *av, int *columns);
-int		fill_map(t_map *map, char ***myarr, char *line, int *i, int *inside_map);
-void	init_t_map(t_map **map);
-void	free_map(t_map *map);
-void	free_arg(char **str);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_atoi(const char *str);
-int		isvalid_map(t_map *map, char **myarr);
-void	is_validcolor(char *str);
-int		is_space(char str);
-int		*min_fill(t_map *map, char *str, int i, int start);
-int		to_map(int fd, char **myarr, t_map *map);
+char	*ft_itoa(int n);
+void	images_to_xpm(t_mlx *wind);
+void	rendering_texture(t_mlx *mlx, int index, t_wall wall);
+int		mouse_move(int x, int y, t_mlx *mlx);
 #endif

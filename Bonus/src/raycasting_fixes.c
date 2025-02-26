@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/01/26 22:44:10 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3d.h"
+#include "../../cube3d.h"
 
 void	find_ray_direction(float angle, t_ray *ray)
 {
@@ -41,7 +41,7 @@ void	fix_intersection(double *x, double *y, t_mlx *mlx)
 		*y = mlx->cube->height;
 }
 
-void	fix(int *x, int *y, t_mlx *mlx)
+void	fix(int *x, int *y)
 {
 	if (*x < 0)
 		*x = 0;
@@ -56,20 +56,18 @@ void	fix(int *x, int *y, t_mlx *mlx)
 void	draw_wall(t_mlx *mlx, int index)
 {
 	double	plane_distance;
-	double	wall_height;
+	int		wall_height;
 	t_wall	wall;
 
 	mlx->ray[index].distance = mlx->ray[index].distance
-		* cos(convert_to_radian(mlx->ray[index].ray_angle
-				- mlx->p->rotation_angle));
-	plane_distance = (WTH / 2) / tan(mlx->p->pov / 2);
+		* cos(convert_to_radian(fix_rayangle(mlx->ray[index].ray_angle
+					- mlx->p->rotation_angle)));
+	plane_distance = (WTH / 2) / tan(convert_to_radian(mlx->p->fov / 2));
 	wall_height = (mlx->map->block_size / mlx->ray[index].distance)
 		* plane_distance;
 	wall.y = HTH / 2 - wall_height / 2;
 	wall.x = index;
-	fix(&wall.x, &wall.y, mlx);
 	wall.y2 = wall.y + wall_height;
-	fix(&wall.x, &wall.y2, mlx);
 	wall.x2 = wall.x;
-	bresenham(mlx, wall);
+	rendering_texture(mlx, index, wall);
 }
