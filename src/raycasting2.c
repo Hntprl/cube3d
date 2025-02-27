@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:59:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:59:56 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 int	init_first_inter(t_cast *h_cast, t_cast *v_cast, t_mlx *mlx, int index)
 {

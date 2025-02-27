@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:43:58 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 11:01:42 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:54:23 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 char	*ft_editbackup(char *line)
 {
@@ -33,7 +33,6 @@ char	*ft_editbackup(char *line)
 char	*ft_readline(int fd, char *backup, char *rd)
 {
 	ssize_t	len;
-	// char	*tmp;
 
 	while (!ft_strchr(rd, '\n'))
 	{
@@ -43,14 +42,11 @@ char	*ft_readline(int fd, char *backup, char *rd)
 		rd[len] = '\0';
 		if (backup)
 		{
-			// tmp = backup;
 			backup = ft_strjoin(backup, rd);
-			// free(tmp);
 		}
 		else
 			backup = ft_strdup2(rd);
 	}
-	// free(rd);
 	return (backup);
 }
 
@@ -62,7 +58,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (free(backup), backup = NULL);
-	rd = ft_malloc(sizeof(char) * (BUFFER_SIZE + 1),'a',false);
+	rd = ft_malloc(sizeof(char) * (BUFFER_SIZE + 1), 'a', false);
 	if (!rd)
 		return (free(backup), backup = NULL);
 	rd[0] = '\0';
@@ -74,4 +70,3 @@ char	*get_next_line(int fd)
 		return (backup = NULL);
 	return (line);
 }
-

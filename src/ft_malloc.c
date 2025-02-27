@@ -6,11 +6,23 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 21:55:12 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:29:52 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
+
+void	ft_bzero(void *data, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		((unsigned char *)data)[i] = 0;
+		i++;
+	}
+}
 
 t_garbage	*new_garbage(void *allocation, bool is_free)
 {

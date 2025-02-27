@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/26 22:07:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:20:36 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 void	sky_floor(t_mlx *mlx)
 {
@@ -24,15 +24,15 @@ void	sky_floor(t_mlx *mlx)
 	{
 		j = -1;
 		while (++j < WTH)
-			put_pixel(mlx->addr, j, i, get_color(mlx->map->fl_color[0],
-					mlx->map->fl_color[1], mlx->map->fl_color[2]));
+			put_pixel(mlx->addr, j, i, get_color(mlx->map->ce_color[0],
+					mlx->map->ce_color[1], mlx->map->ce_color[2]));
 	}
 	while (++i < HTH)
 	{
 		j = -1;
 		while (++j < WTH)
-			put_pixel(mlx->addr, j, i, get_color(mlx->map->ce_color[0],
-					mlx->map->ce_color[1], mlx->map->ce_color[2]));
+			put_pixel(mlx->addr, j, i, get_color(mlx->map->fl_color[0],
+					mlx->map->fl_color[1], mlx->map->fl_color[2]));
 	}
 }
 
@@ -48,6 +48,8 @@ int	ft_cube(void *param)
 			&mlx->addr->endian);
 	sky_floor(mlx);
 	raycaster(mlx);
+	if (mlx->bonus)
+		draw_map(mlx);
 	move_player(mlx, mlx->p->x, mlx->p->y);
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->image, 0, 0);
 	mlx_destroy_image(mlx->ptr, mlx->image);
@@ -78,7 +80,6 @@ t_map	*read_map(char *av)
 	to_map(fd, myarr, map, &pl);
 	if (pl != 1)
 		printerr(1, "Error: the game must have one player ");
-	// get_next_line(-1);
 	(isvalid_map(map, myarr), close(fd));
 	return (map);
 }
@@ -111,22 +112,23 @@ void	find_player_pos(t_mlx *mlx)
 	}
 }
 
-int	main(int ac, char **av)
+int	start(int ac, char **av, t_mlx *mlx)
 {
 	t_cube		cube;
 	t_player	p;
-	t_mlx		mlx;
 	t_addr		addr;
 	t_map		*map;
 
+	init_structs(mlx, &cube, &p, &addr);
 	if (ac != 2)
 		printerr(1, "Error: invalid number of arguments");
 	map = read_map(ft_strdup2(av[1]));
 	map->columns -= 1;
-	mlx.addr = &addr;
-	init_data(&mlx, &cube, &p, map);
-	find_player_pos(&mlx);
-	mlx.window = mlx_new_window(mlx.ptr, WTH, HTH, "Map");
-	images_to_xpm(&mlx);
-	event_handling(&mlx);
+	mlx->addr = &addr;
+	init_data(mlx, &cube, &p, map);
+	find_player_pos(mlx);
+	mlx->window = mlx_new_window(mlx->ptr, WTH, HTH, "Map");
+	images_to_xpm(mlx);
+	event_handling(mlx);
+	return (0);
 }

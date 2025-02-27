@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:49:16 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/26 17:17:22 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:52:46 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 int	get_color(int r, int g, int b)
 {
@@ -39,8 +39,9 @@ int	destroy_win(void *param)
 			mlx_destroy_image(mlx->ptr, mlx->texture[i].xpm);
 		i++;
 	}
-	mlx_destroy_display(mlx->ptr);
 	ft_malloc(0, 'f', false);
 	mlx_destroy_window(mlx->ptr, mlx->window);
+	mlx_destroy_display(mlx->ptr);
+	free(mlx->ptr);
 	exit(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 11:50:51 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:29:40 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_texture
 
 typedef struct s_mlx
 {
+	bool				bonus;
 	void				*ptr;
 	void				*window;
 	void				*image;
@@ -130,6 +131,16 @@ typedef struct s_c
 	int					y;
 }						t_c;
 
+typedef struct s_trn
+{
+	float				opp;
+	float				adj;
+}	t_trn;
+
+void					ft_bzero(void *data, size_t size);
+void					init_structs(t_mlx *mlx, t_cube *cube,
+							t_player *p, t_addr *addr);
+int						start(int ac, char **av, t_mlx *mlx);
 void					render_animation(t_mlx *mlx);
 void					init_ray_hit(t_ray *ray, int index, t_cast hit);
 int						calculate_distance(t_mlx *mlx, int index, t_cast *v,

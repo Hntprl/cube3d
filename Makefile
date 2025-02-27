@@ -2,43 +2,27 @@ NAME = cub3d
 BNAME = cub3d_bonus
 CC = cc
 Cflags = -Wall -Wextra -Werror 
-MLX = -lmlx -lXext -lX11 -lm -O3 
+MLX = -lmlx -lXext -lX11 -lm -O3 -fsanitize=address -g
 RM = rm -f
-M_SRC_DIR := Mandatory/src
-B_SRC_DIR := Bonus/src
+SRC_DIR := src
 PARS_DIR := pars
 
-BSRC := $(B_SRC_DIR)/cube3d.c \
-	$(B_SRC_DIR)/get_next_line.c \
-	$(B_SRC_DIR)/get_next_line_utils.c \
-	$(B_SRC_DIR)/mlx_functions.c \
-	$(B_SRC_DIR)/map_build.c \
-	$(B_SRC_DIR)/player_movement.c \
-	$(B_SRC_DIR)/raycasting.c \
-	$(B_SRC_DIR)/calculations.c \
-	$(B_SRC_DIR)/ft_malloc.c \
-	$(B_SRC_DIR)/raycasting_fixes.c \
-	$(B_SRC_DIR)/raycasting2.c \
-	$(B_SRC_DIR)/key_hook.c \
-	$(B_SRC_DIR)/key_hook2.c \
-	$(B_SRC_DIR)/utils2.c \
-	$(B_SRC_DIR)/textures.c \
 
-
-SRC := $(M_SRC_DIR)/cube3d.c \
-       $(M_SRC_DIR)/get_next_line.c \
-       $(M_SRC_DIR)/get_next_line_utils.c \
-       $(M_SRC_DIR)/mlx_functions.c \
-       $(M_SRC_DIR)/map_build.c \
-       $(M_SRC_DIR)/player_movement.c \
-       $(M_SRC_DIR)/raycasting.c \
-       $(M_SRC_DIR)/calculations.c \
-       $(M_SRC_DIR)/ft_malloc.c \
-       $(M_SRC_DIR)/raycasting_fixes.c \
-       $(M_SRC_DIR)/raycasting2.c \
-       $(M_SRC_DIR)/key_hook.c \
-       $(M_SRC_DIR)/utils2.c \
-       $(M_SRC_DIR)/textures.c \
+SRC := $(SRC_DIR)/cube3d.c \
+       $(SRC_DIR)/get_next_line.c \
+       $(SRC_DIR)/get_next_line_utils.c \
+       $(SRC_DIR)/mlx_functions.c \
+       $(SRC_DIR)/map_build.c \
+       $(SRC_DIR)/player_movement.c \
+       $(SRC_DIR)/raycasting.c \
+       $(SRC_DIR)/calculations.c \
+       $(SRC_DIR)/ft_malloc.c \
+       $(SRC_DIR)/raycasting_fixes.c \
+       $(SRC_DIR)/raycasting2.c \
+       $(SRC_DIR)/key_hook.c \
+       $(SRC_DIR)/key_hook2.c \
+       $(SRC_DIR)/utils2.c \
+       $(SRC_DIR)/textures.c \
 
 
 PARS := $(PARS_DIR)/check_colors.c \
@@ -53,22 +37,24 @@ PARS := $(PARS_DIR)/check_colors.c \
 	$(PARS_DIR)/utils2.c \
 
 
-SRCS := $(SRC) $(PARS)
-BBRCS := $(BSRC) $(PARS)
+SRCS := $(SRC) $(PARS) Mandatory/main.c
+BBRCS := $(SRC) $(PARS) Bonus/main_bonus.c
 
 OBJ := $(SRCS:.c=.o)
 BOBJ := $(BBRCS:.c=.o)
 
 all:$(NAME)
 
-bonus : $(BOBJ)
+bonus : $(BNAME)
+
+$(BNAME) : $(BOBJ)
 	$(CC) $(BOBJ) $(MLX) -o $(BNAME)
 
 $(NAME) : $(OBJ)
 	$(CC)  $(OBJ) $(MLX) -o $(NAME)
 
-# %.o: %.c
-# 	$(CC) $(Cflags) -c $< -o $@
+%.o: %.c
+	$(CC) $(Cflags) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ) $(BOBJ)

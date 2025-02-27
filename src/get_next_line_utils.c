@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:45:39 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 11:01:04 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:55:34 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -36,7 +36,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	p = ft_malloc((ft_strlen(s1) + ft_strlen(s2) + 1 )* sizeof(char),'a',false);
+	p = ft_malloc((ft_strlen(s1) + ft_strlen(s2) + 1)
+			* sizeof(char), 'a', false);
 	if (p == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -104,7 +105,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (ft_strdup2(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	str = ft_malloc(len + 1,'a',false);
+	str = ft_malloc(len + 1, 'a', false);
 	if (!str)
 		return (NULL);
 	i = 0;

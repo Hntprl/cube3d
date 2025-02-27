@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 01:25:13 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:27:08 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 int	vertical_raycast(t_mlx *mlx, float rayangle, int index, t_cast *v_cast)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_fixes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 08:21:31 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 11:55:48 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:56:36 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 void	find_ray_direction(float angle, t_ray *ray)
 {
@@ -57,7 +57,7 @@ void	draw_wall(t_mlx *mlx, int index)
 {
 	double	plane_distance;
 	int		wall_height;
-	double wall_h;
+	double	wall_h;
 	t_wall	wall;
 
 	mlx->ray[index].distance = mlx->ray[index].distance
@@ -70,6 +70,6 @@ void	draw_wall(t_mlx *mlx, int index)
 	wall.x = index;
 	wall.y2 = wall.y + wall_height;
 	wall.x2 = wall.x;
-	wall_h=wall.y2 - wall.y;
-	rendering_texture(mlx, index, wall,wall_h);
+	wall_h = wall.y2 - wall.y;
+	rendering_texture(mlx, index, wall, wall_h);
 }

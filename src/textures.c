@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:34:06 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/27 11:54:03 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:59:56 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 void	images_to_xpm(t_mlx *wind)
 {
@@ -30,7 +30,8 @@ void	images_to_xpm(t_mlx *wind)
 		if (!wind->texture[i].xpm)
 			printerr(1, "ERROR LOADING TEXTURE");
 		wind->texture[i].addr = mlx_get_data_addr(wind->texture[i].xpm,
-				&wind->texture[i].bpp, &wind->texture[i].line_len,
+				&wind->texture[i].bpp,
+				&wind->texture[i].line_len,
 				&wind->texture[i].endian);
 		i++;
 	}

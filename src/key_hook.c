@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:16:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/24 14:44:59 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:03:48 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 void	release_arrows(int keycode, t_mlx *mlx)
 {
@@ -86,6 +86,8 @@ void	event_handling(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, 2, 1L << 0, key_hook, mlx);
 	mlx_hook(mlx->window, 3, 1L << 1, key_release, mlx);
+	if (mlx->bonus)
+		mlx_hook(mlx->window, 6, 1L << 6, mouse_move, mlx);
 	mlx_loop_hook(mlx->ptr, ft_cube, mlx);
 	mlx_hook(mlx->window, 17, 0, destroy_win, mlx);
 	mlx_loop(mlx->ptr);
