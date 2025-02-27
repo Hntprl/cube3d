@@ -6,12 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:09:44 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/26 21:57:01 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:23:03 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+# include <stddef.h>
 
 typedef struct s_map
 {
