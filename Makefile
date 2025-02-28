@@ -2,7 +2,7 @@ NAME = cub3d
 BNAME = cub3d_bonus
 CC = cc
 Cflags = -Wall -Wextra -Werror 
-MLX = -lmlx -lXext -lX11 -lm -O3 -fsanitize=address -g
+MLX = -lmlx -lXext -lX11 -lm -O3 #-fsanitize=address -g
 RM = rm -f
 SRC_DIR := src
 PARS_DIR := pars
@@ -37,7 +37,7 @@ PARS := $(PARS_DIR)/check_colors.c \
 	$(PARS_DIR)/utils2.c \
 
 
-SRCS := $(SRC) $(PARS) Mandatory/main.c
+SRCS := $(SRC) $(PARS) Mandatory/main.c 
 BBRCS := $(SRC) $(PARS) Bonus/main_bonus.c
 
 OBJ := $(SRCS:.c=.o)
@@ -47,10 +47,10 @@ all:$(NAME)
 
 bonus : $(BNAME)
 
-$(BNAME) : $(BOBJ)
+$(BNAME) : $(BOBJ) cube3d.h
 	$(CC) $(BOBJ) $(MLX) -o $(BNAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) cube3d.h
 	$(CC)  $(OBJ) $(MLX) -o $(NAME)
 
 %.o: %.c

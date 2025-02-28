@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:30:03 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 11:43:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/28 21:41:03 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	process_map_line(char *line, t_map *map, t_map_fill *fill_info,
 	else if ((fill_info->map_lines_read != map->rows && (fill_info->inside_map))
 		|| (nwline[0] == '0' || nwline[0] == '1'))
 	{
+		fill_info->inside_map = 1;
 		(fill_info->player_count) = fill_map(map, &myarr, line, fill_info);
 		(fill_info->map_lines_read)++;
 	}

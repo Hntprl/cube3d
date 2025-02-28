@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:25:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/23 11:32:01 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/28 21:40:29 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,26 @@ char	*ft_strdup2(const char *s1)
 
 	i = 0;
 	p = ft_malloc(sizeof(char) * ft_strlen(s1) + 1, 'a', false);
+	if (p == NULL)
+	{
+		return (NULL);
+	}
+	while (s1[i] != '\0')
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
+}
+
+char	*ft_strdup(const char *s1, int len)
+{
+	size_t	i;
+	char	*p;
+
+	i = 0;
+	p = ft_calloc(len + 1, sizeof(char));
 	if (p == NULL)
 	{
 		return (NULL);

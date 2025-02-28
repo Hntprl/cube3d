@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:45:39 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 14:55:34 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/28 19:30:09 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,25 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s1)
-{
-	size_t	i;
-	char	*p;
+// char	*ft_strdup(const char *s1)
+// {
+// 	size_t	i;
+// 	char	*p;
 
-	i = 0;
-	p = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
-	if (p == NULL)
-	{
-		return (NULL);
-	}
-	while (s1[i] != '\0')
-	{
-		p[i] = s1[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
-}
+// 	i = 0;
+// 	p = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
+// 	if (p == NULL)
+// 	{
+// 		return (NULL);
+// 	}
+// 	while (s1[i] != '\0')
+// 	{
+// 		p[i] = s1[i];
+// 		i++;
+// 	}
+// 	p[i] = '\0';
+// 	return (p);
+// }
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {

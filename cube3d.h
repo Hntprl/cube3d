@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 15:29:40 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/28 22:22:45 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,13 @@ typedef struct s_c
 
 typedef struct s_trn
 {
-	float				opp;
-	float				adj;
-}	t_trn;
+	int					opp;
+	int					adj;
+}						t_trn;
 
 void					ft_bzero(void *data, size_t size);
-void					init_structs(t_mlx *mlx, t_cube *cube,
-							t_player *p, t_addr *addr);
+void					init_structs(t_mlx *mlx, t_cube *cube, t_player *p,
+							t_addr *addr);
 int						start(int ac, char **av, t_mlx *mlx);
 void					render_animation(t_mlx *mlx);
 void					init_ray_hit(t_ray *ray, int index, t_cast hit);
@@ -176,10 +176,11 @@ int						ft_cube(void *param);
 void					event_handling(t_mlx *mlx);
 int						key_hook(int keycode, void *param);
 char					*get_next_line(int fd);
+
 char					*ft_editbackup(char *line);
 char					*ft_readline(int fd, char *backup, char *rd);
 char					*ft_strchr(const char *s, int c);
-char					*ft_strdup(const char *s1);
+char					*ft_strdup(const char *s1, int len);
 size_t					ft_strlen(const char *s);
 char					*ft_substr(const char *s, unsigned int start,
 							size_t len);
