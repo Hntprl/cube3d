@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 14:53:21 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/03/01 10:18:06 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,33 @@ void	rotate_player(t_mlx *mlx)
 
 void	wall_slide_bonus(t_mlx *mlx, int *x, int *y, t_trn trn)
 {
-	if (!check_walls(mlx, *x + trn.adj, *y + trn.opp))
+	int	new_x;
+	int	new_y;
+
+	new_y = *y + trn.opp;
+	new_x = *x + trn.adj;
+	if (is_position_clear(mlx, new_x, *y) || is_position_clear(mlx, *x, new_y))
 	{
-		if (!check_walls(mlx, *x + trn.adj - 5, *y - 5)
-			&& !check_walls(mlx, *x + trn.adj + 5, *y + 5))
-			*x += trn.adj;
-		if (!check_walls(mlx, *x - 5, *y + trn.opp - 5)
-			&& !check_walls(mlx, *x + 5, *y + trn.opp + 5))
-			*y += trn.opp;
+		if (is_position_clear(mlx, new_x, *y))
+			*x = new_x;
+		if (is_position_clear(mlx, *x, new_y))
+			*y = new_y;
 	}
 }
 
 void	wall_slide(t_mlx *mlx, int *x, int *y, t_trn trn)
 {
-	if (!check_walls(mlx, *x + trn.adj, *y + trn.opp))
+	int	new_x;
+	int	new_y;
+
+	new_y = *y + trn.opp;
+	new_x = *x + trn.adj;
+	if (is_position_clear(mlx, new_x, new_y))
 	{
-		if (!check_walls(mlx, *x + trn.adj + 5, *y + trn.opp + 5)
-			&& !check_walls(mlx, *x + trn.adj - 5, *y + trn.opp - 5))
-		{
-			*x += trn.adj;
-			*y += trn.opp;
-		}
+		if (is_position_clear(mlx, new_x, *y))
+			*x = new_x;
+		if (is_position_clear(mlx, *x, new_y))
+			*y = new_y;
 	}
 }
 

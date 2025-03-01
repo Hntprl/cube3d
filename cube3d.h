@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:51:52 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/28 22:22:45 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/03/01 10:13:37 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,9 @@ typedef struct s_trn
 	int					adj;
 }						t_trn;
 
+bool					is_position_clear(t_mlx *mlx, int x, int y);
 void					ft_bzero(void *data, size_t size);
-void					init_structs(t_mlx *mlx, t_cube *cube, t_player *p,
+void					init_structs(t_cube *cube, t_player *p,
 							t_addr *addr);
 int						start(int ac, char **av, t_mlx *mlx);
 void					render_animation(t_mlx *mlx);

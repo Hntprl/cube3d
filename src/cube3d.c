@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 18:54:27 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/27 15:20:36 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/03/01 10:10:22 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	start(int ac, char **av, t_mlx *mlx)
 	t_addr		addr;
 	t_map		*map;
 
-	init_structs(mlx, &cube, &p, &addr);
+	init_structs(&cube, &p, &addr);
 	if (ac != 2)
 		printerr(1, "Error: invalid number of arguments");
 	map = read_map(ft_strdup2(av[1]));

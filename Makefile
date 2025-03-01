@@ -2,7 +2,7 @@ NAME = cub3d
 BNAME = cub3d_bonus
 CC = cc
 Cflags = -Wall -Wextra -Werror 
-MLX = -lmlx -lXext -lX11 -lm -O3 #-fsanitize=address -g
+MLX = -lmlx -lXext -lX11 -lm -O3
 RM = rm -f
 SRC_DIR := src
 PARS_DIR := pars
