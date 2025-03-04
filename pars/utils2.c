@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:25:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/24 14:51:39 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/28 21:40:29 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,36 @@ char	*ft_strdup2(const char *s1)
 	return (p);
 }
 
+char	*ft_strdup(const char *s1, int len)
+{
+	size_t	i;
+	char	*p;
+
+	i = 0;
+	p = ft_calloc(len + 1, sizeof(char));
+	if (p == NULL)
+	{
+		return (NULL);
+	}
+	while (s1[i] != '\0')
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
+}
+
 void	is_newline(char *line, t_map_fill *fill_info, int rows)
 {
 	char	*str;
 
 	str = ft_strtrim(line, " \t\n");
 	if (!str)
-		printerr(1, "Error: Memory allocation failed");
-	if (str[0] == '\0' && (*fill_info->inside_map) == 1
+		printerr(1, " Memory allocation failed");
+	if (str[0] == '\0' && (fill_info->inside_map) == 1
 		&& fill_info->map_lines_read != rows)
 	{
-		printerr(1, "Error: Empty line inside map");
+		printerr(1, " Empty line inside map Or the map not the last");
 	}
 }

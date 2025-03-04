@@ -6,22 +6,22 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:37:22 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/26 17:31:16 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/03/01 10:18:06 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
-void    set_player_direction(char c, t_mlx *mlx)
+void	set_player_direction(char c, t_mlx *mlx)
 {
-    if (c == 'N')
-        mlx->p->rotation_angle = 270;
-    if (c == 'S')
-        mlx->p->rotation_angle = 90;
-    if (c == 'E')
-        mlx->p->rotation_angle = 0;
-    if (c == 'W')
-        mlx->p->rotation_angle = 180;
+	if (c == 'S')
+		mlx->p->rotation_angle = 0;
+	if (c == 'W')
+		mlx->p->rotation_angle = 180;
+	if (c == 'N')
+		mlx->p->rotation_angle = 90;
+	if (c == 'E')
+		mlx->p->rotation_angle = 270;
 }
 
 void	rotate_player(t_mlx *mlx)
@@ -34,29 +34,55 @@ void	rotate_player(t_mlx *mlx)
 		mlx->p->rotation_angle = 360 + mlx->p->rotation_angle;
 }
 
+void	wall_slide_bonus(t_mlx *mlx, int *x, int *y, t_trn trn)
+{
+	int	new_x;
+	int	new_y;
+
+	new_y = *y + trn.opp;
+	new_x = *x + trn.adj;
+	if (is_position_clear(mlx, new_x, *y) || is_position_clear(mlx, *x, new_y))
+	{
+		if (is_position_clear(mlx, new_x, *y))
+			*x = new_x;
+		if (is_position_clear(mlx, *x, new_y))
+			*y = new_y;
+	}
+}
+
+void	wall_slide(t_mlx *mlx, int *x, int *y, t_trn trn)
+{
+	int	new_x;
+	int	new_y;
+
+	new_y = *y + trn.opp;
+	new_x = *x + trn.adj;
+	if (is_position_clear(mlx, new_x, new_y))
+	{
+		if (is_position_clear(mlx, new_x, *y))
+			*x = new_x;
+		if (is_position_clear(mlx, *x, new_y))
+			*y = new_y;
+	}
+}
+
 void	move_player(t_mlx *mlx, int x, int y)
 {
 	float	fov;
-	float	adj;
-	float	opp;
+	t_trn	trn;
 
 	rotate_player(mlx);
 	fov = mlx->p->rotation_angle;
 	if (mlx->p->side_walk)
 		fov += 90;
-	adj = (mlx->p->move_speed * cos(convert_to_radian(fov)))
+	trn.adj = (mlx->p->move_speed * cos(convert_to_radian(fov)))
 		* mlx->p->walk_direction;
-	opp = (mlx->p->move_speed * sin(convert_to_radian(fov)))
+	trn.opp = (mlx->p->move_speed * sin(convert_to_radian(fov)))
 		* mlx->p->walk_direction;
-	if (!check_walls(mlx, x + adj, y + opp))
-	{
-		if (!check_walls(mlx, x + adj - 5, y + opp - 5)
-			&& !check_walls(mlx, x + adj + 5, y + opp + 5))
-		{
-			x += adj;
-			y += opp;
-		}
-	}
+	if (mlx->bonus)
+		wall_slide_bonus(mlx, &x, &y, trn);
+	else
+		wall_slide(mlx, &x, &y, trn);
 	mlx->p->x = x;
 	mlx->p->y = y;
 }

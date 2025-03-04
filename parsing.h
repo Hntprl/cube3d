@@ -6,12 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:09:44 by amarouf           #+#    #+#             */
-/*   Updated: 2025/02/21 20:06:11 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:23:03 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+# include <stddef.h>
 
 typedef struct s_map
 {
@@ -35,8 +36,8 @@ typedef struct s_map
 
 typedef struct s_map_fill
 {
-	int		*map_index;
-	int		*inside_map;
+	int		map_index;
+	int		inside_map;
 	int		player_count;
 	int		element;
 	int		map_lines_read;

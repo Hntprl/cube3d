@@ -6,11 +6,11 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:34:06 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/24 14:38:43 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:59:56 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../cube3d.h"
 
 void	images_to_xpm(t_mlx *wind)
 {
@@ -74,16 +74,15 @@ int	get_text_x(int index, t_mlx *mlx, int d)
 	return (texture_x);
 }
 
-void	rendering_texture(t_mlx *mlx, int index, t_wall wall)
+void	rendering_texture(t_mlx *mlx, int index, t_wall wall,
+		double wall_height)
 {
-	double	wall_height;
 	int		d;
 	int		texture_x;
 	int		texture_y;
 	double	texture_pos;
 	int		color;
 
-	wall_height = wall.y2 - wall.y;
 	d = get_wall_orientation(mlx, index);
 	texture_x = get_text_x(index, mlx, d);
 	while (wall.y < wall.y2)
@@ -91,13 +90,13 @@ void	rendering_texture(t_mlx *mlx, int index, t_wall wall)
 		texture_pos = wall.y + (wall_height / 2) - (HTH / 2);
 		texture_y = ((int)texture_pos) * (mlx->texture[d].t_height
 				/ wall_height);
-		int offset = (texture_y * mlx->texture[d].line_len) +
-			(texture_x * (mlx->texture[d].bpp / 8));
 		if (wall.y >= 0 && wall.y < HTH && texture_x >= 0
-			&& texture_x < mlx->texture[d].t_width &&
-			texture_y >= 0 && texture_y < mlx->texture[d].t_height)
+			&& texture_x < mlx->texture[d].t_width && texture_y >= 0
+			&& texture_y < mlx->texture[d].t_height)
 		{
-			color = *(int *)(mlx->texture[d].addr + offset);
+			color = *(int *)(mlx->texture[d].addr + (texture_y
+						* mlx->texture[d].line_len) + (texture_x
+						* (mlx->texture[d].bpp / 8)));
 			put_pixel(mlx->addr, wall.x, wall.y, color);
 		}
 		wall.y++;

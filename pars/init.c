@@ -6,7 +6,7 @@
 /*   By: amarouf <amarouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 21:16:53 by bbenjrai          #+#    #+#             */
-/*   Updated: 2025/02/24 14:51:20 by amarouf          ###   ########.fr       */
+/*   Updated: 2025/03/01 12:10:12 by amarouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	printerr(int status, char *str)
 {
+	write(2, "Error\n", 6);
 	write(2, str, ft_strlen(str));
-	write(2, "\n", 2);
 	ft_malloc(sizeof(t_map), 'f', false);
 	exit(status);
 }
